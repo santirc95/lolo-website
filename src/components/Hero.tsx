@@ -2,9 +2,33 @@
 
 import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
-import { easeLuxury, fadeUp, stagger } from "@/lib/motion";
+import { easeLuxury } from "@/lib/motion";
 
 export default function Hero() {
+  // ✅ Hero-only: ultra-luxury timing (más lento y con “peso”)
+  const heroFadeUp = {
+    hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 1.9, // MUCHO más lento
+        ease: easeLuxury,
+      },
+    },
+  };
+
+  const heroStagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        delayChildren: 0.6, // espera antes de empezar
+        staggerChildren: 0.28, // más espacio entre cada elemento
+      },
+    },
+  };
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-champagne px-5 pt-20">
       {/* Decorative background */}
@@ -16,26 +40,27 @@ export default function Hero() {
 
       {/* Subtle brand glow */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.12]
+        <div
+          className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.12]
           bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.55),transparent_60%)]"
         />
       </div>
 
       <motion.div
         className="relative z-10 mx-auto max-w-3xl text-center"
-        variants={stagger}
+        variants={heroStagger}
         initial="hidden"
         animate="visible"
       >
         <motion.p
-          variants={fadeUp}
+          variants={heroFadeUp}
           className="mb-4 text-sm uppercase tracking-[0.3em] text-gold-dark"
         >
           Joyería fina personalizada
         </motion.p>
 
         <motion.h1
-          variants={fadeUp}
+          variants={heroFadeUp}
           className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
         >
           El anillo que cuenta
@@ -44,7 +69,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          variants={fadeUp}
+          variants={heroFadeUp}
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
@@ -52,7 +77,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          variants={fadeUp}
+          variants={heroFadeUp}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <a
@@ -86,7 +111,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          variants={fadeUp}
+          variants={heroFadeUp}
           className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
         >
           <span>Diamantes GIA</span>
@@ -97,16 +122,16 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator — slow, elegant float */}
+      {/* Scroll indicator — ultra slow float */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
+        animate={{ opacity: 1, y: [0, 7, 0] }}
         transition={{
-          duration: 2.8,
+          duration: 4.6,
           repeat: Infinity,
           ease: easeLuxury,
-          delay: 1.2,
+          delay: 2.2,
         }}
       >
         <svg
@@ -125,3 +150,4 @@ export default function Hero() {
     </section>
   );
 }
+
