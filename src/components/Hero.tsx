@@ -1,4 +1,35 @@
+'use client';
+
 import { getWhatsAppUrl } from "@/lib/constants";
+import { motion } from "framer-motion";
+
+const EASE = [0.22, 1, 0.36, 1];
+
+const container = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.05,          // más lento
+      ease: EASE,
+      delayChildren: 0.18,      // más “aire” al inicio
+      staggerChildren: 0.12,    // entra más espaciado
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,           // más lento por elemento
+      ease: EASE,
+    },
+  },
+};
 
 export default function Hero() {
   return (
@@ -10,21 +41,48 @@ export default function Hero() {
         <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <p className="mb-4 text-sm uppercase tracking-[0.3em] text-gold-dark">
+      {/* Subtle brand glow (morado) */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.12]
+          bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.55),transparent_60%)]"
+        />
+      </div>
+
+      {/* Hero content */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 mx-auto max-w-3xl text-center"
+      >
+        <motion.p
+          variants={item}
+          className="mb-4 text-sm uppercase tracking-[0.3em] text-gold-dark"
+        >
           Joyería fina personalizada
-        </p>
-        <h1 className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl">
+        </motion.p>
+
+        <motion.h1
+          variants={item}
+          className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
+        >
           El anillo que cuenta
           <br />
           <span className="italic text-gold-dark">vuestra historia</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl">
+        </motion.h1>
+
+        <motion.p
+          variants={item}
+          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl"
+        >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
           artesanía que un momento así merece.
-        </p>
+        </motion.p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <motion.div
+          variants={item}
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+        >
           <a
             href={getWhatsAppUrl()}
             target="_blank"
@@ -46,25 +104,39 @@ export default function Hero() {
               <path d="m9 18 6-6-6-6" />
             </svg>
           </a>
+
           <a
             href="#proceso"
             className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-8 py-4 text-base font-medium text-charcoal transition-all hover:border-gold hover:bg-white/50"
           >
             Cómo funciona
           </a>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray">
+        <motion.div
+          variants={item}
+          className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
+        >
           <span>Diamantes GIA</span>
           <span className="h-4 w-px bg-gold/30" />
           <span>Oro 14k &amp; 18k</span>
           <span className="h-4 w-px bg-gold/30" />
           <span>Platino 950</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      {/* Scroll indicator (más suave) */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 6, 0] }}
+        transition={{
+          duration: 2.8,      // más lento
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.2,
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -77,7 +149,7 @@ export default function Hero() {
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
-      </div>
+      </motion.div>
     </section>
   );
 }
