@@ -1,3 +1,14 @@
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  fadeUp,
+  stagger,
+  hoverLift,
+  hoverTransition,
+  viewportOnce,
+} from "@/lib/motion";
+
 const TESTIMONIALS = [
   {
     quote:
@@ -23,19 +34,34 @@ export default function Testimonials() {
   return (
     <section id="testimonios" className="bg-champagne px-5 py-20 md:py-28">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
             Testimonios
           </p>
           <h2 className="mt-3 font-display text-3xl tracking-tight text-charcoal sm:text-4xl">
             Historias que nos inspiran
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <motion.div
+          className="mt-14 grid gap-8 md:grid-cols-3"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {TESTIMONIALS.map((t) => (
-            <div
+            <motion.div
               key={t.author}
+              variants={fadeUp}
+              whileHover={hoverLift}
+              transition={hoverTransition}
               className="rounded-2xl bg-white p-8 shadow-sm"
             >
               {/* Stars */}
@@ -64,9 +90,9 @@ export default function Testimonials() {
                 </p>
                 <p className="text-xs text-warm-gray">{t.detail}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

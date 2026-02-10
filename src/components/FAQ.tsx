@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
 
 const FAQS = [
   {
@@ -59,7 +61,7 @@ function FAQItem({
         <span className="pr-4 text-base font-medium text-charcoal">
           {question}
         </span>
-        <svg
+        <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
@@ -67,16 +69,29 @@ function FAQItem({
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
-          className={`shrink-0 text-gold transition-transform ${open ? "rotate-180" : ""}`}
+          className="shrink-0 text-gold"
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.4, ease: easeLuxury }}
         >
           <path d="m6 9 6 6 6-6" />
-        </svg>
+        </motion.svg>
       </button>
-      {open && (
-        <div className="pb-5 pr-12 text-sm leading-relaxed text-warm-gray">
-          {answer}
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: easeLuxury }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 pr-12 text-sm leading-relaxed text-warm-gray">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -85,20 +100,32 @@ export default function FAQ() {
   return (
     <section id="faq" className="bg-champagne px-5 py-20 md:py-28">
       <div className="mx-auto max-w-3xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
             FAQ
           </p>
           <h2 className="mt-3 font-display text-3xl tracking-tight text-charcoal sm:text-4xl">
             Preguntas frecuentes
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="mt-12">
+        <motion.div
+          className="mt-12"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {FAQS.map((faq) => (
             <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* FAQ Structured Data */}

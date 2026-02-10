@@ -1,35 +1,8 @@
-'use client';
+"use client";
 
-import { getWhatsAppUrl } from "@/lib/constants";
 import { motion } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1];
-
-const container = {
-  hidden: { opacity: 0, y: 10 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1.05,          // más lento
-      ease: EASE,
-      delayChildren: 0.18,      // más “aire” al inicio
-      staggerChildren: 0.12,    // entra más espaciado
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 10 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.9,           // más lento por elemento
-      ease: EASE,
-    },
-  },
-};
+import { getWhatsAppUrl } from "@/lib/constants";
+import { easeLuxury, fadeUp, stagger } from "@/lib/motion";
 
 export default function Hero() {
   return (
@@ -41,29 +14,28 @@ export default function Hero() {
         <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
       </div>
 
-      {/* Subtle brand glow (morado) */}
+      {/* Subtle brand glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.12]
           bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.55),transparent_60%)]"
         />
       </div>
 
-      {/* Hero content */}
       <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
         className="relative z-10 mx-auto max-w-3xl text-center"
+        variants={stagger}
+        initial="hidden"
+        animate="visible"
       >
         <motion.p
-          variants={item}
+          variants={fadeUp}
           className="mb-4 text-sm uppercase tracking-[0.3em] text-gold-dark"
         >
           Joyería fina personalizada
         </motion.p>
 
         <motion.h1
-          variants={item}
+          variants={fadeUp}
           className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
         >
           El anillo que cuenta
@@ -72,7 +44,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          variants={item}
+          variants={fadeUp}
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
@@ -80,7 +52,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          variants={item}
+          variants={fadeUp}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <a
@@ -114,7 +86,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          variants={item}
+          variants={fadeUp}
           className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
         >
           <span>Diamantes GIA</span>
@@ -125,15 +97,15 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator (más suave) */}
+      {/* Scroll indicator — slow, elegant float */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 6, 0] }}
         transition={{
-          duration: 2.8,      // más lento
+          duration: 2.8,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: easeLuxury,
           delay: 1.2,
         }}
       >

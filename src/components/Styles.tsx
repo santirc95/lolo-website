@@ -2,6 +2,13 @@
 
 import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import {
+  fadeUp,
+  stagger,
+  hoverLift,
+  hoverTransition,
+  viewportOnce,
+} from "@/lib/motion";
 
 const STYLES = [
   {
@@ -64,24 +71,17 @@ const STYLES = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.12,
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  }),
-};
-
 export default function Styles() {
   return (
     <section id="estilos" className="bg-cream px-5 py-20 md:py-28">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
             Estilos
           </p>
@@ -92,10 +92,16 @@ export default function Styles() {
             Cada diseño tiene su propia personalidad. Explora los estilos más
             populares y cuéntanos cuál va contigo.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STYLES.map((style, i) => (
+        <motion.div
+          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          {STYLES.map((style) => (
             <motion.a
               key={style.name}
               href={getWhatsAppUrl(
@@ -103,16 +109,9 @@ export default function Styles() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              whileHover={{
-                y: -4,
-                boxShadow: "0 12px 32px rgba(184, 151, 126, 0.15)",
-              }}
-              transition={{ type: "tween", duration: 0.2 }}
+              variants={fadeUp}
+              whileHover={hoverLift}
+              transition={hoverTransition}
               className="group flex cursor-pointer flex-col items-center rounded-2xl bg-white p-8 shadow-sm text-center"
             >
               {/* Placeholder image area */}
@@ -132,7 +131,7 @@ export default function Styles() {
               </span>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

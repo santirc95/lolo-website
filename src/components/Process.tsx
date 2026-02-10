@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { fadeUp, stagger, viewportOnce } from "@/lib/motion";
 
 const STEPS = [
   {
@@ -37,7 +41,13 @@ export default function Process() {
   return (
     <section id="proceso" className="bg-cream px-5 py-20 md:py-28">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
             Proceso
           </p>
@@ -48,11 +58,17 @@ export default function Process() {
             Un proceso cercano y transparente, diseñado para que disfrutes cada
             paso tanto como el resultado final.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-5">
+        <motion.div
+          className="mt-16 grid gap-8 md:grid-cols-5"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {STEPS.map((step) => (
-            <div key={step.number} className="text-center">
+            <motion.div key={step.number} variants={fadeUp} className="text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-champagne">
                 <span className="font-display text-lg text-gold-dark">
                   {step.number}
@@ -64,11 +80,17 @@ export default function Process() {
               <p className="mt-2 text-sm leading-relaxed text-warm-gray">
                 {step.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-14 text-center">
+        <motion.div
+          className="mt-14 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <a
             href={getWhatsAppUrl("Hola, quiero iniciar el proceso de diseño de mi anillo de compromiso.")}
             target="_blank"
@@ -77,7 +99,7 @@ export default function Process() {
           >
             Inicia tu proceso hoy
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

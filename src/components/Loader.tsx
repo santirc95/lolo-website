@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE_CONFIG } from "@/lib/constants";
+import { easeLuxury } from "@/lib/motion";
 
 export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Hide loader once the page is fully loaded
     const handleLoad = () => {
-      // Small delay to ensure paint is complete
       setTimeout(() => setVisible(false), 300);
     };
 
@@ -29,14 +28,14 @@ export default function Loader() {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.7, ease: easeLuxury }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-champagne"
           aria-hidden="true"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.9, ease: easeLuxury }}
             className="flex flex-col items-center gap-4"
           >
             <span className="font-display text-3xl tracking-wider text-charcoal sm:text-4xl">
@@ -49,8 +48,8 @@ export default function Loader() {
                 animate={{ x: "100%" }}
                 transition={{
                   repeat: Infinity,
-                  duration: 1.2,
-                  ease: "easeInOut",
+                  duration: 1.6,
+                  ease: easeLuxury,
                 }}
               />
             </div>

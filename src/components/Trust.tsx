@@ -1,4 +1,14 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import {
+  fadeUp,
+  stagger,
+  hoverLift,
+  hoverTransition,
+  viewportOnce,
+} from "@/lib/motion";
 
 const TRUST_POINTS = [
   {
@@ -49,7 +59,13 @@ export default function Trust() {
   return (
     <section id="nosotros" className="bg-cream px-5 py-20 md:py-28">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
             Por qué LOLŌ
           </p>
@@ -61,12 +77,21 @@ export default function Trust() {
             promesa hecha materia. Por eso ponemos el mismo amor en crearlo que
             tú al entregarlo.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {TRUST_POINTS.map((point) => (
-            <div
+            <motion.div
               key={point.title}
+              variants={fadeUp}
+              whileHover={hoverLift}
+              transition={hoverTransition}
               className="rounded-2xl bg-white p-6 shadow-sm text-center"
             >
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-champagne text-gold-dark">
@@ -78,11 +103,17 @@ export default function Trust() {
               <p className="mt-2 text-sm leading-relaxed text-warm-gray">
                 {point.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-14 text-center">
+        <motion.div
+          className="mt-14 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           <a
             href={getWhatsAppUrl()}
             target="_blank"
@@ -91,7 +122,7 @@ export default function Trust() {
           >
             Conócenos mejor
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
