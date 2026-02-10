@@ -4,31 +4,35 @@ import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
 
+const heroItem = {
+  hidden: { opacity: 0, y: 22, filter: "blur(10px)" },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.45,
+      ease: easeLuxury,
+      delay: 0.35 + i * 0.22,
+    },
+  }),
+};
+
+const heroCtas = {
+  hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.25,
+      ease: easeLuxury,
+      delay: 0.35 + i * 0.22,
+    },
+  }),
+};
+
 export default function Hero() {
-  // ✅ Hero-only: ultra-luxury timing (más lento y con “peso”)
-  const heroFadeUp = {
-    hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 1.9, // MUCHO más lento
-        ease: easeLuxury,
-      },
-    },
-  };
-
-  const heroStagger = {
-    hidden: {},
-    visible: {
-      transition: {
-        delayChildren: 0.6, // espera antes de empezar
-        staggerChildren: 0.28, // más espacio entre cada elemento
-      },
-    },
-  };
-
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-champagne px-5 pt-20">
       {/* Decorative background */}
@@ -46,21 +50,18 @@ export default function Hero() {
         />
       </div>
 
-      <motion.div
-        className="relative z-10 mx-auto max-w-3xl text-center"
-        variants={heroStagger}
-        initial="hidden"
-        animate="visible"
-      >
+      <motion.div className="relative z-10 mx-auto max-w-3xl text-center" initial="hidden" animate="show">
         <motion.p
-          variants={heroFadeUp}
-          className="mb-4 text-sm uppercase tracking-[0.3em] text-gold-dark"
+          custom={0}
+          variants={heroItem}
+          className="mb-4 text-sm uppercase tracking-[0.34em] text-gold-dark"
         >
           Joyería fina personalizada
         </motion.p>
 
         <motion.h1
-          variants={heroFadeUp}
+          custom={1}
+          variants={heroItem}
           className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
         >
           El anillo que cuenta
@@ -69,15 +70,16 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          variants={heroFadeUp}
+          custom={2}
+          variants={heroItem}
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl"
         >
-          Diseñamos anillos de compromiso únicos, con diamantes certificados y la
-          artesanía que un momento así merece.
+          Diseñamos anillos de compromiso únicos, con diamantes certificados y la artesanía que un momento así merece.
         </motion.p>
 
         <motion.div
-          variants={heroFadeUp}
+          custom={3}
+          variants={heroCtas}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <a
@@ -111,7 +113,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          variants={heroFadeUp}
+          custom={4}
+          variants={heroItem}
           className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
         >
           <span>Diamantes GIA</span>
@@ -122,16 +125,16 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator — ultra slow float */}
+      {/* Scroll indicator — slower, more discreet */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 7, 0] }}
+        animate={{ opacity: 1, y: [0, 5, 0] }}
         transition={{
-          duration: 4.6,
+          duration: 4.2,
           repeat: Infinity,
           ease: easeLuxury,
-          delay: 2.2,
+          delay: 2.4,
         }}
       >
         <svg
@@ -150,4 +153,3 @@ export default function Hero() {
     </section>
   );
 }
-
