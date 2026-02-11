@@ -40,7 +40,7 @@ const heroCtas = {
 ================================ */
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[calc(100vh-88px)] items-center justify-center overflow-hidden px-5 pt-20 bg-luxury-wash bg-luxury-grain">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20 bg-luxury-wash bg-luxury-grain">
 
       {/* ==============================
           Decorative rings (gold)
