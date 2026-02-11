@@ -1,39 +1,66 @@
 @import "tailwindcss";
 
+/* =========================================================
+   LOLŌ — Design Tokens (Luxury / European Jewelry)
+========================================================= */
+
 :root {
+  /* Core neutrals */
   --color-cream: #FAF7F2;
   --color-champagne: #F5EDE3;
+
+  /* Gold palette */
   --color-gold: #B8977E;
   --color-gold-light: #D4B896;
   --color-gold-dark: #96775E;
+
+  /* Text */
   --color-charcoal: #2C2C2C;
   --color-charcoal-light: #4A4A4A;
   --color-warm-gray: #8A8278;
+
+  /* Utility */
   --color-white: #FFFFFF;
   --color-black: #1A1A1A;
   --color-whatsapp: #25D366;
 
+  /* Brand lavender / purple (VERY subtle use) */
+  --color-brand: #4A3160;        /* deep base */
+  --color-brand-light: #6F4A8E;  /* accent */
+  --color-brand-soft: #EEE8F3;   /* ultra-light wash */
+
+  /* App tokens */
   --background: var(--color-cream);
   --foreground: var(--color-charcoal);
 }
 
+/* Tailwind theme bridge */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-cream: var(--color-cream);
   --color-champagne: var(--color-champagne);
+
   --color-gold: var(--color-gold);
   --color-gold-light: var(--color-gold-light);
   --color-gold-dark: var(--color-gold-dark);
+
   --color-charcoal: var(--color-charcoal);
   --color-charcoal-light: var(--color-charcoal-light);
   --color-warm-gray: var(--color-warm-gray);
+
+  --color-brand: var(--color-brand);
+  --color-brand-light: var(--color-brand-light);
+  --color-brand-soft: var(--color-brand-soft);
+
   --color-whatsapp: var(--color-whatsapp);
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
 }
 
+/* Base behavior */
 html {
   scroll-behavior: smooth;
 }
@@ -43,7 +70,46 @@ body {
   color: var(--foreground);
 }
 
+/* Selection */
 ::selection {
   background-color: var(--color-gold-light);
   color: var(--color-charcoal);
 }
+
+/* =========================================
+   LOLŌ — Editorial Gradient (Purple Light)
+========================================= */
+.bg-luxury-wash {
+  background:
+    /* columnas verticales suaves (más visibles) */
+    linear-gradient(
+      90deg,
+      rgba(74, 49, 96, 0.00) 0%,
+      rgba(74, 49, 96, 0.06) 18%,
+      rgba(74, 49, 96, 0.00) 35%,
+      rgba(74, 49, 96, 0.07) 52%,
+      rgba(74, 49, 96, 0.00) 70%,
+      rgba(74, 49, 96, 0.05) 88%,
+      rgba(74, 49, 96, 0.00) 100%
+    ),
+
+    /* glow lavanda abajo (sube fuerza) */
+    radial-gradient(
+      120% 60% at 50% 105%,
+      rgba(111, 74, 142, 0.22),
+      transparent 58%
+    ),
+
+    /* wash arriba (muy ligero) */
+    radial-gradient(
+      90% 55% at 50% -10%,
+      rgba(74, 49, 96, 0.10),
+      transparent 60%
+    ),
+
+    /* base */
+    linear-gradient(180deg, #FAF7F2 0%, #F7F0E8 60%, #F3ECE2 100%);
+}
+
+
+
