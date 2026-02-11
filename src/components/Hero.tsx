@@ -4,53 +4,85 @@ import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
 
+/* ==============================
+   Animation presets
+================================ */
 const heroItem = {
-  hidden: { opacity: 0, y: 22, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 1.45,
+      duration: 1.6,
       ease: easeLuxury,
-      delay: 0.35 + i * 0.22,
+      delay: 0.45 + i * 0.24,
     },
   }),
 };
 
 const heroCtas = {
-  hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 1.25,
+      duration: 1.4,
       ease: easeLuxury,
-      delay: 0.35 + i * 0.22,
+      delay: 0.6 + i * 0.24,
     },
   }),
 };
 
+/* ==============================
+   Hero Component
+================================ */
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-champagne px-5 pt-20">
-      {/* Decorative background */}
+    <section className="relative flex min-h-[calc(100vh-88px)] items-center justify-center overflow-hidden px-5 pt-20 bg-luxury-wash bg-luxury-grain">
+
+      {/* ==============================
+          Decorative rings (gold)
+      ============================== */}
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
-        <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+        <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+        <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+        <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
       </div>
 
-      {/* Subtle brand glow */}
+      {/* ==============================
+          Purple glow system (lavender)
+      ============================== */}
       <div className="pointer-events-none absolute inset-0">
+        {/* Top soft wash */}
         <div
-          className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.12]
-          bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.55),transparent_60%)]"
+          className="absolute inset-0 opacity-[0.10]"
+          style={{
+            background:
+              "radial-gradient(85% 55% at 50% 0%, rgba(74,49,96,0.18), transparent 62%)",
+          }}
+        />
+
+        {/* Center glow */}
+        <div
+          className="absolute left-1/2 top-[18%] h-[600px] w-[600px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.11]"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(74,49,96,0.45), transparent 66%)",
+          }}
         />
       </div>
 
-      <motion.div className="relative z-10 mx-auto max-w-3xl text-center" initial="hidden" animate="show">
+      {/* ==============================
+          Main content
+      ============================== */}
+      <motion.div
+        className="relative z-10 mx-auto max-w-3xl text-center"
+        initial="hidden"
+        animate="show"
+      >
+        {/* Eyebrow */}
         <motion.p
           custom={0}
           variants={heroItem}
@@ -59,6 +91,7 @@ export default function Hero() {
           Joyería fina personalizada
         </motion.p>
 
+        {/* Headline */}
         <motion.h1
           custom={1}
           variants={heroItem}
@@ -69,14 +102,17 @@ export default function Hero() {
           <span className="italic text-gold-dark">vuestra historia</span>
         </motion.h1>
 
+        {/* Description */}
         <motion.p
           custom={2}
           variants={heroItem}
           className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-warm-gray sm:text-xl"
         >
-          Diseñamos anillos de compromiso únicos, con diamantes certificados y la artesanía que un momento así merece.
+          Diseñamos anillos de compromiso únicos, con diamantes certificados y la
+          artesanía que un momento así merece.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
           custom={3}
           variants={heroCtas}
@@ -86,7 +122,9 @@ export default function Hero() {
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-charcoal px-8 py-4 text-base font-medium text-white transition-all hover:bg-charcoal-light hover:shadow-lg"
+            className="inline-flex items-center gap-2 rounded-full bg-charcoal px-8 py-4 text-base font-medium text-white transition-all
+                       hover:bg-charcoal-light hover:shadow-lg
+                       hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]"
           >
             Empieza tu diseño
             <svg
@@ -106,12 +144,15 @@ export default function Hero() {
 
           <a
             href="#proceso"
-            className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-8 py-4 text-base font-medium text-charcoal transition-all hover:border-gold hover:bg-white/50"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-8 py-4 text-base font-medium text-charcoal transition-all
+                       hover:border-gold hover:bg-white/50
+                       hover:ring-1 hover:ring-[rgba(74,49,96,0.22)]"
           >
             Cómo funciona
           </a>
         </motion.div>
 
+        {/* Trust line */}
         <motion.div
           custom={4}
           variants={heroItem}
@@ -125,16 +166,18 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator — slower, more discreet */}
+      {/* ==============================
+          Scroll indicator
+      ============================== */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 5, 0] }}
+        animate={{ opacity: 1, y: [0, 6, 0] }}
         transition={{
-          duration: 4.2,
+          duration: 5,
           repeat: Infinity,
           ease: easeLuxury,
-          delay: 2.4,
+          delay: 2.8,
         }}
       >
         <svg
@@ -153,3 +196,5 @@ export default function Hero() {
     </section>
   );
 }
+
+
