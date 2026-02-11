@@ -11,6 +11,9 @@
   --color-warm-gray: #8A8278;
   --color-white: #FFFFFF;
   --color-black: #1A1A1A;
+  --color-purple: #7C3AED;
+  --color-purple-light: #C4B5FD;
+  --color-purple-dark: #5B21B6;
   --color-whatsapp: #25D366;
 
   --background: var(--color-cream);
@@ -28,6 +31,9 @@
   --color-charcoal: var(--color-charcoal);
   --color-charcoal-light: var(--color-charcoal-light);
   --color-warm-gray: var(--color-warm-gray);
+  --color-purple: var(--color-purple);
+  --color-purple-light: var(--color-purple-light);
+  --color-purple-dark: var(--color-purple-dark);
   --color-whatsapp: var(--color-whatsapp);
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
