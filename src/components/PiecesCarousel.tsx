@@ -118,14 +118,14 @@ export default function PiecesCarousel() {
                            md:w-[calc((100%-1.25rem*1)/2)]
                            lg:w-[calc((100%-1.25rem*2)/3)]
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           rounded-2xl transition-all duration-300
+                           rounded-2xl overflow-hidden transition-all duration-300
                            hover:-translate-y-1 hover:shadow-lg"
               >
                 {/* Gradient border wrapper */}
-                <div className="rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] overflow-hidden">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   {/* Glass card */}
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[4/5] w-full overflow-hidden">
+                    <div className="aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
                       <img
                         src={piece.src}
                         alt={piece.title}
