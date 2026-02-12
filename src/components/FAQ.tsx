@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
+import { getWhatsAppUrl } from "@/lib/constants";
 
 const FAQS = [
   {
@@ -45,11 +46,14 @@ const FAQS = [
 function FAQItem({
   question,
   answer,
+  index,
 }: {
   question: string;
   answer: string;
+  index: number;
 }) {
   const [open, setOpen] = useState(false);
+  const panelId = `faq-panel-${index}`;
 
   return (
     <div className="border-b border-gold/10">
@@ -57,29 +61,55 @@ function FAQItem({
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between py-5 text-left"
         aria-expanded={open}
+        aria-controls={panelId}
       >
         <span className="pr-4 text-base font-medium text-charcoal">
           {question}
         </span>
-        <motion.svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="shrink-0 text-gold"
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.4, ease: easeLuxury }}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </motion.svg>
+        <div className="flex shrink-0 items-center gap-2">
+          <AnimatePresence initial={false}>
+            {open && (
+              <motion.button
+                key="contact-btn"
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.25, ease: easeLuxury }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(getWhatsAppUrl(), "_blank");
+                }}
+                className="rounded-full bg-[#4a3160] px-3 py-1 text-xs font-medium text-white
+                           transition-colors duration-200 hover:bg-[#5c3d7a]
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+                aria-label="Contactar por WhatsApp"
+              >
+                Contactar
+              </motion.button>
+            )}
+          </AnimatePresence>
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="shrink-0 text-gold"
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ duration: 0.4, ease: easeLuxury }}
+          >
+            <path d="m6 9 6 6 6-6" />
+          </motion.svg>
+        </div>
       </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={panelId}
             key="content"
+            role="region"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -122,8 +152,8 @@ export default function FAQ() {
           whileInView="visible"
           viewport={viewportOnce}
         >
-          {FAQS.map((faq) => (
-            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+          {FAQS.map((faq, i) => (
+            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} index={i} />
           ))}
         </motion.div>
       </div>
