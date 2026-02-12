@@ -105,17 +105,19 @@ export default function Trust() {
             >
               <div
                 className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
-                           shadow-sm md:shadow-sm transition-all duration-300
-                           hover:-translate-y-1 hover:shadow-lg"
+                           shadow-sm transition-all duration-300
+                           hover:-translate-y-1 hover:shadow-lg
+                           min-h-[220px] md:min-h-0"
               >
-                <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/80 backdrop-blur-md overflow-hidden p-6 text-center">
+                <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 md:bg-[#faf8f5]/80 backdrop-blur-md overflow-hidden p-6 text-center
+                               h-full flex flex-col items-center justify-center">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f5efe8] text-[#4a3160]">
                     {point.icon}
                   </div>
                   <h3 className="mt-4 text-base font-semibold text-[#2c2c2c]">
                     {point.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#8a8078]">
+                  <p className="mt-2 text-sm leading-relaxed text-[#8a8078] line-clamp-3 md:line-clamp-none">
                     {point.description}
                   </p>
                 </div>
