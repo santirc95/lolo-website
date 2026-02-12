@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const STYLES = [
   {
@@ -34,32 +34,55 @@ const STYLES = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const sectionRevealVariants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease },
+  },
+};
+
 const panelVariants = {
-  initial: { opacity: 0, y: 12, filter: "blur(6px)" },
+  initial: { opacity: 0, y: 12, filter: "blur(4px)" },
   animate: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease },
   },
   exit: {
     opacity: 0,
     y: -12,
-    filter: "blur(6px)",
-    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+    filter: "blur(4px)",
+    transition: { duration: 0.35, ease },
   },
+};
+
+const panelStaticVariants = {
+  initial: { opacity: 1 },
+  animate: { opacity: 1 },
+  exit: { opacity: 1 },
 };
 
 export default function Styles() {
   const [activeId, setActiveId] = useState(STYLES[0].id);
   const active = STYLES.find((s) => s.id === activeId)!;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section
+    <motion.section
       id="estilos"
       role="region"
       aria-label="Estilos de anillo de compromiso"
       className="overflow-hidden bg-[#faf8f5] px-5 py-20 md:py-28"
+      variants={prefersReducedMotion ? undefined : sectionRevealVariants}
+      initial={prefersReducedMotion ? undefined : "hidden"}
+      whileInView={prefersReducedMotion ? undefined : "visible"}
+      viewport={{ once: true, margin: "-60px" }}
     >
       {/* Header */}
       <div className="mx-auto max-w-3xl text-center mb-12">
@@ -122,7 +145,7 @@ export default function Styles() {
                 id={`panel-${active.id}`}
                 role="tabpanel"
                 aria-label={`Estilo ${active.name}`}
-                variants={panelVariants}
+                variants={prefersReducedMotion ? panelStaticVariants : panelVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
@@ -191,14 +214,15 @@ export default function Styles() {
                                    : "bg-[#faf8f5]/50 backdrop-blur-sm hover:bg-[#faf8f5]/70"
                                }`}
                   >
-                    {/* Active indicator bar */}
-                    <div
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full transition-all duration-300
-                                 ${
-                                   isActive
-                                     ? "h-8 bg-[#4a3160]"
-                                     : "h-0 bg-transparent"
-                                 }`}
+                    {/* Active indicator bar — animated with Framer Motion */}
+                    <motion.div
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-[#4a3160]"
+                      initial={false}
+                      animate={{
+                        height: isActive ? 32 : 0,
+                        opacity: isActive ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease }}
                     />
 
                     <h3
@@ -228,6 +252,6 @@ export default function Styles() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
