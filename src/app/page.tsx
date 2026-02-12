@@ -10,6 +10,8 @@ import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Loader from "@/components/Loader";
+import GemCuts from "@/components/GemCuts";
+
 
 export default function Home() {
   return (
@@ -19,6 +21,7 @@ export default function Home() {
       <main>
         <Hero />
         <PiecesCarousel />
+        <GemCuts />
         <Styles />
         <Process />
         <Testimonials />
