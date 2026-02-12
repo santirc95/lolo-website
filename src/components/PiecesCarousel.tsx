@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const pieces = [
   { id: 1, src: "/images/pieces/01.jpg", title: "Solitario Eterno", subtitle: "Oro 18k & Diamante GIA" },
@@ -12,6 +13,37 @@ const pieces = [
   { id: 7, src: "/images/pieces/07.jpg", title: "Pétalos de Alba", subtitle: "Oro Rosa 18k & Morganita" },
   { id: 8, src: "/images/pieces/08.jpg", title: "Constellation", subtitle: "Platino 950 & Diamantes" },
 ];
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const headerVariants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease },
+  },
+};
+
+const cardContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease },
+  },
+};
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -34,6 +66,7 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
 
 export default function PiecesCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -53,7 +86,13 @@ export default function PiecesCarousel() {
       className="overflow-hidden bg-[#faf8f5] py-20 px-5"
     >
       {/* Header */}
-      <div className="mx-auto max-w-3xl text-center mb-12">
+      <motion.div
+        className="mx-auto max-w-3xl text-center mb-12"
+        variants={prefersReducedMotion ? undefined : headerVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "visible"}
+        viewport={{ once: true, margin: "-60px" }}
+      >
         <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Colección
         </p>
@@ -65,7 +104,7 @@ export default function PiecesCarousel() {
           Cada anillo es una obra única, diseñada con materiales nobles y el
           cuidado artesanal que merece vuestra historia.
         </p>
-      </div>
+      </motion.div>
 
       {/* Carousel wrapper with nav buttons */}
       <div className="relative mx-auto max-w-7xl">
@@ -109,11 +148,18 @@ export default function PiecesCarousel() {
           className="overflow-x-auto scroll-smooth snap-x snap-mandatory
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <div className="flex gap-5 px-[7.5%] lg:px-0">
+          <motion.div
+            className="flex gap-5 px-[7.5%] lg:px-0"
+            variants={prefersReducedMotion ? undefined : cardContainerVariants}
+            initial={prefersReducedMotion ? undefined : "hidden"}
+            whileInView={prefersReducedMotion ? undefined : "visible"}
+            viewport={{ once: true, margin: "-60px" }}
+          >
             {pieces.map((piece) => (
-              <div
+              <motion.div
                 key={piece.id}
                 tabIndex={0}
+                variants={prefersReducedMotion ? undefined : cardVariants}
                 className="w-[85%] flex-shrink-0 snap-center
                            md:w-[calc((100%-1.25rem*1)/2)]
                            lg:w-[calc((100%-1.25rem*2)/3)]
@@ -143,9 +189,9 @@ export default function PiecesCarousel() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
