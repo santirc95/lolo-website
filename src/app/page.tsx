@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import PiecesCarousel from "@/components/PiecesCarousel";
 import Styles from "@/components/Styles";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <PiecesCarousel />
         <Styles />
         <Process />
         <Testimonials />
