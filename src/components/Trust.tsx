@@ -97,7 +97,7 @@ export default function Trust() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
-              className="sticky md:static md:sticky-none mb-6 md:mb-0"
+              className="sticky md:static mb-6 md:mb-0 h-[240px] md:h-auto"
               style={{
                 top: `${96 + i * 12}px`,
                 zIndex: i + 1,
@@ -107,16 +107,18 @@ export default function Trust() {
                 className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                            shadow-sm transition-all duration-300
                            hover:-translate-y-1 hover:shadow-lg
-                           min-h-[220px] md:min-h-0"
+                           h-full"
               >
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 md:bg-[#faf8f5]/80 backdrop-blur-md overflow-hidden p-6 text-center
-                               h-full flex flex-col items-center justify-center">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f5efe8] text-[#4a3160]">
-                    {point.icon}
+                               h-full flex flex-col items-center justify-between">
+                  <div>
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f5efe8] text-[#4a3160]">
+                      {point.icon}
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-[#2c2c2c]">
+                      {point.title}
+                    </h3>
                   </div>
-                  <h3 className="mt-4 text-base font-semibold text-[#2c2c2c]">
-                    {point.title}
-                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#8a8078] line-clamp-3 md:line-clamp-none">
                     {point.description}
                   </p>
