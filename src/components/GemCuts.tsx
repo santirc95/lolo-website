@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const cuts = [
   {
@@ -70,21 +70,44 @@ const cuts = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const sectionRevealVariants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease },
+  },
+};
+
 const previewVariants = {
-  initial: { opacity: 0, y: 12, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-  exit: { opacity: 0, y: -12, filter: "blur(6px)", transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
+  initial: { opacity: 0, y: 12, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease } },
+  exit: { opacity: 0, y: -12, filter: "blur(4px)", transition: { duration: 0.35, ease } },
+};
+
+const previewStaticVariants = {
+  initial: { opacity: 1 },
+  animate: { opacity: 1 },
+  exit: { opacity: 1 },
 };
 
 export default function GemCuts() {
   const [activeId, setActiveId] = useState(cuts[0].id);
   const active = cuts.find((c) => c.id === activeId)!;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section
+    <motion.section
       role="region"
       aria-label="Cortes de diamante disponibles"
       className="overflow-hidden bg-[#faf8f5] py-20 px-5"
+      variants={prefersReducedMotion ? undefined : sectionRevealVariants}
+      initial={prefersReducedMotion ? undefined : "hidden"}
+      whileInView={prefersReducedMotion ? undefined : "visible"}
+      viewport={{ once: true, margin: "-60px" }}
     >
       {/* Header */}
       <div className="mx-auto max-w-3xl text-center mb-12">
@@ -143,7 +166,7 @@ export default function GemCuts() {
           id={`panel-${active.id}`}
           role="tabpanel"
           aria-label={`Corte ${active.label}`}
-          variants={previewVariants}
+          variants={prefersReducedMotion ? previewStaticVariants : previewVariants}
           initial="initial"
           animate="animate"
           exit="exit"
@@ -190,6 +213,6 @@ export default function GemCuts() {
           </div>
         </motion.div>
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 }
