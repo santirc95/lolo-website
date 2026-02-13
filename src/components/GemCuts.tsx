@@ -72,13 +72,25 @@ const cuts = [
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const sectionRevealVariants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
+
+const headerRevealVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.7, ease },
+    transition: { duration: 1.0, ease },
+  },
+};
+
+const contentRevealVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1.0, ease, delay: 0.2 },
   },
 };
 
@@ -100,17 +112,19 @@ export default function GemCuts() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.section
+    <section
       role="region"
       aria-label="Cortes de diamante disponibles"
       className="overflow-hidden bg-[#faf8f5] py-20 px-5"
-      variants={prefersReducedMotion ? undefined : sectionRevealVariants}
-      initial={prefersReducedMotion ? undefined : "hidden"}
-      whileInView={prefersReducedMotion ? undefined : "visible"}
-      viewport={{ once: true, margin: "-60px" }}
     >
-      {/* Header */}
-      <div className="mx-auto max-w-3xl text-center mb-12">
+      {/* Header — beat 1 */}
+      <motion.div
+        className="mx-auto max-w-3xl text-center mb-12"
+        variants={prefersReducedMotion ? undefined : headerRevealVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "visible"}
+        viewport={viewportConfig}
+      >
         <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Cortes
         </p>
@@ -122,97 +136,105 @@ export default function GemCuts() {
           Cada forma refleja la luz de manera distinta y transforma el carácter
           de tu anillo. Explora los cortes y descubre cuál va contigo.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Tabs — horizontally scrollable on mobile */}
-      <div
-        className="mx-auto max-w-4xl mb-10 overflow-x-auto
-                   [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      {/* Tabs + Panel — beat 2 (delayed) */}
+      <motion.div
+        variants={prefersReducedMotion ? undefined : contentRevealVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "visible"}
+        viewport={viewportConfig}
       >
+        {/* Tabs — horizontally scrollable on mobile */}
         <div
-          role="tablist"
-          aria-label="Selecciona un corte de diamante"
-          className="flex gap-2 px-1 min-w-max mx-auto w-fit"
+          className="mx-auto max-w-4xl mb-10 overflow-x-auto
+                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {cuts.map((cut) => {
-            const isActive = cut.id === activeId;
-            return (
-              <button
-                key={cut.id}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`panel-${cut.id}`}
-                onClick={() => setActiveId(cut.id)}
-                className={`relative whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium
-                           transition-all duration-300
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           ${
-                             isActive
-                               ? "bg-[#2c2c2c] text-white shadow-md"
-                               : "bg-white/60 text-[#8a8078] border border-[#d4b896]/30 hover:bg-white hover:text-[#2c2c2c] hover:border-[#d4b896]/60"
-                           }`}
-              >
-                {cut.label}
-              </button>
-            );
-          })}
+          <div
+            role="tablist"
+            aria-label="Selecciona un corte de diamante"
+            className="flex gap-2 px-1 min-w-max mx-auto w-fit"
+          >
+            {cuts.map((cut) => {
+              const isActive = cut.id === activeId;
+              return (
+                <button
+                  key={cut.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${cut.id}`}
+                  onClick={() => setActiveId(cut.id)}
+                  className={`relative whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium
+                             transition-all duration-300
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
+                             ${
+                               isActive
+                                 ? "bg-[#2c2c2c] text-white shadow-md"
+                                 : "bg-white/60 text-[#8a8078] border border-[#d4b896]/30 hover:bg-white hover:text-[#2c2c2c] hover:border-[#d4b896]/60"
+                             }`}
+                >
+                  {cut.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Preview panel */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={active.id}
-          id={`panel-${active.id}`}
-          role="tabpanel"
-          aria-label={`Corte ${active.label}`}
-          variants={prefersReducedMotion ? previewStaticVariants : previewVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="mx-auto max-w-5xl"
-        >
-          <div className="grid gap-6 md:grid-cols-2 md:gap-10 items-center">
-            {/* Cut image */}
-            <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
-              <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                <div className="aspect-square w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
-                  <img
-                    src={active.cutImage}
-                    alt={`Diamante corte ${active.label}`}
-                    className="h-3/4 w-3/4 object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Info + hand image */}
-            <div className="flex flex-col gap-6">
+        {/* Preview panel */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active.id}
+            id={`panel-${active.id}`}
+            role="tabpanel"
+            aria-label={`Corte ${active.label}`}
+            variants={prefersReducedMotion ? previewStaticVariants : previewVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="mx-auto max-w-5xl"
+          >
+            <div className="grid gap-6 md:grid-cols-2 md:gap-10 items-center">
+              {/* Cut image */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                  <div className="aspect-[4/3] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                  <div className="aspect-square w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
                     <img
-                      src={active.handImage}
-                      alt={`Corte ${active.label} en mano`}
-                      className="h-full w-full object-cover"
+                      src={active.cutImage}
+                      alt={`Diamante corte ${active.label}`}
+                      className="h-3/4 w-3/4 object-contain"
                     />
                   </div>
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
-                  Corte{" "}
-                  <span className="italic text-[#4a3160]">{active.label}</span>
-                </h3>
-                <p className="text-base leading-relaxed text-[#8a8078]">
-                  {active.description}
-                </p>
+              {/* Info + hand image */}
+              <div className="flex flex-col gap-6">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
+                  <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
+                    <div className="aspect-[4/3] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                      <img
+                        src={active.handImage}
+                        alt={`Corte ${active.label} en mano`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                    Corte{" "}
+                    <span className="italic text-[#4a3160]">{active.label}</span>
+                  </h3>
+                  <p className="text-base leading-relaxed text-[#8a8078]">
+                    {active.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </motion.section>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </section>
   );
 }

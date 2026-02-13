@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
 import { getWhatsAppUrl } from "@/lib/constants";
@@ -55,11 +55,26 @@ function FAQItem({
   const [open, setOpen] = useState(false);
   const panelId = `faq-panel-${index}`;
 
+  const toggle = useCallback(() => setOpen((prev) => !prev), []);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    },
+    [toggle],
+  );
+
   return (
     <div className="border-b border-gold/10">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between py-5 text-left"
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={toggle}
+        onKeyDown={handleKeyDown}
+        className="flex w-full items-center justify-between py-5 text-left cursor-pointer"
         aria-expanded={open}
         aria-controls={panelId}
       >
@@ -103,7 +118,7 @@ function FAQItem({
             <path d="m6 9 6 6 6-6" />
           </motion.svg>
         </div>
-      </button>
+      </div>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
