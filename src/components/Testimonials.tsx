@@ -47,6 +47,8 @@ const TESTIMONIALS = [
   },
 ];
 
+const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 const cardVariants = {
   hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
   visible: (i: number) => ({
@@ -55,7 +57,7 @@ const cardVariants = {
     filter: "blur(0px)",
     transition: {
       duration: 0.7,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      ease: EASE_LUXURY,
       delay: i * 0.12,
     },
   }),
