@@ -270,10 +270,7 @@ export default function Process() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#2c2c2c] px-8 py-4 text-base font-medium text-white transition-all
-                       hover:bg-[#3a3a3a] hover:shadow-lg
-                       hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+            className="btn-liquid btn-liquid--primary px-8 py-4 text-base"
           >
             Inicia tu proceso hoy
             <svg
