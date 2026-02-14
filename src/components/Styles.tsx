@@ -32,6 +32,13 @@ const STYLES = [
     description:
       "Micro-diamantes engastados a lo largo de la banda crean un camino de luz continuo. Sofisticado y moderno, envuelve tu mano en un brillo sutil pero constante.",
   },
+  {
+    id: "side-stones",
+    name: "Side Stones",
+    video: "/videos/styles/side-stones.mp4",
+    description:
+      "Piedras laterales que enmarcan el diamante central, aportando simetría y un brillo envolvente. Un diseño que eleva la presencia del anillo sin restarle elegancia.",
+  },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
