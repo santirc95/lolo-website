@@ -121,6 +121,7 @@ export default function GemCuts() {
   const active = cuts.find((c) => c.id === activeId)!;
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
+  const [wipeKey, setWipeKey] = useState(0);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -135,6 +136,11 @@ export default function GemCuts() {
     : isMobile
       ? contentRevealMobile
       : contentRevealDesktop;
+
+  function handleCutChange(id: string) {
+    setActiveId(id);
+    setWipeKey((k) => k + 1);
+  }
 
   return (
     <section
@@ -188,7 +194,7 @@ export default function GemCuts() {
                   role="tab"
                   aria-selected={isActive}
                   aria-controls={`panel-${cut.id}`}
-                  onClick={() => setActiveId(cut.id)}
+                  onClick={() => handleCutChange(cut.id)}
                   className={`relative whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium
                              transition-all duration-300
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
@@ -212,11 +218,11 @@ export default function GemCuts() {
           aria-label={`Corte ${active.label}`}
           className="mx-auto max-w-5xl"
         >
-          {/* Mobile: single unified card — cut image instant, hand+copy animated */}
+          {/* Mobile: unified card with curtain wipe */}
           <div className="md:hidden">
             <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
               <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Cut image — updates instantly, no animation */}
+                {/* Cut image — always on top, updates instantly */}
                 <div className="flex items-center justify-center bg-white/40 py-6">
                   <img
                     src={active.cutImage}
@@ -225,13 +231,9 @@ export default function GemCuts() {
                   />
                 </div>
 
-                {/* Hand + title + description — keyed fade-slide */}
-                <motion.div
-                  key={active.id}
-                  initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.28, ease: EASE_LUXURY }}
-                >
+                {/* Hand + title + description — base layer with curtain overlay */}
+                <div className="relative overflow-hidden">
+                  {/* Base content — always in DOM */}
                   <div className="aspect-[4/3] w-full overflow-hidden">
                     <img
                       src={active.handImage}
@@ -248,7 +250,20 @@ export default function GemCuts() {
                       {active.description}
                     </p>
                   </div>
-                </motion.div>
+
+                  {/* Curtain overlay — wipe reveal on tab change only */}
+                  {!prefersReducedMotion && wipeKey > 0 && (
+                    <motion.div
+                      key={wipeKey}
+                      initial={{ scaleY: 1 }}
+                      animate={{ scaleY: 0 }}
+                      transition={{ duration: 0.28, ease: EASE_LUXURY }}
+                      style={{ transformOrigin: "bottom" }}
+                      className="absolute inset-0 bg-[#faf8f5]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
