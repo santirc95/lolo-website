@@ -87,41 +87,20 @@ function FAQItem({
         <span className="pr-4 text-base font-medium text-charcoal">
           {question}
         </span>
-        <div className="flex shrink-0 items-center gap-2">
-          <AnimatePresence initial={false}>
-            {open && (
-              <motion.button
-                key="contact-btn"
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.2, ease: easeLuxury }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(getWhatsAppUrl(), "_blank");
-                }}
-                className="btn-liquid btn-liquid--primary px-3 py-1 text-xs"
-                aria-label="Contactar por WhatsApp"
-              >
-                Contactar
-              </motion.button>
-            )}
-          </AnimatePresence>
-          <motion.svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            className="shrink-0 text-gold"
-            animate={{ rotate: open ? 180 : 0 }}
-            transition={PANEL_TRANSITION}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </motion.svg>
-        </div>
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          className="shrink-0 text-gold"
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={PANEL_TRANSITION}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </motion.svg>
       </div>
       <AnimatePresence initial={false} mode="sync">
         {open && (
@@ -136,8 +115,21 @@ function FAQItem({
             className="overflow-hidden"
             style={{ willChange: "height" }}
           >
-            <div className="pb-5 pr-12 text-sm leading-relaxed text-warm-gray">
-              {answer}
+            <div className="relative pb-14 pr-4 text-sm leading-relaxed text-warm-gray">
+              <p className="pr-8">{answer}</p>
+              <motion.button
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2, ease: easeLuxury }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(getWhatsAppUrl(), "_blank");
+                }}
+                className="btn-liquid btn-liquid--primary absolute bottom-4 right-4 px-3 py-1 text-xs"
+                aria-label="Contactar por WhatsApp"
+              >
+                Contactar
+              </motion.button>
             </div>
           </motion.div>
         )}
