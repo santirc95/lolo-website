@@ -121,7 +121,7 @@ export default function Header() {
                     className="btn-liquid btn-liquid--primary mt-2 px-6 py-3 text-sm font-medium
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
                   >
-                    Hablar con un experto
+                    Empieza tu diseño
                   </a>
                 </div>
               </div>
