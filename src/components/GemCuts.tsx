@@ -204,7 +204,7 @@ export default function GemCuts() {
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                              ${
                                isActive
-                                 ? "bg-[#2c2c2c] text-white shadow-md"
+                                 ? "bg-[#4a3160] text-white shadow-md"
                                  : "bg-white/60 text-[#8a8078] border border-[#d4b896]/30 hover:bg-white hover:text-[#2c2c2c] hover:border-[#d4b896]/60"
                              }`}
                 >
