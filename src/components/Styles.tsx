@@ -136,7 +136,7 @@ export default function Styles() {
 
       {/* Main layout */}
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row md:gap-10 md:items-stretch md:min-h-[520px] md:max-h-[640px]">
+        <div className="flex flex-col md:flex-row md:gap-10 md:items-stretch md:h-[clamp(520px,62vh,680px)]">
           {/* Video panel — full width mobile, ~63% desktop */}
           <div className="md:w-[63%] flex-shrink-0 flex flex-col">
             <AnimatePresence mode="wait">
@@ -153,8 +153,8 @@ export default function Styles() {
               >
                 {/* Glass border wrapper */}
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] md:h-full">
-                  <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full">
-                    <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:h-full">
+                  <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full md:p-2">
+                    <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
                       <video
                         key={active.video}
                         src={active.video}
@@ -185,71 +185,79 @@ export default function Styles() {
           </div>
 
           {/* Desktop vertical selector (hidden < md) */}
-          <div
-            className="hidden md:flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2"
-            role="tablist"
-            aria-label="Selecciona un estilo de anillo"
-          >
-            {STYLES.map((style) => {
-              const isActive = style.id === activeId;
-              return (
-                <button
-                  key={style.id}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls={`panel-${style.id}`}
-                  onClick={() => setActiveId(style.id)}
-                  className={`group relative w-full text-left rounded-2xl overflow-hidden transition-all duration-300
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                             ${
-                               isActive
-                                 ? "bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] shadow-md"
-                                 : "p-[1px] bg-[#d4b896]/20 hover:bg-[#d4b896]/40"
-                             }`}
-                >
-                  <div
-                    className={`rounded-[calc(1rem-1px)] px-6 py-5 transition-colors duration-300
+          <div className="hidden md:flex md:flex-col md:flex-1 md:min-h-0 relative">
+            {/* OSMO top fade mask */}
+            <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 z-10 bg-gradient-to-b from-[#faf8f5] to-transparent" />
+            {/* OSMO bottom fade mask */}
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 z-10 bg-gradient-to-t from-[#faf8f5] to-transparent" />
+
+            {/* Scrollable card list */}
+            <div
+              className="flex flex-col gap-2 flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-6 pr-1"
+              role="tablist"
+              aria-label="Selecciona un estilo de anillo"
+            >
+              {STYLES.map((style) => {
+                const isActive = style.id === activeId;
+                return (
+                  <button
+                    key={style.id}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`panel-${style.id}`}
+                    onClick={() => setActiveId(style.id)}
+                    className={`group relative w-full text-left rounded-2xl overflow-hidden transition-all duration-300
+                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                                ${
                                  isActive
-                                   ? "bg-[#faf8f5]/80 backdrop-blur-md"
-                                   : "bg-[#faf8f5]/50 backdrop-blur-sm hover:bg-[#faf8f5]/70"
+                                   ? "bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] shadow-md"
+                                   : "p-[1px] bg-[#d4b896]/20 hover:bg-[#d4b896]/40"
                                }`}
                   >
-                    {/* Active indicator bar — animated with Framer Motion */}
-                    <motion.div
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-[#4a3160]"
-                      initial={false}
-                      animate={{
-                        height: isActive ? 32 : 0,
-                        opacity: isActive ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.3, ease }}
-                    />
+                    <div
+                      className={`rounded-[calc(1rem-1px)] px-5 py-3.5 transition-colors duration-300
+                                 ${
+                                   isActive
+                                     ? "bg-[#faf8f5]/80 backdrop-blur-md"
+                                     : "bg-[#faf8f5]/50 backdrop-blur-sm hover:bg-[#faf8f5]/70"
+                                 }`}
+                    >
+                      {/* Active indicator bar — animated with Framer Motion */}
+                      <motion.div
+                        className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-[#4a3160]"
+                        initial={false}
+                        animate={{
+                          height: isActive ? 28 : 0,
+                          opacity: isActive ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3, ease }}
+                      />
 
-                    <h3
-                      className={`font-display text-lg tracking-tight transition-colors duration-300
-                                 ${
-                                   isActive
-                                     ? "text-[#4a3160]"
-                                     : "text-[#2c2c2c] group-hover:text-[#4a3160]"
-                                 }`}
-                    >
-                      {style.name}
-                    </h3>
-                    <p
-                      className={`mt-1.5 text-sm leading-relaxed transition-colors duration-300
-                                 ${
-                                   isActive
-                                     ? "text-[#8a8078]"
-                                     : "text-[#8a8078]/70"
-                                 }`}
-                    >
-                      {style.description}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
+                      <h3
+                        className={`font-display text-base tracking-tight transition-colors duration-300
+                                   ${
+                                     isActive
+                                       ? "text-[#4a3160]"
+                                       : "text-[#2c2c2c] group-hover:text-[#4a3160]"
+                                   }`}
+                      >
+                        {style.name}
+                      </h3>
+                      <p
+                        className={`mt-1 text-sm leading-snug line-clamp-2 transition-colors duration-300
+                                   ${
+                                     isActive
+                                       ? "text-[#8a8078]"
+                                       : "text-[#8a8078]/70"
+                                   }`}
+                      >
+                        {style.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
