@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const cuts = [
@@ -70,7 +70,7 @@ const cuts = [
   },
 ];
 
-const ease = [0.22, 1, 0.36, 1] as const;
+const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
@@ -80,24 +80,34 @@ const headerRevealVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 1.0, ease },
+    transition: { duration: 1.0, ease: EASE_LUXURY },
   },
 };
 
-const contentRevealVariants = {
+const contentRevealDesktop = {
   hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 1.0, ease, delay: 0.2 },
+    transition: { duration: 1.0, ease: EASE_LUXURY, delay: 0.2 },
+  },
+};
+
+const contentRevealMobile = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, ease: EASE_LUXURY },
   },
 };
 
 const previewVariants = {
   initial: { opacity: 0, y: 12, filter: "blur(4px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease } },
-  exit: { opacity: 0, y: -12, filter: "blur(4px)", transition: { duration: 0.35, ease } },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: EASE_LUXURY } },
+  exit: { opacity: 0, y: -12, filter: "blur(4px)", transition: { duration: 0.35, ease: EASE_LUXURY } },
 };
 
 const previewStaticVariants = {
@@ -110,6 +120,21 @@ export default function GemCuts() {
   const [activeId, setActiveId] = useState(cuts[0].id);
   const active = cuts.find((c) => c.id === activeId)!;
   const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  const contentVariants = prefersReducedMotion
+    ? undefined
+    : isMobile
+      ? contentRevealMobile
+      : contentRevealDesktop;
 
   return (
     <section
@@ -117,7 +142,7 @@ export default function GemCuts() {
       aria-label="Cortes de diamante disponibles"
       className="overflow-hidden bg-[#faf8f5] py-20 px-5"
     >
-      {/* Header — beat 1 */}
+      {/* Header */}
       <motion.div
         className="mx-auto max-w-3xl text-center mb-12"
         variants={prefersReducedMotion ? undefined : headerRevealVariants}
@@ -138,9 +163,9 @@ export default function GemCuts() {
         </p>
       </motion.div>
 
-      {/* Tabs + Panel — beat 2 (delayed) */}
+      {/* Tabs + Panel */}
       <motion.div
-        variants={prefersReducedMotion ? undefined : contentRevealVariants}
+        variants={contentVariants}
         initial={prefersReducedMotion ? undefined : "hidden"}
         whileInView={prefersReducedMotion ? undefined : "visible"}
         viewport={viewportConfig}
@@ -193,7 +218,39 @@ export default function GemCuts() {
             exit="exit"
             className="mx-auto max-w-5xl"
           >
-            <div className="grid gap-6 md:grid-cols-2 md:gap-10 items-center">
+            {/* Mobile: single unified card */}
+            <div className="md:hidden">
+              <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
+                <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
+                  <div className="flex items-center justify-center bg-white/40 py-6">
+                    <img
+                      src={active.cutImage}
+                      alt={`Diamante corte ${active.label}`}
+                      className="h-40 w-40 object-contain"
+                    />
+                  </div>
+                  <div className="aspect-[4/3] w-full overflow-hidden">
+                    <img
+                      src={active.handImage}
+                      alt={`Corte ${active.label} en mano`}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                      Corte{" "}
+                      <span className="italic text-[#4a3160]">{active.label}</span>
+                    </h3>
+                    <p className="text-base leading-relaxed text-[#8a8078]">
+                      {active.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop: 2-column grid */}
+            <div className="hidden md:grid md:grid-cols-2 md:gap-10 items-center">
               {/* Cut image */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
