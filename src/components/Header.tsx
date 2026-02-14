@@ -60,31 +60,49 @@ export default function Header() {
               </a>
             </nav>
 
-            {/* Mobile hamburger */}
-            <button
-              type="button"
-              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-full"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-              aria-expanded={mobileOpen}
-            >
-              <span
-                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                  mobileOpen ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
-                }`}
-              />
-            </button>
+            {/* Mobile CTAs + hamburger */}
+            <div className="flex items-center gap-2 md:hidden">
+              <a
+                href="#estilos"
+                className="btn-liquid btn-liquid--ghost px-3 py-1.5 text-xs font-medium
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+              >
+                Conocer estilos
+              </a>
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-liquid btn-liquid--primary px-3 py-1.5 text-xs font-medium
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+              >
+                Empieza tu diseño
+              </a>
+              <button
+                type="button"
+                className="flex h-9 w-9 flex-col items-center justify-center gap-1.5
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-full"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={mobileOpen}
+              >
+                <span
+                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                    mobileOpen ? "translate-y-2 rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                    mobileOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                    mobileOpen ? "-translate-y-2 -rotate-45" : ""
+                  }`}
+                />
+              </button>
+            </div>
           </div>
         </div>
 
