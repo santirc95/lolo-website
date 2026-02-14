@@ -206,29 +206,32 @@ export default function GemCuts() {
         </div>
 
         {/* Preview panel */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active.id}
-            id={`panel-${active.id}`}
-            role="tabpanel"
-            aria-label={`Corte ${active.label}`}
-            variants={prefersReducedMotion ? previewStaticVariants : previewVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="mx-auto max-w-5xl"
-          >
-            {/* Mobile: single unified card */}
-            <div className="md:hidden">
-              <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
-                <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                  <div className="flex items-center justify-center bg-white/40 py-6">
-                    <img
-                      src={active.cutImage}
-                      alt={`Diamante corte ${active.label}`}
-                      className="h-40 w-40 object-contain"
-                    />
-                  </div>
+        <div
+          id={`panel-${active.id}`}
+          role="tabpanel"
+          aria-label={`Corte ${active.label}`}
+          className="mx-auto max-w-5xl"
+        >
+          {/* Mobile: single unified card — cut image instant, hand+copy animated */}
+          <div className="md:hidden">
+            <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
+              <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
+                {/* Cut image — updates instantly, no animation */}
+                <div className="flex items-center justify-center bg-white/40 py-6">
+                  <img
+                    src={active.cutImage}
+                    alt={`Diamante corte ${active.label}`}
+                    className="h-40 w-40 object-contain"
+                  />
+                </div>
+
+                {/* Hand + title + description — keyed fade-slide */}
+                <motion.div
+                  key={active.id}
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.28, ease: EASE_LUXURY }}
+                >
                   <div className="aspect-[4/3] w-full overflow-hidden">
                     <img
                       src={active.handImage}
@@ -245,12 +248,21 @@ export default function GemCuts() {
                       {active.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
+          </div>
 
-            {/* Desktop: 2-column grid */}
-            <div className="hidden md:grid md:grid-cols-2 md:gap-10 items-center">
+          {/* Desktop: 2-column grid — unchanged */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active.id}
+              variants={prefersReducedMotion ? previewStaticVariants : previewVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="hidden md:grid md:grid-cols-2 md:gap-10 items-center"
+            >
               {/* Cut image */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
@@ -288,9 +300,9 @@ export default function GemCuts() {
                   </p>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </motion.div>
     </section>
   );
