@@ -146,7 +146,7 @@ export default function GemCuts() {
     <section
       role="region"
       aria-label="Cortes de diamante disponibles"
-      className="overflow-hidden bg-[#faf8f5] py-20 px-5"
+      className="overflow-clip bg-[#faf8f5] py-20 px-5"
     >
       {/* Header */}
       <motion.div
@@ -176,15 +176,18 @@ export default function GemCuts() {
         whileInView={prefersReducedMotion ? undefined : "visible"}
         viewport={viewportConfig}
       >
-        {/* Tabs — horizontally scrollable on mobile */}
+        {/* Tabs — wrapped + sticky on mobile, single-row scrollable on desktop */}
         <div
-          className="mx-auto max-w-4xl mb-10 overflow-x-auto
-                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mx-auto max-w-4xl mb-6 md:mb-10
+                     sticky top-16 z-20 bg-[#faf8f5]/90 backdrop-blur-md py-3
+                     md:static md:z-auto md:bg-transparent md:backdrop-blur-none md:py-0
+                     md:overflow-x-auto md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden"
         >
           <div
             role="tablist"
             aria-label="Selecciona un corte de diamante"
-            className="flex gap-2 px-1 min-w-max mx-auto w-fit"
+            className="flex flex-wrap justify-center gap-1.5 px-1
+                       md:flex-nowrap md:gap-2 md:min-w-max md:mx-auto md:w-fit"
           >
             {cuts.map((cut) => {
               const isActive = cut.id === activeId;
@@ -195,7 +198,8 @@ export default function GemCuts() {
                   aria-selected={isActive}
                   aria-controls={`panel-${cut.id}`}
                   onClick={() => handleCutChange(cut.id)}
-                  className={`relative whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium
+                  className={`relative whitespace-nowrap rounded-full font-medium
+                             text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
                              transition-all duration-300
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                              ${
@@ -218,35 +222,35 @@ export default function GemCuts() {
           aria-label={`Corte ${active.label}`}
           className="mx-auto max-w-5xl"
         >
-          {/* Mobile: unified card with curtain wipe */}
+          {/* Mobile: compact card with curtain wipe */}
           <div className="md:hidden">
             <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
               <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Cut image — always on top, updates instantly */}
-                <div className="flex items-center justify-center bg-white/40 py-6">
+                {/* Cut image — compact, updates instantly */}
+                <div className="flex items-center justify-center bg-white/40 py-4">
                   <img
                     src={active.cutImage}
                     alt={`Diamante corte ${active.label}`}
-                    className="h-40 w-40 object-contain"
+                    className="h-32 w-32 object-contain"
                   />
                 </div>
 
                 {/* Hand + title + description — base layer with curtain overlay */}
                 <div className="relative overflow-hidden">
                   {/* Base content — always in DOM */}
-                  <div className="aspect-[4/3] w-full overflow-hidden">
+                  <div className="aspect-[16/9] w-full overflow-hidden">
                     <img
                       src={active.handImage}
                       alt={`Corte ${active.label} en mano`}
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-5">
                     <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
                       Corte{" "}
                       <span className="italic text-[#4a3160]">{active.label}</span>
                     </h3>
-                    <p className="text-base leading-relaxed text-[#8a8078]">
+                    <p className="text-base leading-relaxed text-[#8a8078] line-clamp-3">
                       {active.description}
                     </p>
                   </div>
