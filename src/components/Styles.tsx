@@ -157,7 +157,7 @@ export default function Styles() {
                 {/* Glass border wrapper */}
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[16/10] w-full overflow-hidden rounded-[calc(1rem-1px)]">
+                    <div className="aspect-[5/7] md:aspect-[16/10] w-full overflow-hidden rounded-[calc(1rem-1px)]">
                       <video
                         key={active.video}
                         src={active.video}
