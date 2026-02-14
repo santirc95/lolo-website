@@ -1,81 +1,126 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { NAV_LINKS, SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
 
+const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-gold/10">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link href="/" className="font-display text-2xl tracking-wider text-charcoal">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#faf8f5]/70 backdrop-blur-md border-b border-[#d4b896]/30">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="font-display text-2xl tracking-wider text-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+        >
           {SITE_CONFIG.name}
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm tracking-wide text-warm-gray transition-colors hover:text-charcoal"
-            >
-              {link.label}
-            </a>
-          ))}
+        <nav
+          aria-label="Navegación principal"
+          className="hidden items-center gap-6 md:flex"
+        >
+          {/* Pill glass wrapper for links */}
+          <div className="rounded-full bg-gradient-to-r from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/60 p-[1px]">
+            <div className="flex items-center gap-1 rounded-full bg-[#faf8f5]/80 backdrop-blur-md px-2 py-1.5">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="group relative px-4 py-1.5 text-sm tracking-wide text-[#8a8078] transition-colors duration-200
+                             hover:text-[#4a3160]
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-full"
+                >
+                  {link.label}
+                  <span className="absolute inset-x-4 -bottom-0 h-[1.5px] origin-left scale-x-0 rounded-full bg-[#4a3160]/40 transition-transform duration-200 ease-out group-hover:scale-x-100" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
           <a
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-charcoal px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-charcoal-light"
+            className="btn-liquid btn-liquid--primary px-5 py-2.5 text-sm font-medium
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
           >
-            Agenda tu cita
+            Empieza tu diseño
           </a>
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Mobile hamburger */}
         <button
-          className="flex flex-col gap-1.5 md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          type="button"
+          className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden
+                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-lg"
+          onClick={() => setMobileOpen((prev) => !prev)}
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={mobileOpen}
         >
           <span
-            className={`block h-0.5 w-6 bg-charcoal transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+            className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+              mobileOpen ? "translate-y-2 rotate-45" : ""
+            }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-charcoal transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+            className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+              mobileOpen ? "opacity-0" : ""
+            }`}
           />
           <span
-            className={`block h-0.5 w-6 bg-charcoal transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+              mobileOpen ? "-translate-y-2 -rotate-45" : ""
+            }`}
           />
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <nav className="flex flex-col gap-4 border-t border-gold/10 bg-cream px-5 py-6 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-base text-warm-gray transition-colors hover:text-charcoal"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href={getWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block rounded-full bg-charcoal px-5 py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-charcoal-light"
+      {/* Mobile menu panel */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            aria-label="Navegación móvil"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: EASE_LUXURY }}
+            className="overflow-hidden border-t border-[#d4b896]/20 bg-[#faf8f5]/95 backdrop-blur-md md:hidden"
           >
-            Agenda tu cita
-          </a>
-        </nav>
-      )}
+            <div className="flex flex-col items-center gap-5 px-6 py-8">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMobile}
+                  className="text-base tracking-wide text-[#8a8078] transition-colors duration-200 hover:text-[#4a3160]
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMobile}
+                className="btn-liquid btn-liquid--primary mt-2 px-6 py-3 text-sm font-medium
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+              >
+                Hablar con un experto
+              </a>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
