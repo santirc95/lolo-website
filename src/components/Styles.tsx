@@ -106,15 +106,12 @@ export default function Styles() {
         </p>
       </div>
 
-      {/* Mobile: pills selector (visible < md) */}
-      <div
-        className="md:hidden mx-auto max-w-4xl mb-8 overflow-x-auto
-                   [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      {/* Mobile: pills selector (visible < md) — wrapped, no scroll */}
+      <div className="md:hidden mx-auto max-w-4xl mb-8">
         <div
           role="tablist"
           aria-label="Selecciona un estilo de anillo"
-          className="flex gap-2 px-1 min-w-max mx-auto w-fit"
+          className="flex flex-wrap justify-center gap-2 px-1"
         >
           {STYLES.map((style) => {
             const isActive = style.id === activeId;
@@ -125,7 +122,7 @@ export default function Styles() {
                 aria-selected={isActive}
                 aria-controls={`panel-${style.id}`}
                 onClick={() => setActiveId(style.id)}
-                className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium
+                className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-medium
                            transition-all duration-300
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                            ${
