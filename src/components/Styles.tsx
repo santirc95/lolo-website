@@ -77,6 +77,7 @@ const panelStaticVariants = {
 
 export default function Styles() {
   const [activeId, setActiveId] = useState(STYLES[0].id);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const active = STYLES.find((s) => s.id === activeId)!;
   const prefersReducedMotion = useReducedMotion();
 
@@ -199,14 +200,22 @@ export default function Styles() {
             >
               {STYLES.map((style) => {
                 const isActive = style.id === activeId;
+                const isExpanded = expandedId === style.id;
                 return (
-                  <button
+                  <div
                     key={style.id}
                     role="tab"
+                    tabIndex={0}
                     aria-selected={isActive}
                     aria-controls={`panel-${style.id}`}
                     onClick={() => setActiveId(style.id)}
-                    className={`group relative w-full text-left rounded-2xl overflow-hidden transition-all duration-300
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActiveId(style.id);
+                      }
+                    }}
+                    className={`group relative w-full text-left rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                                ${
                                  isActive
@@ -244,7 +253,8 @@ export default function Styles() {
                         {style.name}
                       </h3>
                       <p
-                        className={`mt-1 text-sm leading-snug line-clamp-2 transition-colors duration-300
+                        className={`mt-1 text-sm leading-snug transition-colors duration-300
+                                   ${isExpanded ? "" : "line-clamp-2"}
                                    ${
                                      isActive
                                        ? "text-[#8a8078]"
@@ -253,8 +263,19 @@ export default function Styles() {
                       >
                         {style.description}
                       </p>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpandedId(isExpanded ? null : style.id);
+                        }}
+                        className="mt-1.5 text-xs text-[#4a3160]/70 hover:text-[#4a3160] hover:underline transition-colors duration-200
+                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded"
+                      >
+                        {isExpanded ? "Leer menos" : "Leer más"}
+                      </button>
                     </div>
-                  </button>
+                  </div>
                 );
               })}
             </div>
