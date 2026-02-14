@@ -136,9 +136,9 @@ export default function Styles() {
 
       {/* Main layout */}
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row md:gap-10 md:items-stretch">
+        <div className="flex flex-col md:flex-row md:gap-10 md:items-stretch md:min-h-[520px] md:max-h-[640px]">
           {/* Video panel — full width mobile, ~63% desktop */}
-          <div className="md:w-[63%] flex-shrink-0">
+          <div className="md:w-[63%] flex-shrink-0 flex flex-col">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -149,11 +149,12 @@ export default function Styles() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                className="md:flex-1 md:min-h-0"
               >
                 {/* Glass border wrapper */}
-                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
-                  <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[4/5] md:aspect-[16/10] w-full overflow-hidden rounded-[calc(1rem-1px)]">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] md:h-full">
+                  <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full">
+                    <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:h-full">
                       <video
                         key={active.video}
                         src={active.video}
@@ -185,7 +186,7 @@ export default function Styles() {
 
           {/* Desktop vertical selector (hidden < md) */}
           <div
-            className="hidden md:flex flex-col gap-3 flex-1 justify-center"
+            className="hidden md:flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2"
             role="tablist"
             aria-label="Selecciona un estilo de anillo"
           >
