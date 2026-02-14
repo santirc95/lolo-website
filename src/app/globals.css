@@ -111,5 +111,86 @@ body {
     linear-gradient(180deg, #FAF7F2 0%, #F7F0E8 60%, #F3ECE2 100%);
 }
 
+/* =========================================
+   LOLŌ — Liquid Glossy Buttons (CTA only)
+========================================= */
 
+.btn-liquid {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
 
+.btn-liquid:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 20px rgba(74, 49, 96, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.btn-liquid:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.btn-liquid:focus-visible {
+  outline: 2px solid rgba(74, 49, 96, 0.5);
+  outline-offset: 2px;
+}
+
+/* Specular highlight */
+.btn-liquid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.20) 0%,
+    rgba(255, 255, 255, 0.07) 45%,
+    transparent 100%
+  );
+}
+
+/* Primary — deep purple */
+.btn-liquid--primary {
+  background-color: #4a3160;
+  color: #fff;
+  border: 1px solid rgba(111, 74, 142, 0.3);
+}
+.btn-liquid--primary:hover {
+  background-color: #5c3d7a;
+}
+
+/* Dark — charcoal */
+.btn-liquid--dark {
+  background-color: #2c2c2c;
+  color: #fff;
+  border: 1px solid rgba(74, 49, 96, 0.2);
+}
+.btn-liquid--dark:hover {
+  background-color: #3a3a3a;
+}
+
+/* Ghost — transparent champagne border */
+.btn-liquid--ghost {
+  background-color: transparent;
+  color: #2c2c2c;
+  border: 1px solid rgba(212, 184, 150, 0.4);
+}
+.btn-liquid--ghost:hover {
+  background-color: rgba(74, 49, 96, 0.04);
+  border-color: rgba(74, 49, 96, 0.25);
+}

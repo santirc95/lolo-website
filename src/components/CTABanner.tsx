@@ -109,10 +109,7 @@ export default function CTABanner() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Hablar por WhatsApp para diseñar tu anillo"
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#2c2c2c] px-8 py-4 text-base font-medium text-white
-                             transition-all duration-300
-                             hover:bg-[#3a3a3a] hover:shadow-lg hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+                  className="btn-liquid btn-liquid--primary gap-2.5 px-8 py-4 text-base"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -131,10 +128,7 @@ export default function CTABanner() {
                 <a
                   href="#proceso"
                   aria-label="Ver cómo funciona nuestro proceso"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#d4b896]/40 px-8 py-4 text-base font-medium text-[#2c2c2c]
-                             transition-all duration-300
-                             hover:border-[#4a3160]/30 hover:bg-[#4a3160]/5 hover:shadow-sm
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+                  className="btn-liquid btn-liquid--ghost px-8 py-4 text-base"
                 >
                   Ver proceso
                 </a>

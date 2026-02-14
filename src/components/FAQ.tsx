@@ -94,9 +94,7 @@ function FAQItem({
                   e.stopPropagation();
                   window.open(getWhatsAppUrl(), "_blank");
                 }}
-                className="rounded-full bg-[#4a3160] px-3 py-1 text-xs font-medium text-white
-                           transition-colors duration-200 hover:bg-[#5c3d7a]
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+                className="btn-liquid btn-liquid--primary px-3 py-1 text-xs"
                 aria-label="Contactar por WhatsApp"
               >
                 Contactar

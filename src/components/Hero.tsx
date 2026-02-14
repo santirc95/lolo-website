@@ -122,9 +122,7 @@ export default function Hero() {
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-charcoal px-8 py-4 text-base font-medium text-white transition-all
-                       hover:bg-charcoal-light hover:shadow-lg
-                       hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]"
+            className="btn-liquid btn-liquid--dark px-8 py-4 text-base"
           >
             Empieza tu diseño
             <svg
@@ -144,9 +142,7 @@ export default function Hero() {
 
           <a
             href="#proceso"
-            className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-8 py-4 text-base font-medium text-charcoal transition-all
-                       hover:border-gold hover:bg-white/50
-                       hover:ring-1 hover:ring-[rgba(74,49,96,0.22)]"
+            className="btn-liquid btn-liquid--ghost px-8 py-4 text-base"
           >
             Cómo funciona
           </a>
