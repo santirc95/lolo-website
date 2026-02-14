@@ -60,49 +60,31 @@ export default function Header() {
               </a>
             </nav>
 
-            {/* Mobile CTAs + hamburger */}
-            <div className="flex items-center gap-2 md:hidden">
-              <a
-                href="#estilos"
-                className="btn-liquid btn-liquid--ghost px-3 py-1.5 text-xs font-medium
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
-              >
-                Conocer estilos
-              </a>
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-liquid btn-liquid--primary px-3 py-1.5 text-xs font-medium
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
-              >
-                Empieza tu diseño
-              </a>
-              <button
-                type="button"
-                className="flex h-9 w-9 flex-col items-center justify-center gap-1.5
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-full"
-                onClick={() => setMobileOpen((prev) => !prev)}
-                aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-                aria-expanded={mobileOpen}
-              >
-                <span
-                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                    mobileOpen ? "translate-y-2 rotate-45" : ""
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                    mobileOpen ? "opacity-0" : ""
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
-                    mobileOpen ? "-translate-y-2 -rotate-45" : ""
-                  }`}
-                />
-              </button>
-            </div>
+            {/* Mobile hamburger */}
+            <button
+              type="button"
+              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded-full"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={mobileOpen}
+            >
+              <span
+                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                  mobileOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-5 rounded-full bg-charcoal transition-all duration-200 ease-out ${
+                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </button>
           </div>
         </div>
 
@@ -118,8 +100,9 @@ export default function Header() {
               className="mt-2 overflow-hidden rounded-2xl bg-gradient-to-b from-[#d4b896]/40 via-[#4a3160]/10 to-[#d4b896]/30 p-[1px]
                          shadow-[0_12px_40px_rgba(0,0,0,0.1)] md:hidden"
             >
-              <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 backdrop-blur-md">
-                <div className="flex flex-col items-center gap-5 px-6 py-8">
+              <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 backdrop-blur-md px-6 py-8">
+                {/* Navigation links */}
+                <div className="flex flex-col items-center gap-5">
                   {NAV_LINKS.map((link) => (
                     <a
                       key={link.href}
@@ -131,15 +114,33 @@ export default function Header() {
                       {link.label}
                     </a>
                   ))}
+                </div>
+
+                {/* ── Separator ── */}
+                <div className="mx-auto my-6 h-[1px] w-2/3 bg-gradient-to-r from-transparent via-[#d4b896]/40 to-transparent" />
+
+                {/* ── Acciones rápidas ── */}
+                <p className="mb-4 text-center text-xs uppercase tracking-[0.28em] text-[#4a3160]/50">
+                  Acciones rápidas
+                </p>
+                <div className="flex flex-col gap-3">
                   <a
                     href={getWhatsAppUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={closeMobile}
-                    className="btn-liquid btn-liquid--primary mt-2 px-6 py-3 text-sm font-medium
+                    className="btn-liquid btn-liquid--primary w-full px-6 py-3 text-center text-sm font-medium
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
                   >
                     Empieza tu diseño
+                  </a>
+                  <a
+                    href="#estilos"
+                    onClick={closeMobile}
+                    className="btn-liquid btn-liquid--ghost w-full px-6 py-3 text-center text-sm font-medium
+                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+                  >
+                    Conocer estilos
                   </a>
                 </div>
               </div>
