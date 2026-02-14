@@ -85,7 +85,7 @@ export default function Styles() {
       id="estilos"
       role="region"
       aria-label="Estilos de anillo de compromiso"
-      className="overflow-hidden bg-[#faf8f5] px-5 py-20 md:py-28"
+      className="overflow-x-clip bg-[#faf8f5] px-5 py-20 md:py-28"
       variants={prefersReducedMotion ? undefined : sectionRevealVariants}
       initial={prefersReducedMotion ? undefined : "hidden"}
       whileInView={prefersReducedMotion ? undefined : "visible"}
@@ -106,29 +106,31 @@ export default function Styles() {
         </p>
       </div>
 
-      {/* Mobile: pills selector (visible < md) — wrapped, no scroll */}
-      <div className="md:hidden mx-auto max-w-4xl mb-8">
-        <div
-          role="tablist"
-          aria-label="Selecciona un estilo de anillo"
-          className="flex flex-wrap justify-center gap-2 px-1"
-        >
-          {STYLES.map((style) => {
-            const isActive = style.id === activeId;
-            return (
-              <button
-                key={style.id}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`panel-${style.id}`}
-                onClick={() => setActiveId(style.id)}
-                className={`pill-liquid whitespace-nowrap px-3 py-2 text-xs
-                           ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
-              >
-                {style.name}
-              </button>
-            );
-          })}
+      {/* Mobile: sticky pills selector (visible < md) */}
+      <div className="md:hidden sticky top-20 z-20 -mx-5 px-5 bg-[#faf8f5]/90 backdrop-blur-md py-3 border-b border-[#d4b896]/25 mb-8">
+        <div className="mx-auto max-w-4xl">
+          <div
+            role="tablist"
+            aria-label="Selecciona un estilo de anillo"
+            className="flex flex-wrap justify-center gap-2 px-1"
+          >
+            {STYLES.map((style) => {
+              const isActive = style.id === activeId;
+              return (
+                <button
+                  key={style.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${style.id}`}
+                  onClick={() => setActiveId(style.id)}
+                  className={`pill-liquid whitespace-nowrap px-3 py-2 text-xs
+                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
+                >
+                  {style.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
