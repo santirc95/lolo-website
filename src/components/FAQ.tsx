@@ -47,24 +47,25 @@ function FAQItem({
   question,
   answer,
   index,
+  open,
+  onToggle,
 }: {
   question: string;
   answer: string;
   index: number;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  const [open, setOpen] = useState(false);
   const panelId = `faq-panel-${index}`;
-
-  const toggle = useCallback(() => setOpen((prev) => !prev), []);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        toggle();
+        onToggle();
       }
     },
-    [toggle],
+    [onToggle],
   );
 
   return (
@@ -72,7 +73,7 @@ function FAQItem({
       <div
         role="button"
         tabIndex={0}
-        onClick={toggle}
+        onClick={onToggle}
         onKeyDown={handleKeyDown}
         className="liquid-row flex w-full items-center justify-between py-5 text-left cursor-pointer"
         aria-expanded={open}
@@ -140,6 +141,8 @@ function FAQItem({
 }
 
 export default function FAQ() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
     <section id="faq" className="bg-champagne px-5 py-20 md:py-28">
       <div className="mx-auto max-w-3xl">
@@ -166,7 +169,14 @@ export default function FAQ() {
           viewport={viewportOnce}
         >
           {FAQS.map((faq, i) => (
-            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} index={i} />
+            <FAQItem
+              key={faq.question}
+              question={faq.question}
+              answer={faq.answer}
+              index={i}
+              open={activeIndex === i}
+              onToggle={() => setActiveIndex(activeIndex === i ? null : i)}
+            />
           ))}
         </motion.div>
       </div>
