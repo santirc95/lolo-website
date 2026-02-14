@@ -74,7 +74,7 @@ function FAQItem({
         tabIndex={0}
         onClick={toggle}
         onKeyDown={handleKeyDown}
-        className="flex w-full items-center justify-between py-5 text-left cursor-pointer"
+        className="liquid-row flex w-full items-center justify-between py-5 text-left cursor-pointer"
         aria-expanded={open}
         aria-controls={panelId}
       >

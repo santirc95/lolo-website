@@ -190,3 +190,75 @@ body {
   background-color: rgba(74, 49, 96, 0.04);
   border-color: rgba(74, 49, 96, 0.25);
 }
+
+/* =========================================
+   LOLŌ — Liquid Pills / Tabs
+========================================= */
+
+.pill-liquid {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: all 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pill-liquid:focus-visible {
+  outline: 2px solid rgba(74, 49, 96, 0.5);
+  outline-offset: 2px;
+}
+
+/* Specular highlight — subtler than btn-liquid */
+.pill-liquid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  bottom: 60%;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+/* Active — deep purple */
+.pill-liquid--active {
+  background-color: #4a3160;
+  color: #fff;
+  border: 1px solid rgba(111, 74, 142, 0.25);
+  box-shadow: 0 2px 8px rgba(74, 49, 96, 0.12);
+}
+
+/* Idle — champagne glass */
+.pill-liquid--idle {
+  background-color: rgba(250, 248, 245, 0.75);
+  color: #8a8078;
+  border: 1px solid rgba(212, 184, 150, 0.35);
+  box-shadow: none;
+}
+
+.pill-liquid--idle:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #2c2c2c;
+  border-color: rgba(212, 184, 150, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================
+   LOLŌ — Liquid Row (FAQ accordion header)
+========================================= */
+
+.liquid-row {
+  transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.liquid-row:hover {
+  background-color: rgba(74, 49, 96, 0.025);
+}

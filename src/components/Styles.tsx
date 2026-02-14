@@ -122,14 +122,8 @@ export default function Styles() {
                 aria-selected={isActive}
                 aria-controls={`panel-${style.id}`}
                 onClick={() => setActiveId(style.id)}
-                className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-medium
-                           transition-all duration-300
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           ${
-                             isActive
-                               ? "bg-[#4a3160] text-white shadow-md"
-                               : "bg-white/60 text-[#8a8078] border border-[#d4b896]/30 hover:bg-white hover:text-[#2c2c2c] hover:border-[#d4b896]/60"
-                           }`}
+                className={`pill-liquid whitespace-nowrap px-3 py-2 text-xs
+                           ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
               >
                 {style.name}
               </button>

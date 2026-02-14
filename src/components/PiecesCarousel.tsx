@@ -113,14 +113,8 @@ export default function PiecesCarousel() {
           type="button"
           aria-label="Ver piezas anteriores"
           onClick={() => scroll("left")}
-          className="absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
-                     h-11 w-11 items-center justify-center rounded-full
-                     bg-[#faf8f5]/70 backdrop-blur-md
-                     border border-[#d4b896]/40
-                     text-[#4a3160] shadow-sm
-                     transition-all duration-200
-                     hover:bg-white/90 hover:shadow-md hover:border-[#d4b896]/70
-                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+          className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                     h-11 w-11 text-[#4a3160]"
         >
           <ArrowIcon direction="left" />
         </button>
@@ -130,14 +124,8 @@ export default function PiecesCarousel() {
           type="button"
           aria-label="Ver siguientes piezas"
           onClick={() => scroll("right")}
-          className="absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
-                     h-11 w-11 items-center justify-center rounded-full
-                     bg-[#faf8f5]/70 backdrop-blur-md
-                     border border-[#d4b896]/40
-                     text-[#4a3160] shadow-sm
-                     transition-all duration-200
-                     hover:bg-white/90 hover:shadow-md hover:border-[#d4b896]/70
-                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+          className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                     h-11 w-11 text-[#4a3160]"
         >
           <ArrowIcon direction="right" />
         </button>

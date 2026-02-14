@@ -198,15 +198,9 @@ export default function GemCuts() {
                   aria-selected={isActive}
                   aria-controls={`panel-${cut.id}`}
                   onClick={() => handleCutChange(cut.id)}
-                  className={`relative whitespace-nowrap rounded-full font-medium
+                  className={`pill-liquid whitespace-nowrap
                              text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
-                             transition-all duration-300
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                             ${
-                               isActive
-                                 ? "bg-[#4a3160] text-white shadow-md"
-                                 : "bg-white/60 text-[#8a8078] border border-[#d4b896]/30 hover:bg-white hover:text-[#2c2c2c] hover:border-[#d4b896]/60"
-                             }`}
+                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
                 >
                   {cut.label}
                 </button>
