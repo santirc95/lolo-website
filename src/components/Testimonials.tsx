@@ -97,7 +97,7 @@ function TestimonialCard({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
+      className="rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
       <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden p-6 h-full flex flex-col">
@@ -131,7 +131,7 @@ export default function Testimonials() {
       id="testimonios"
       role="region"
       aria-label="Reseñas de clientes"
-      className="overflow-hidden bg-[#faf8f5] px-5 py-20 md:py-28"
+      className="overflow-x-clip bg-[#faf8f5] px-5 py-20 md:py-28"
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
@@ -152,7 +152,7 @@ export default function Testimonials() {
         {/* Mobile: horizontal carousel (visible < md) */}
         <div className="md:hidden">
           <div
-            className="overflow-x-auto scroll-smooth snap-x snap-mandatory
+            className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
                        [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             <div className="flex gap-4 px-1">

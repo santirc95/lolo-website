@@ -83,7 +83,7 @@ export default function PiecesCarousel() {
     <section
       role="region"
       aria-label="Galería de piezas destacadas"
-      className="overflow-hidden bg-[#faf8f5] py-20 px-5"
+      className="overflow-x-clip bg-[#faf8f5] py-20 px-5"
     >
       {/* Header */}
       <motion.div
@@ -130,10 +130,10 @@ export default function PiecesCarousel() {
           <ArrowIcon direction="right" />
         </button>
 
-        {/* Scrollable track */}
+        {/* Scrollable track — py-3/-my-3 gives room for hover shadow inside scroll container */}
         <div
           ref={scrollRef}
-          className="overflow-x-auto scroll-smooth snap-x snap-mandatory
+          className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <motion.div
@@ -152,7 +152,7 @@ export default function PiecesCarousel() {
                            md:w-[calc((100%-1.25rem*1)/2)]
                            lg:w-[calc((100%-1.25rem*2)/3)]
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           rounded-2xl overflow-hidden transition-all duration-300
+                           rounded-2xl transition-all duration-300
                            hover:-translate-y-1 hover:shadow-lg"
               >
                 {/* Gradient border wrapper */}
