@@ -5,6 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 
+const PANEL_TRANSITION = {
+  duration: 0.26,
+  ease: easeLuxury,
+} as const;
+
 const FAQS = [
   {
     question: "¿Cuánto cuesta un anillo de compromiso personalizado?",
@@ -69,7 +74,7 @@ function FAQItem({
   );
 
   return (
-    <div className="border-b border-gold/10">
+    <motion.div layout="position" className="border-b border-gold/10">
       <div
         role="button"
         tabIndex={0}
@@ -90,7 +95,7 @@ function FAQItem({
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.25, ease: easeLuxury }}
+                transition={{ duration: 0.2, ease: easeLuxury }}
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(getWhatsAppUrl(), "_blank");
@@ -112,13 +117,13 @@ function FAQItem({
             strokeWidth="1.5"
             className="shrink-0 text-gold"
             animate={{ rotate: open ? 180 : 0 }}
-            transition={{ duration: 0.4, ease: easeLuxury }}
+            transition={PANEL_TRANSITION}
           >
             <path d="m6 9 6 6 6-6" />
           </motion.svg>
         </div>
       </div>
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="sync">
         {open && (
           <motion.div
             id={panelId}
@@ -127,8 +132,9 @@ function FAQItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: easeLuxury }}
+            transition={PANEL_TRANSITION}
             className="overflow-hidden"
+            style={{ willChange: "height" }}
           >
             <div className="pb-5 pr-12 text-sm leading-relaxed text-warm-gray">
               {answer}
@@ -136,7 +142,7 @@ function FAQItem({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
