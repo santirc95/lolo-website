@@ -2,13 +2,6 @@
 
 import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
-import {
-  fadeUp,
-  stagger,
-  hoverLift,
-  hoverTransition,
-  viewportOnce,
-} from "@/lib/motion";
 
 const TRUST_POINTS = [
   {
@@ -55,70 +48,108 @@ const TRUST_POINTS = [
   },
 ];
 
+const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.7,
+      ease: EASE_LUXURY,
+      delay: i * 0.12,
+    },
+  }),
+};
+
 export default function Trust() {
   return (
-    <section id="nosotros" className="bg-cream px-5 py-20 md:py-28">
+    <section
+      id="nosotros"
+      role="region"
+      aria-label="Por qué elegir LOLŌ"
+      className="bg-[#faf8f5] px-5 py-20 md:py-28"
+    >
       <div className="mx-auto max-w-5xl">
-        <motion.div
-          className="text-center"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center mb-14">
+          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
             Por qué LOLŌ
           </p>
-          <h2 className="mt-3 font-display text-3xl tracking-tight text-charcoal sm:text-4xl">
-            Joyería con alma
+          <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
+            Joyería con{" "}
+            <span className="italic text-[#4a3160]">alma</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-warm-gray">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
             Creemos que un anillo de compromiso es mucho más que una joya. Es una
             promesa hecha materia. Por eso ponemos el mismo amor en crearlo que
             tú al entregarlo.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          {TRUST_POINTS.map((point) => (
+        {/* Cards — stacking sticky on mobile, grid on md+ */}
+        <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6">
+          {TRUST_POINTS.map((point, i) => (
             <motion.div
               key={point.title}
-              variants={fadeUp}
-              whileHover={hoverLift}
-              transition={hoverTransition}
-              className="rounded-2xl bg-white p-6 shadow-sm text-center"
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              className="sticky md:static mb-6 md:mb-0 h-[240px] md:h-auto"
+              style={{
+                top: `${96 + i * 12}px`,
+                zIndex: i + 1,
+              }}
             >
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-champagne text-gold-dark">
-                {point.icon}
+              <div
+                className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
+                           shadow-sm transition-all duration-300
+                           hover:-translate-y-1 hover:shadow-lg
+                           h-full"
+              >
+                <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 md:bg-[#faf8f5]/80 backdrop-blur-md overflow-hidden p-6 text-center
+                               h-full flex flex-col items-center justify-between">
+                  <div>
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f5efe8] text-[#4a3160]">
+                      {point.icon}
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-[#2c2c2c]">
+                      {point.title}
+                    </h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-[#8a8078] line-clamp-3 md:line-clamp-none">
+                    {point.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="mt-4 text-base font-semibold text-charcoal">
-                {point.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-warm-gray">
-                {point.description}
-              </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
+        {/* Extra scroll room for stacking effect on mobile */}
+        <div className="h-8 md:hidden" />
+
+        {/* CTA */}
         <motion.div
-          className="mt-14 text-center"
-          variants={fadeUp}
+          custom={TRUST_POINTS.length}
+          variants={cardVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={{ once: true, margin: "-40px" }}
+          className="mt-10 md:mt-14 text-center"
         >
           <a
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-charcoal px-8 py-4 text-base font-medium text-white transition-all hover:bg-charcoal-light hover:shadow-lg"
+            className="inline-flex items-center gap-2 rounded-full bg-[#2c2c2c] px-8 py-4 text-base font-medium text-white transition-all
+                       hover:bg-[#3a3a3a] hover:shadow-lg
+                       hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
           >
             Conócenos mejor
           </a>
