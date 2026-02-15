@@ -71,6 +71,7 @@ const cuts = [
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE_WIPE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
@@ -123,6 +124,7 @@ export default function GemCuts() {
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
+  const [isWiping, setIsWiping] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
@@ -130,6 +132,7 @@ export default function GemCuts() {
   useEffect(() => {
     if (isInView && !hasEntered) {
       setHasEntered(true);
+      setIsWiping(true);
       setWipeKey((k) => k + 1);
     }
   }, [isInView, hasEntered]);
@@ -149,7 +152,9 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
+    if (isWiping) return;
     setActiveId(id);
+    setIsWiping(true);
     setWipeKey((k) => k + 1);
   }
 
@@ -203,16 +208,20 @@ export default function GemCuts() {
           >
             {cuts.map((cut) => {
               const isActive = cut.id === activeId;
+              const pillDisabled = isWiping && !prefersReducedMotion && isMobile;
               return (
                 <button
                   key={cut.id}
                   role="tab"
                   aria-selected={isActive}
                   aria-controls={`panel-${cut.id}`}
+                  aria-disabled={pillDisabled || undefined}
+                  disabled={pillDisabled}
                   onClick={() => handleCutChange(cut.id)}
                   className={`pill-liquid whitespace-nowrap
                              text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
-                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
+                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}
+                             ${pillDisabled ? "opacity-70 cursor-default" : ""}`}
                 >
                   {cut.label}
                 </button>
@@ -260,7 +269,8 @@ export default function GemCuts() {
                     key={wipeKey}
                     initial={{ y: 0 }}
                     animate={{ y: "-110%" }}
-                    transition={{ duration: 0.55, ease: EASE_LUXURY }}
+                    transition={{ duration: 0.95, ease: EASE_WIPE }}
+                    onAnimationComplete={() => setIsWiping(false)}
                     className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-sm"
                     aria-hidden="true"
                   >
@@ -268,6 +278,14 @@ export default function GemCuts() {
                       src={active.cutImage}
                       alt=""
                       className="h-40 w-40 object-contain drop-shadow-lg"
+                    />
+                    {/* Highlight line — travels with the curtain edge */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-[2px] opacity-70 blur-sm"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(212,184,150,0.75), rgba(124,58,237,0.25), transparent)",
+                      }}
                     />
                   </motion.div>
                 )}
