@@ -337,13 +337,12 @@ export default function GemCuts() {
 
                 {/* Floating cut badge — overlaps image/text boundary */}
                 <div className="relative mx-auto -mt-8 w-fit z-20">
-                  <AnimatePresence mode="popLayout">
+                  <AnimatePresence mode="wait">
                     <motion.div
                       key={active.id}
                       initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
-                      animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
-                      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
-                      transition={{ duration: 0.55, ease: EASE_LUXURY }}
+                      animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1, transition: { duration: 0.55, ease: EASE_LUXURY } }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0, transition: { duration: 0.12 } }}
                     >
                       <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
                         style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
