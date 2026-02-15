@@ -137,6 +137,10 @@ export default function GemCuts() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
   const curtainAnimRef = useRef<ReturnType<typeof animate> | null>(null);
 
+  // Capture previous images so the curtain carries the old scene
+  const prevHandImageRef = useRef(active.handImage);
+  const prevCutImageRef = useRef(active.cutImage);
+
   // Motion values for curtain progress tracking (mobile)
   const curtainY = useMotionValue(0);
   const curtainYPercent = useTransform(curtainY, (v) => `${v}%`);
@@ -176,6 +180,9 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
+    // Snapshot current images before switching
+    prevHandImageRef.current = active.handImage;
+    prevCutImageRef.current = active.cutImage;
     setActiveId(id);
     setRevealReady(false);
     curtainAnimRef.current?.stop();
@@ -266,34 +273,38 @@ export default function GemCuts() {
               <div className="relative flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
                 {/* Visual area — image + curtain locked to 2:3 */}
                 <div className="relative aspect-[3/4] w-full overflow-hidden shrink-0">
-                  {/* Hand image — crossfade between cuts */}
-                  <AnimatePresence initial={false}>
-                    <motion.img
-                      key={active.handImage}
-                      src={active.handImage}
-                      alt={`Corte ${active.label} en mano`}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      initial={prefersReducedMotion ? undefined : { opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
-                      transition={{ duration: 0.6, ease: EASE_LUXURY }}
-                    />
-                  </AnimatePresence>
+                  {/* New hand image — revealed as curtain lifts */}
+                  <img
+                    src={active.handImage}
+                    alt={`Corte ${active.label} en mano`}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
 
-                  {/* Curtain overlay — cutImage slides up driven by curtainY motion value */}
+                  {/* Curtain — carries the PREVIOUS scene and slides up to reveal the new one */}
                   {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                     <motion.div
                       style={{ y: curtainYPercent }}
-                      className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
+                      className="absolute inset-0 z-10 pointer-events-none overflow-hidden"
                       aria-hidden="true"
                     >
+                      {/* Previous hand image */}
                       <img
-                        src={active.cutImage}
+                        src={prevHandImageRef.current}
                         alt=""
-                        className="h-40 w-40 object-contain drop-shadow-lg"
+                        className="h-full w-full object-cover"
                       />
+                      {/* Top wash (matches base) */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent" />
+                      {/* Frosted overlay + previous cut diamond */}
+                      <div className="absolute inset-0 bg-white/35 backdrop-blur-[2px] flex items-center justify-center">
+                        <img
+                          src={prevCutImageRef.current}
+                          alt=""
+                          className="h-40 w-40 object-contain drop-shadow-lg"
+                        />
+                      </div>
 
                       {/* Curtain fold — curved fabric edge */}
                       <div
