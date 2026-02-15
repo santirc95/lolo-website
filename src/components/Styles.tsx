@@ -41,15 +41,27 @@ const STYLES = [
   },
 ];
 
-const ease = [0.22, 1, 0.36, 1] as const;
+const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const sectionRevealVariants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
+
+const headerRevealVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.6, ease },
+    transition: { duration: 1.0, ease: EASE_LUXURY },
+  },
+};
+
+const contentRevealVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1.0, ease: EASE_LUXURY, delay: 0.2 },
   },
 };
 
@@ -59,13 +71,13 @@ const panelVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.4, ease },
+    transition: { duration: 0.4, ease: EASE_LUXURY },
   },
   exit: {
     opacity: 0,
     y: -12,
     filter: "blur(4px)",
-    transition: { duration: 0.35, ease },
+    transition: { duration: 0.35, ease: EASE_LUXURY },
   },
 };
 
@@ -81,18 +93,20 @@ export default function Styles() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.section
+    <section
       id="estilos"
       role="region"
       aria-label="Estilos de anillo de compromiso"
       className="overflow-x-clip bg-[#faf8f5] px-5 py-20 md:py-28"
-      variants={prefersReducedMotion ? undefined : sectionRevealVariants}
-      initial={prefersReducedMotion ? undefined : "hidden"}
-      whileInView={prefersReducedMotion ? undefined : "visible"}
-      viewport={{ once: true, margin: "-60px" }}
     >
       {/* Header */}
-      <div className="mx-auto max-w-3xl text-center mb-12">
+      <motion.div
+        className="mx-auto max-w-3xl text-center mb-12"
+        variants={prefersReducedMotion ? undefined : headerRevealVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "visible"}
+        viewport={viewportConfig}
+      >
         <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Estilos
         </p>
@@ -104,8 +118,15 @@ export default function Styles() {
           Cada diseño tiene su propia personalidad. Explora los estilos más
           populares y cuéntanos cuál va contigo.
         </p>
-      </div>
+      </motion.div>
 
+      {/* Content — revealed after header */}
+      <motion.div
+        variants={prefersReducedMotion ? undefined : contentRevealVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "visible"}
+        viewport={viewportConfig}
+      >
       {/* Mobile: sticky pills selector (visible < md) */}
       <div className="md:hidden sticky top-20 z-20 -mx-5 px-5 bg-[#faf8f5]/90 backdrop-blur-md py-3 mb-8">
         <div className="mx-auto max-w-4xl">
@@ -205,7 +226,7 @@ export default function Styles() {
                   <motion.div
                     key={style.id}
                     layout
-                    transition={{ layout: { duration: 0.35, ease } }}
+                    transition={{ layout: { duration: 0.35, ease: EASE_LUXURY } }}
                     role="tab"
                     tabIndex={0}
                     aria-selected={isActive}
@@ -241,7 +262,7 @@ export default function Styles() {
                           height: isActive ? 28 : 0,
                           opacity: isActive ? 1 : 0,
                         }}
-                        transition={{ duration: 0.3, ease }}
+                        transition={{ duration: 0.3, ease: EASE_LUXURY }}
                       />
 
                       <h3
@@ -273,6 +294,7 @@ export default function Styles() {
           </div>
         </div>
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   );
 }
