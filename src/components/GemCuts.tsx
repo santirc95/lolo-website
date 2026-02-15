@@ -71,7 +71,7 @@ const cuts = [
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const EASE_WIPE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const EASE_WIPE: [number, number, number, number] = [0.12, 1, 0.24, 1];
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
@@ -127,12 +127,15 @@ export default function GemCuts() {
   const [isWiping, setIsWiping] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
+  const lastWipeKeyRef = useRef(0);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
+
+  // Keep ref in sync so only the latest overlay can unlock
+  lastWipeKeyRef.current = wipeKey;
 
   useEffect(() => {
     if (isInView && !hasEntered) {
       setHasEntered(true);
-      setIsWiping(true);
       setWipeKey((k) => k + 1);
     }
   }, [isInView, hasEntered]);
@@ -154,9 +157,11 @@ export default function GemCuts() {
   function handleCutChange(id: string) {
     if (isWiping) return;
     setActiveId(id);
-    setIsWiping(true);
     setWipeKey((k) => k + 1);
   }
+
+  // Capture current wipeKey for the overlay closure
+  const currentWipeKey = wipeKey;
 
   return (
     <section
@@ -221,7 +226,7 @@ export default function GemCuts() {
                   className={`pill-liquid whitespace-nowrap
                              text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
                              ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}
-                             ${pillDisabled ? "opacity-70 cursor-default" : ""}`}
+                             ${pillDisabled ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
                   {cut.label}
                 </button>
@@ -267,11 +272,16 @@ export default function GemCuts() {
                 {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                   <motion.div
                     key={wipeKey}
-                    initial={{ y: 0 }}
+                    initial={{ y: "0%" }}
                     animate={{ y: "-110%" }}
-                    transition={{ duration: 0.95, ease: EASE_WIPE }}
-                    onAnimationComplete={() => setIsWiping(false)}
-                    className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-sm"
+                    transition={{ duration: 1.15, ease: EASE_WIPE }}
+                    onAnimationStart={() => setIsWiping(true)}
+                    onAnimationComplete={() => {
+                      if (currentWipeKey === lastWipeKeyRef.current) {
+                        setIsWiping(false);
+                      }
+                    }}
+                    className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
                     aria-hidden="true"
                   >
                     <img
