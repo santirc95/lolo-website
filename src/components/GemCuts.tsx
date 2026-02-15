@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -144,8 +144,9 @@ export default function GemCuts() {
   const curtainY = useMotionValue(0);
   const curtainYPercent = useTransform(curtainY, (v) => `${v}%`);
 
-  // Drive curtain animation imperatively — text reveals simultaneously
-  useEffect(() => {
+  // Drive curtain animation — useLayoutEffect fires before paint,
+  // so the reset + animation start happen in the same frame (no glitch)
+  useLayoutEffect(() => {
     if (!prefersReducedMotion && hasEntered && wipeKey > 0) {
       curtainAnimRef.current?.stop();
       curtainY.set(0);
@@ -179,12 +180,12 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
-    // Snapshot current images before switching
+    // Snapshot current hand before switching
     prevHandImageRef.current = active.handImage;
     setActiveId(id);
     setRevealReady(false);
     curtainAnimRef.current?.stop();
-    curtainY.set(0);
+    // curtainY.set(0) moved to useLayoutEffect — avoids 1-frame glitch
     setWipeKey((k) => k + 1);
   }
 
