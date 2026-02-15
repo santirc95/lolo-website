@@ -246,10 +246,25 @@ export default function GemCuts() {
                 </div>
 
                 {/* Floating cut badge */}
-                <div className="relative mx-auto -mt-4 w-fit z-20">
-                  <div className="relative rounded-xl px-3 py-1 bg-[#faf8f5]/70 backdrop-blur-sm border border-[#d4b896]/35 shadow-[0_8px_24px_rgba(0,0,0,0.10)] text-xs tracking-wide font-medium text-[#4a3160]">
-                    <span className="absolute inset-x-0 top-0 h-[1px] bg-white/30 rounded-t-xl" />
-                    {active.label}
+                <div className="relative mx-auto -mt-8 w-fit z-20">
+                  <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                    style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
+                    <div className="relative bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-3">
+                      <img
+                        src={active.cutImage}
+                        alt={`Diamante corte ${active.label}`}
+                        className="h-24 w-24 object-contain"
+                      />
+                      {/* Small premium label */}
+                      <div className="absolute top-3 left-3 rounded-xl px-3 py-1 text-xs font-medium tracking-wide bg-[#faf8f5]/70 backdrop-blur-sm border border-[#d4b896]/35 text-[#4a3160]">
+                        <span className="absolute inset-x-0 top-0 h-[1px] bg-white/30 rounded-t-xl" />
+                        {active.label}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Specular highlight */}
+                  <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
                   </div>
                 </div>
 
