@@ -292,14 +292,20 @@ export default function GemCuts() {
                       />
                       {/* Frosted translucent overlay */}
                       <div className="absolute inset-0 bg-[#faf8f5]/40 backdrop-blur-[2px]" />
-                      {/* New cut diamond */}
-                      <div className="absolute inset-0 flex items-center justify-center">
+                      {/* New cut diamond — fades in during curtain's slow start */}
+                      <motion.div
+                        key={active.id}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.35, ease: EASE_LUXURY }}
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
                         <img
                           src={active.cutImage}
                           alt=""
                           className="h-40 w-40 object-contain drop-shadow-lg"
                         />
-                      </div>
+                      </motion.div>
 
                       {/* Curtain fold — curved fabric edge */}
                       <div
