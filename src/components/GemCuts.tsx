@@ -337,9 +337,10 @@ export default function GemCuts() {
 
                 {/* Floating cut badge — overlaps image/text boundary */}
                 <div className="relative mx-auto -mt-8 w-fit z-20">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence mode="popLayout">
                     <motion.div
                       key={active.id}
+                      layout
                       initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
                       animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
                       exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
@@ -365,9 +366,10 @@ export default function GemCuts() {
 
                 {/* Text body — fade in with badge */}
                 <div className="px-5 pt-4 pb-5">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence mode="popLayout">
                     <motion.div
                       key={active.id}
+                      layout
                       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6, filter: "blur(2px)" }}
                       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
                       exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6, filter: "blur(2px)" }}
