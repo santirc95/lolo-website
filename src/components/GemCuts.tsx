@@ -269,7 +269,7 @@ export default function GemCuts() {
                     key={wipeKey}
                     initial={{ y: "0%" }}
                     animate={{ y: "-105%" }}
-                    transition={{ duration: 1.6, ease: "easeInOut" }}
+                    transition={{ duration: 1.35, ease: "easeInOut" }}
                     className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
                     aria-hidden="true"
                   >
