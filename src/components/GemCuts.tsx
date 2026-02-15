@@ -234,7 +234,7 @@ export default function GemCuts() {
           <div className="md:hidden">
             <div className="w-full max-w-[420px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
               <div className="relative flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Visual area — image + badge + curtain locked to 2:3 */}
+                {/* Visual area — image + curtain locked to 2:3 */}
                 <div className="relative aspect-[2/3] w-full overflow-hidden shrink-0">
                   {/* Hand image with top wash */}
                   <img
@@ -244,24 +244,6 @@ export default function GemCuts() {
                   />
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Floating cut badge — positioned at bottom-center of visual area */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20">
-                    <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-                      style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
-                      <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
-                        <img
-                          src={active.cutImage}
-                          alt={`Diamante corte ${active.label}`}
-                          className="h-16 w-16 object-contain"
-                        />
-                      </div>
-                    </div>
-                    {/* Specular highlight */}
-                    <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
-                      <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
-                    </div>
-                  </div>
 
                   {/* Curtain overlay — cutImage slides up slowly to reveal content */}
                   {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
@@ -288,6 +270,24 @@ export default function GemCuts() {
                       />
                     </motion.div>
                   )}
+                </div>
+
+                {/* Floating cut badge — overlaps image/text boundary */}
+                <div className="relative mx-auto -mt-8 w-fit z-20">
+                  <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                    style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
+                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
+                      <img
+                        src={active.cutImage}
+                        alt={`Diamante corte ${active.label}`}
+                        className="h-16 w-16 object-contain"
+                      />
+                    </div>
+                  </div>
+                  {/* Specular highlight */}
+                  <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
+                  </div>
                 </div>
 
                 {/* Text body — flows naturally below the visual area */}
