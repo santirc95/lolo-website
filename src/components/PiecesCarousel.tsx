@@ -16,6 +16,11 @@ const pieces = [
   { id: 10, src: "/images/collection/10.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 10" },
   { id: 11, src: "/images/collection/11.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 11" },
   { id: 12, src: "/images/collection/12.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 12" },
+  { id: 13, src: "/images/collection/13.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 13" },
+  { id: 14, src: "/images/collection/14.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 14" },
+  { id: 15, src: "/images/collection/15.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 15" },
+  { id: 16, src: "/images/collection/16.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 16" },
+  { id: 17, src: "/images/collection/17.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 17" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
