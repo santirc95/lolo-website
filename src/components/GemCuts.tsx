@@ -266,12 +266,19 @@ export default function GemCuts() {
               <div className="relative flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
                 {/* Visual area — image + curtain locked to 2:3 */}
                 <div className="relative aspect-[3/4] w-full overflow-hidden shrink-0">
-                  {/* Hand image with top wash */}
-                  <img
-                    src={active.handImage}
-                    alt={`Corte ${active.label} en mano`}
-                    className="h-full w-full object-cover"
-                  />
+                  {/* Hand image — crossfade between cuts */}
+                  <AnimatePresence initial={false}>
+                    <motion.img
+                      key={active.handImage}
+                      src={active.handImage}
+                      alt={`Corte ${active.label} en mano`}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      initial={prefersReducedMotion ? undefined : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+                      transition={{ duration: 0.6, ease: EASE_LUXURY }}
+                    />
+                  </AnimatePresence>
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
 
@@ -356,7 +363,7 @@ export default function GemCuts() {
                           ? { opacity: 1, y: 0, filter: "blur(0px)" }
                           : { opacity: 0, y: 6, filter: "blur(2px)" }
                       }
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
