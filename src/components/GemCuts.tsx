@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 
 const cuts = [
   {
@@ -122,6 +122,17 @@ export default function GemCuts() {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
+  const [hasEntered, setHasEntered] = useState(false);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
+
+  useEffect(() => {
+    if (isInView && !hasEntered) {
+      setHasEntered(true);
+      setWipeKey((k) => k + 1);
+    }
+  }, [isInView, hasEntered]);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -144,6 +155,7 @@ export default function GemCuts() {
 
   return (
     <section
+      ref={sectionRef}
       role="region"
       aria-label="Cortes de diamante disponibles"
       className="overflow-clip bg-[#faf8f5] py-20 px-5"
@@ -218,52 +230,47 @@ export default function GemCuts() {
           aria-label={`Corte ${active.label}`}
           className="mx-auto max-w-5xl"
         >
-          {/* Mobile: compact card with curtain wipe */}
+          {/* Mobile: compact card with cutImage curtain wipe */}
           <div className="md:hidden">
             <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
-              <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Cut image — compact, updates instantly */}
-                <div className="flex items-center justify-center bg-white/40 py-4">
+              <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
+                {/* Base content — always in DOM */}
+                {/* Hand image */}
+                <div className="aspect-[16/9] w-full overflow-hidden">
                   <img
-                    src={active.cutImage}
-                    alt={`Diamante corte ${active.label}`}
-                    className="h-32 w-32 object-contain"
+                    src={active.handImage}
+                    alt={`Corte ${active.label} en mano`}
+                    className="h-full w-full object-cover"
                   />
                 </div>
-
-                {/* Hand + title + description — base layer with curtain overlay */}
-                <div className="relative overflow-hidden">
-                  {/* Base content — always in DOM */}
-                  <div className="aspect-[16/9] w-full overflow-hidden">
-                    <img
-                      src={active.handImage}
-                      alt={`Corte ${active.label} en mano`}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
-                      Corte{" "}
-                      <span className="italic text-[#4a3160]">{active.label}</span>
-                    </h3>
-                    <p className="text-base leading-relaxed text-[#8a8078] line-clamp-3">
-                      {active.description}
-                    </p>
-                  </div>
-
-                  {/* Curtain overlay — wipe reveal on tab change only */}
-                  {!prefersReducedMotion && wipeKey > 0 && (
-                    <motion.div
-                      key={wipeKey}
-                      initial={{ scaleY: 1 }}
-                      animate={{ scaleY: 0 }}
-                      transition={{ duration: 0.28, ease: EASE_LUXURY }}
-                      style={{ transformOrigin: "bottom" }}
-                      className="absolute inset-0 bg-[#faf8f5]"
-                      aria-hidden="true"
-                    />
-                  )}
+                {/* Title + description */}
+                <div className="p-5">
+                  <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                    Corte{" "}
+                    <span className="italic text-[#4a3160]">{active.label}</span>
+                  </h3>
+                  <p className="text-base leading-relaxed text-[#8a8078] line-clamp-3">
+                    {active.description}
+                  </p>
                 </div>
+
+                {/* Curtain overlay — cutImage slides up to reveal hand + text */}
+                {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
+                  <motion.div
+                    key={wipeKey}
+                    initial={{ y: 0 }}
+                    animate={{ y: "-110%" }}
+                    transition={{ duration: 0.55, ease: EASE_LUXURY }}
+                    className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-sm"
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={active.cutImage}
+                      alt=""
+                      className="h-40 w-40 object-contain drop-shadow-lg"
+                    />
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
