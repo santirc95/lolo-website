@@ -4,14 +4,18 @@ import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const pieces = [
-  { id: 1, src: "/images/pieces/01.jpg", title: "Solitario Eterno", subtitle: "Oro 18k & Diamante GIA" },
-  { id: 2, src: "/images/pieces/02.jpg", title: "Alianza Infinita", subtitle: "Platino 950 & Pavé" },
-  { id: 3, src: "/images/pieces/03.jpg", title: "Halo Luminoso", subtitle: "Oro Rosa 14k & Zafiro" },
-  { id: 4, src: "/images/pieces/04.jpg", title: "Torsade Royale", subtitle: "Oro 18k & Esmeralda" },
-  { id: 5, src: "/images/pieces/05.jpg", title: "Cinta de Luz", subtitle: "Platino 950 & Baguettes" },
-  { id: 6, src: "/images/pieces/06.jpg", title: "Nudo Imperial", subtitle: "Oro Amarillo 18k" },
-  { id: 7, src: "/images/pieces/07.jpg", title: "Pétalos de Alba", subtitle: "Oro Rosa 18k & Morganita" },
-  { id: 8, src: "/images/pieces/08.jpg", title: "Constellation", subtitle: "Platino 950 & Diamantes" },
+  { id: 1, src: "/images/collection/01.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 01" },
+  { id: 2, src: "/images/collection/02.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 02" },
+  { id: 3, src: "/images/collection/03.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 03" },
+  { id: 4, src: "/images/collection/04.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 04" },
+  { id: 5, src: "/images/collection/05.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 05" },
+  { id: 6, src: "/images/collection/06.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 06" },
+  { id: 7, src: "/images/collection/07.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 07" },
+  { id: 8, src: "/images/collection/08.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 08" },
+  { id: 9, src: "/images/collection/09.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 09" },
+  { id: 10, src: "/images/collection/10.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 10" },
+  { id: 11, src: "/images/collection/11.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 11" },
+  { id: 12, src: "/images/collection/12.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 12" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -162,7 +166,7 @@ export default function PiecesCarousel() {
                     <div className="aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
                       <img
                         src={piece.src}
-                        alt={piece.title}
+                        alt={piece.alt}
                         loading="lazy"
                         className="h-full w-full object-cover"
                       />
