@@ -131,7 +131,7 @@ export default function GemCuts() {
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
-  const [revealReady, setRevealReady] = useState(false);
+
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
@@ -152,7 +152,7 @@ export default function GemCuts() {
         duration: 1.35,
         ease: [0.65, 0, 0.35, 1],
       });
-      setRevealReady(true);
+
     }
   }, [wipeKey, hasEntered, prefersReducedMotion, curtainY]);
 
@@ -180,7 +180,6 @@ export default function GemCuts() {
   function handleCutChange(id: string) {
     prevHandImageRef.current = active.handImage;
     setActiveId(id);
-    setRevealReady(false);
     curtainAnimRef.current?.stop();
     setWipeKey((k) => k + 1);
   }
@@ -338,44 +337,41 @@ export default function GemCuts() {
 
                 {/* Floating cut badge — overlaps image/text boundary */}
                 <div className="relative mx-auto -mt-8 w-fit z-20">
-                  <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-                    style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
-                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
-                      <img
-                        src={active.cutImage}
-                        alt={`Diamante corte ${active.label}`}
-                        className="h-16 w-16 object-contain"
-                      />
-                    </div>
-                  </div>
-                  {/* Specular highlight */}
-                  <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
-                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
-                  </div>
-                </div>
-
-                {/* Text body — synced with curtain progress */}
-                <div className="px-5 pt-4 pb-5">
-                  {prefersReducedMotion ? (
-                    <>
-                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
-                        Corte{" "}
-                        <span className="italic text-[#4a3160]">{active.label}</span>
-                      </h3>
-                      <p className="text-base leading-relaxed text-[#8a8078]">
-                        {active.description}
-                      </p>
-                    </>
-                  ) : (
+                  <AnimatePresence mode="wait">
                     <motion.div
                       key={active.id}
-                      initial={{ opacity: 0, y: 4, filter: "blur(1px)" }}
-                      animate={
-                        revealReady
-                          ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                          : { opacity: 0, y: 4, filter: "blur(1px)" }
-                      }
-                      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                      initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
+                      animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
+                      transition={{ duration: 0.4, ease: EASE_LUXURY }}
+                    >
+                      <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                        style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
+                        <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
+                          <img
+                            src={active.cutImage}
+                            alt={`Diamante corte ${active.label}`}
+                            className="h-16 w-16 object-contain"
+                          />
+                        </div>
+                      </div>
+                      {/* Specular highlight */}
+                      <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
+                        <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Text body — fade in with badge */}
+                <div className="px-5 pt-4 pb-5">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={active.id}
+                      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6, filter: "blur(2px)" }}
+                      animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6, filter: "blur(2px)" }}
+                      transition={{ duration: 0.5, ease: EASE_LUXURY }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
@@ -385,7 +381,7 @@ export default function GemCuts() {
                         {active.description}
                       </p>
                     </motion.div>
-                  )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
