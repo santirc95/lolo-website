@@ -136,6 +136,7 @@ export default function GemCuts() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
   const curtainAnimRef = useRef<ReturnType<typeof animate> | null>(null);
+  const prevHandImageRef = useRef(active.handImage);
 
   // Motion values for curtain progress tracking (mobile)
   const curtainY = useMotionValue(0);
@@ -177,6 +178,7 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
+    prevHandImageRef.current = active.handImage;
     setActiveId(id);
     setRevealReady(false);
     curtainAnimRef.current?.stop();
@@ -275,15 +277,29 @@ export default function GemCuts() {
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
 
-                  {/* Curtain — opaque overlay, content-independent */}
+                  {/* Curtain — translucent overlay with prev image + new diamond */}
                   {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                     <motion.div
                       style={{ y: curtainYPercent }}
                       className="absolute inset-0 z-10 pointer-events-none overflow-hidden"
                       aria-hidden="true"
                     >
-                      {/* Solid frosted panel */}
-                      <div className="absolute inset-0 bg-[#faf8f5]" />
+                      {/* Previous hand image — visible through frosted glass */}
+                      <img
+                        src={prevHandImageRef.current}
+                        alt=""
+                        className="h-full w-full object-cover"
+                      />
+                      {/* Frosted translucent overlay */}
+                      <div className="absolute inset-0 bg-[#faf8f5]/80 backdrop-blur-sm" />
+                      {/* New cut diamond */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <img
+                          src={active.cutImage}
+                          alt=""
+                          className="h-40 w-40 object-contain drop-shadow-lg"
+                        />
+                      </div>
 
                       {/* Curtain fold — curved fabric edge */}
                       <div
