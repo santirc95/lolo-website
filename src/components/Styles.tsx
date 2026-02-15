@@ -215,7 +215,7 @@ export default function Styles() {
                         setActiveId(style.id);
                       }
                     }}
-                    className={`group relative w-full text-left rounded-2xl overflow-hidden cursor-pointer
+                    className={`group relative w-full text-left rounded-2xl cursor-pointer
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                                ${
                                  isActive
@@ -223,8 +223,7 @@ export default function Styles() {
                                    : "p-[1px] bg-[#d4b896]/20 hover:bg-[#d4b896]/40"
                                }`}
                   >
-                    <motion.div
-                      layout="position"
+                    <div
                       className={`rounded-[calc(1rem-1px)] px-5 transition-colors duration-300
                                  ${
                                    isActive
@@ -254,8 +253,8 @@ export default function Styles() {
                         {style.name}
                       </h3>
                       <p
-                        className={`mt-1 text-sm leading-snug transition-colors duration-300
-                                   ${isActive ? "" : "line-clamp-2"}
+                        className={`mt-1 text-sm leading-snug min-w-0 break-words transition-colors duration-300
+                                   ${isActive ? "whitespace-normal" : "line-clamp-2"}
                                    ${
                                      isActive
                                        ? "text-[#8a8078]"
@@ -264,7 +263,7 @@ export default function Styles() {
                       >
                         {style.description}
                       </p>
-                    </motion.div>
+                    </div>
                   </motion.div>
                 );
               })}
