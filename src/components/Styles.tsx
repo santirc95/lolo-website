@@ -107,7 +107,7 @@ export default function Styles() {
       </div>
 
       {/* Mobile: sticky pills selector (visible < md) */}
-      <div className="md:hidden sticky top-20 z-20 -mx-5 px-5 bg-[#faf8f5]/90 backdrop-blur-md py-3 border-b border-[#d4b896]/25 mb-8">
+      <div className="md:hidden sticky top-20 z-20 -mx-5 px-5 bg-[#faf8f5]/90 backdrop-blur-md py-3 mb-8">
         <div className="mx-auto max-w-4xl">
           <div
             role="tablist"
@@ -131,6 +131,8 @@ export default function Styles() {
               );
             })}
           </div>
+          {/* Divider — content-width, mobile only */}
+          <div className="mt-3 h-px w-full bg-gradient-to-r from-transparent via-[#d4b896]/25 to-transparent" />
         </div>
       </div>
 
