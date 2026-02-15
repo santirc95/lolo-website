@@ -20,12 +20,19 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram LOLŌ"
-              className="text-[#4a3160] opacity-60 transition-all duration-200 hover:opacity-100 hover:-translate-y-[1px]"
+              className="opacity-80 transition-all duration-[250ms] ease-out hover:opacity-100 hover:-translate-y-[1px] hover:drop-shadow-[0_0_6px_rgba(74,49,96,0.35)]"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-[22px] w-[22px]">
-                <rect x="2" y="2" width="20" height="20" rx="5" />
-                <circle cx="12" cy="12" r="5" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <defs>
+                  <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#d4b896" />
+                    <stop offset="50%" stopColor="#4a3160" />
+                    <stop offset="100%" stopColor="#d4b896" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig-grad)" />
+                <circle cx="12" cy="12" r="5" stroke="url(#ig-grad)" />
+                <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad)" stroke="none" />
               </svg>
             </a>
             <a
@@ -33,11 +40,18 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp LOLŌ"
-              className="text-[#4a3160] opacity-60 transition-all duration-200 hover:opacity-100 hover:-translate-y-[1px]"
+              className="opacity-80 transition-all duration-[250ms] ease-out hover:opacity-100 hover:-translate-y-[1px] hover:drop-shadow-[0_0_6px_rgba(74,49,96,0.35)]"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-[22px] w-[22px]">
-                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Zm0 0a5 5 0 0 0 5 5m0 0h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1Z" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <defs>
+                  <linearGradient id="wa-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#d4b896" />
+                    <stop offset="50%" stopColor="#4a3160" />
+                    <stop offset="100%" stopColor="#d4b896" />
+                  </linearGradient>
+                </defs>
+                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" stroke="url(#wa-grad)" />
+                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Zm0 0a5 5 0 0 0 5 5m0 0h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1Z" stroke="url(#wa-grad)" />
               </svg>
             </a>
           </div>
