@@ -340,10 +340,9 @@ export default function GemCuts() {
                   <AnimatePresence mode="popLayout">
                     <motion.div
                       key={active.id}
-                      layout
                       initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
                       animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
-                      exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
                       transition={{ duration: 0.55, ease: EASE_LUXURY }}
                     >
                       <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
