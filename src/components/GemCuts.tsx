@@ -344,7 +344,7 @@ export default function GemCuts() {
                       initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
                       animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
                       exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
-                      transition={{ duration: 0.4, ease: EASE_LUXURY }}
+                      transition={{ duration: 0.55, ease: EASE_LUXURY }}
                     >
                       <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
                         style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
@@ -373,7 +373,7 @@ export default function GemCuts() {
                       initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6, filter: "blur(2px)" }}
                       animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
                       exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6, filter: "blur(2px)" }}
-                      transition={{ duration: 0.5, ease: EASE_LUXURY }}
+                      transition={{ duration: 0.65, ease: EASE_LUXURY }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
