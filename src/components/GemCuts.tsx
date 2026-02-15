@@ -140,17 +140,8 @@ export default function GemCuts() {
   // Motion values for curtain progress tracking (mobile)
   const curtainY = useMotionValue(0);
   const curtainYPercent = useTransform(curtainY, (v) => `${v}%`);
-  const curtainProgress = useTransform(curtainY, [0, -105], [0, 1]);
 
-  // Track curtain progress → reveal text at ~90%
-  useEffect(() => {
-    const unsubscribe = curtainProgress.on("change", (v) => {
-      if (v >= 0.9) setRevealReady(true);
-    });
-    return unsubscribe;
-  }, [curtainProgress]);
-
-  // Drive curtain animation imperatively
+  // Drive curtain animation imperatively — text reveals simultaneously
   useEffect(() => {
     if (!prefersReducedMotion && hasEntered && wipeKey > 0) {
       curtainAnimRef.current?.stop();
@@ -159,6 +150,7 @@ export default function GemCuts() {
         duration: 1.35,
         ease: [0.65, 0, 0.35, 1],
       });
+      setRevealReady(true);
     }
   }, [wipeKey, hasEntered, prefersReducedMotion, curtainY]);
 
