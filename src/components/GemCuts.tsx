@@ -230,37 +230,48 @@ export default function GemCuts() {
           aria-label={`Corte ${active.label}`}
           className="mx-auto max-w-5xl"
         >
-          {/* Mobile: 2:3 vertical card with cut image header + hand/text body */}
+          {/* Mobile: 2:3 vertical card with floating badge + hand/text body */}
           <div className="md:hidden">
             <div className="aspect-[2/3] w-full max-w-[420px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
               <div className="relative flex flex-col h-full rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Cut image header */}
-                <div className="h-32 w-full flex items-center justify-center bg-white/40 shrink-0">
+                {/* Hand image with top wash */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
                   <img
-                    src={active.cutImage}
-                    alt={`Diamante corte ${active.label}`}
-                    className="h-24 w-24 object-contain drop-shadow-lg"
+                    src={active.handImage}
+                    alt={`Corte ${active.label} en mano`}
+                    className="h-full w-full object-cover"
                   />
+                  {/* Top wash */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Hand image + text body — fills remaining space */}
-                <div className="flex-1 flex flex-col min-h-0">
-                  <div className="aspect-[4/3] w-full overflow-hidden shrink-0">
-                    <img
-                      src={active.handImage}
-                      alt={`Corte ${active.label} en mano`}
-                      className="h-full w-full object-cover"
-                    />
+                {/* Floating cut badge */}
+                <div className="relative mx-auto -mt-8 w-fit z-20">
+                  <div className="rounded-full p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                    style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
+                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-full p-3">
+                      <img
+                        src={active.cutImage}
+                        alt={`Diamante corte ${active.label}`}
+                        className="h-24 w-24 object-contain"
+                      />
+                    </div>
                   </div>
-                  <div className="p-5 overflow-auto max-h-[40%]">
-                    <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
-                      Corte{" "}
-                      <span className="italic text-[#4a3160]">{active.label}</span>
-                    </h3>
-                    <p className="text-base leading-relaxed text-[#8a8078]">
-                      {active.description}
-                    </p>
+                  {/* Specular highlight */}
+                  <div className="absolute inset-[1px] rounded-full pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
                   </div>
+                </div>
+
+                {/* Text body — less top padding, more bottom air */}
+                <div className="flex-1 pt-2 pb-6 px-5 overflow-auto">
+                  <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                    Corte{" "}
+                    <span className="italic text-[#4a3160]">{active.label}</span>
+                  </h3>
+                  <p className="text-base leading-relaxed text-[#8a8078]">
+                    {active.description}
+                  </p>
                 </div>
 
                 {/* Curtain overlay — cutImage slides up slowly to reveal content */}
