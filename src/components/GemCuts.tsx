@@ -137,9 +137,8 @@ export default function GemCuts() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
   const curtainAnimRef = useRef<ReturnType<typeof animate> | null>(null);
 
-  // Capture previous images so the curtain carries the old scene
+  // Capture previous hand image so the curtain carries the old scene
   const prevHandImageRef = useRef(active.handImage);
-  const prevCutImageRef = useRef(active.cutImage);
 
   // Motion values for curtain progress tracking (mobile)
   const curtainY = useMotionValue(0);
@@ -182,7 +181,6 @@ export default function GemCuts() {
   function handleCutChange(id: string) {
     // Snapshot current images before switching
     prevHandImageRef.current = active.handImage;
-    prevCutImageRef.current = active.cutImage;
     setActiveId(id);
     setRevealReady(false);
     curtainAnimRef.current?.stop();
@@ -297,10 +295,10 @@ export default function GemCuts() {
                       />
                       {/* Top wash (matches base) */}
                       <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent" />
-                      {/* Frosted overlay + previous cut diamond */}
+                      {/* Frosted overlay + new cut diamond */}
                       <div className="absolute inset-0 bg-white/35 backdrop-blur-[2px] flex items-center justify-center">
                         <img
-                          src={prevCutImageRef.current}
+                          src={active.cutImage}
                           alt=""
                           className="h-40 w-40 object-contain drop-shadow-lg"
                         />
@@ -368,13 +366,13 @@ export default function GemCuts() {
                   ) : (
                     <motion.div
                       key={active.id}
-                      initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                      initial={{ opacity: 0, y: 4, filter: "blur(1px)" }}
                       animate={
                         revealReady
                           ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                          : { opacity: 0, y: 6, filter: "blur(2px)" }
+                          : { opacity: 0, y: 4, filter: "blur(1px)" }
                       }
-                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
