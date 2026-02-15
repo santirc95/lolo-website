@@ -264,7 +264,7 @@ export default function GemCuts() {
                 </div>
 
                 {/* Text body — less top padding, more bottom air */}
-                <div className="flex-1 px-5 pt-4 pb-3 overflow-auto">
+                <div className="flex-1 px-5 pt-4 pb-1 overflow-auto">
                   {prefersReducedMotion ? (
                     <>
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
