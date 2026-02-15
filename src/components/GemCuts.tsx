@@ -265,13 +265,32 @@ export default function GemCuts() {
 
                 {/* Text body — less top padding, more bottom air */}
                 <div className="flex-1 pt-2 pb-6 px-5 overflow-auto">
-                  <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
-                    Corte{" "}
-                    <span className="italic text-[#4a3160]">{active.label}</span>
-                  </h3>
-                  <p className="text-base leading-relaxed text-[#8a8078]">
-                    {active.description}
-                  </p>
+                  {prefersReducedMotion ? (
+                    <>
+                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                        Corte{" "}
+                        <span className="italic text-[#4a3160]">{active.label}</span>
+                      </h3>
+                      <p className="text-base leading-relaxed text-[#8a8078]">
+                        {active.description}
+                      </p>
+                    </>
+                  ) : (
+                    <motion.div
+                      key={active.id}
+                      initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{ duration: 0.26, ease: [0.12, 0.9, 0.18, 1], delay: 1.05 }}
+                    >
+                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                        Corte{" "}
+                        <span className="italic text-[#4a3160]">{active.label}</span>
+                      </h3>
+                      <p className="text-base leading-relaxed text-[#8a8078]">
+                        {active.description}
+                      </p>
+                    </motion.div>
+                  )}
                 </div>
 
                 {/* Curtain overlay — cutImage slides up slowly to reveal content */}
@@ -280,7 +299,7 @@ export default function GemCuts() {
                     key={wipeKey}
                     initial={{ y: "0%" }}
                     animate={{ y: "-105%" }}
-                    transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 1.35, ease: [0.12, 0.9, 0.18, 1] }}
                     className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
                     aria-hidden="true"
                   >
