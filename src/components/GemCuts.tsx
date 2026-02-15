@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "framer-motion";
 
 const cuts = [
   {
@@ -123,9 +131,36 @@ export default function GemCuts() {
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
+  const [revealReady, setRevealReady] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
+  const curtainAnimRef = useRef<ReturnType<typeof animate> | null>(null);
+
+  // Motion values for curtain progress tracking (mobile)
+  const curtainY = useMotionValue(0);
+  const curtainYPercent = useTransform(curtainY, (v) => `${v}%`);
+  const curtainProgress = useTransform(curtainY, [0, -105], [0, 1]);
+
+  // Track curtain progress → reveal text at ~90%
+  useEffect(() => {
+    const unsubscribe = curtainProgress.on("change", (v) => {
+      if (v >= 0.9) setRevealReady(true);
+    });
+    return unsubscribe;
+  }, [curtainProgress]);
+
+  // Drive curtain animation imperatively
+  useEffect(() => {
+    if (!prefersReducedMotion && hasEntered && wipeKey > 0) {
+      curtainAnimRef.current?.stop();
+      curtainY.set(0);
+      curtainAnimRef.current = animate(curtainY, -105, {
+        duration: 1.35,
+        ease: [0.12, 0.9, 0.18, 1],
+      });
+    }
+  }, [wipeKey, hasEntered, prefersReducedMotion, curtainY]);
 
   useEffect(() => {
     if (isInView && !hasEntered) {
@@ -150,6 +185,9 @@ export default function GemCuts() {
 
   function handleCutChange(id: string) {
     setActiveId(id);
+    setRevealReady(false);
+    curtainAnimRef.current?.stop();
+    curtainY.set(0);
     setWipeKey((k) => k + 1);
   }
 
@@ -245,13 +283,10 @@ export default function GemCuts() {
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
 
-                  {/* Curtain overlay — cutImage slides up slowly to reveal content */}
+                  {/* Curtain overlay — cutImage slides up driven by curtainY motion value */}
                   {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                     <motion.div
-                      key={wipeKey}
-                      initial={{ y: "0%" }}
-                      animate={{ y: "-105%" }}
-                      transition={{ duration: 1.35, ease: [0.12, 0.9, 0.18, 1] }}
+                      style={{ y: curtainYPercent }}
                       className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
                       aria-hidden="true"
                     >
@@ -260,7 +295,25 @@ export default function GemCuts() {
                         alt=""
                         className="h-40 w-40 object-contain drop-shadow-lg"
                       />
-                      {/* Highlight line — travels with the curtain edge */}
+
+                      {/* Curtain fold — curved fabric edge */}
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 bottom-[-18px] w-[140%] h-[42px] rounded-[999px] blur-md opacity-70 pointer-events-none"
+                        style={{
+                          background:
+                            "radial-gradient(closest-side, rgba(243,227,201,0.85), rgba(243,227,201,0.35), transparent 70%)",
+                        }}
+                      />
+                      {/* Highlight line inside fold */}
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 bottom-[-6px] w-[110%] h-[2px] opacity-60 pointer-events-none"
+                        style={{
+                          background:
+                            "linear-gradient(90deg, transparent, rgba(212,184,150,0.75), rgba(124,58,237,0.25), transparent)",
+                        }}
+                      />
+
+                      {/* Highlight line — bottom edge */}
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2px] opacity-70 blur-sm"
                         style={{
@@ -290,7 +343,7 @@ export default function GemCuts() {
                   </div>
                 </div>
 
-                {/* Text body — flows naturally below the visual area */}
+                {/* Text body — synced with curtain progress */}
                 <div className="px-5 pt-4 pb-5">
                   {prefersReducedMotion ? (
                     <>
@@ -305,8 +358,12 @@ export default function GemCuts() {
                   ) : (
                     <motion.div
                       key={active.id}
-                      initial={{ opacity: 0, y: 4, filter: "blur(2px)" }}
-                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                      animate={
+                        revealReady
+                          ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                          : { opacity: 0, y: 6, filter: "blur(2px)" }
+                      }
                       transition={{ duration: 0.28, ease: [0.12, 0.9, 0.18, 1] }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
