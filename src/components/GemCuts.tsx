@@ -291,7 +291,7 @@ export default function GemCuts() {
                         className="h-full w-full object-cover"
                       />
                       {/* Frosted translucent overlay */}
-                      <div className="absolute inset-0 bg-[#faf8f5]/80 backdrop-blur-sm" />
+                      <div className="absolute inset-0 bg-[#faf8f5]/40 backdrop-blur-[2px]" />
                       {/* New cut diamond */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <img
