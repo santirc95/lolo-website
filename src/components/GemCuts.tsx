@@ -76,6 +76,14 @@ const cuts = [
     description:
       "Su forma de naveta maximiza la superficie visible del diamante, creando un efecto dramático en la mano. Ideal para quien busca presencia y originalidad.",
   },
+  {
+    id: "asscher",
+    label: "Asscher",
+    cutImage: "/images/cuts/asscher-cut.png",
+    handImage: "/images/cuts/asscher-hand.png",
+    description:
+      "Un cuadrado de facetas escalonadas con esquinas recortadas que irradia simetría art-déco. Su brillo profundo y geométrico lo convierte en una elección única para quien valora el detalle y la distinción.",
+  },
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
