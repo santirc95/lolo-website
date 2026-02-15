@@ -264,10 +264,10 @@ export default function GemCuts() {
                 </div>
 
                 {/* Text body — less top padding, more bottom air */}
-                <div className="flex-1 px-5 pt-4 pb-4 overflow-auto">
+                <div className="flex-1 px-5 pt-4 pb-3 overflow-auto">
                   {prefersReducedMotion ? (
                     <>
-                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
                         <span className="italic text-[#4a3160]">{active.label}</span>
                       </h3>
@@ -282,7 +282,7 @@ export default function GemCuts() {
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       transition={{ duration: 0.28, ease: [0.12, 0.9, 0.18, 1] }}
                     >
-                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                      <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
                         <span className="italic text-[#4a3160]">{active.label}</span>
                       </h3>
