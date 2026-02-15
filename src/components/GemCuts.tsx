@@ -247,9 +247,9 @@ export default function GemCuts() {
 
                 {/* Floating cut badge */}
                 <div className="relative mx-auto -mt-8 w-fit z-20">
-                  <div className="rounded-full p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                  <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
                     style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
-                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-full p-3">
+                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-3">
                       <img
                         src={active.cutImage}
                         alt={`Diamante corte ${active.label}`}
@@ -258,7 +258,7 @@ export default function GemCuts() {
                     </div>
                   </div>
                   {/* Specular highlight */}
-                  <div className="absolute inset-[1px] rounded-full pointer-events-none overflow-hidden">
+                  <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
                     <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
                   </div>
                 </div>
