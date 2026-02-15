@@ -77,7 +77,6 @@ const panelStaticVariants = {
 
 export default function Styles() {
   const [activeId, setActiveId] = useState(STYLES[0].id);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const active = STYLES.find((s) => s.id === activeId)!;
   const prefersReducedMotion = useReducedMotion();
 
@@ -200,10 +199,11 @@ export default function Styles() {
             >
               {STYLES.map((style) => {
                 const isActive = style.id === activeId;
-                const isExpanded = expandedId === style.id;
                 return (
-                  <div
+                  <motion.div
                     key={style.id}
+                    layout
+                    transition={{ layout: { duration: 0.35, ease } }}
                     role="tab"
                     tabIndex={0}
                     aria-selected={isActive}
@@ -215,20 +215,21 @@ export default function Styles() {
                         setActiveId(style.id);
                       }
                     }}
-                    className={`group relative w-full text-left rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer
+                    className={`group relative w-full text-left rounded-2xl overflow-hidden cursor-pointer
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                                ${
                                  isActive
-                                   ? "bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] shadow-md"
+                                   ? "bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] shadow-lg shadow-[#4a3160]/10"
                                    : "p-[1px] bg-[#d4b896]/20 hover:bg-[#d4b896]/40"
                                }`}
                   >
-                    <div
-                      className={`rounded-[calc(1rem-1px)] px-5 py-3.5 transition-colors duration-300
+                    <motion.div
+                      layout="position"
+                      className={`rounded-[calc(1rem-1px)] px-5 transition-colors duration-300
                                  ${
                                    isActive
-                                     ? "bg-[#faf8f5]/80 backdrop-blur-md"
-                                     : "bg-[#faf8f5]/50 backdrop-blur-sm hover:bg-[#faf8f5]/70"
+                                     ? "py-5 bg-[#faf8f5]/80 backdrop-blur-md"
+                                     : "py-3.5 bg-[#faf8f5]/50 backdrop-blur-sm hover:bg-[#faf8f5]/70"
                                  }`}
                     >
                       {/* Active indicator bar — animated with Framer Motion */}
@@ -254,7 +255,7 @@ export default function Styles() {
                       </h3>
                       <p
                         className={`mt-1 text-sm leading-snug transition-colors duration-300
-                                   ${isExpanded ? "" : "line-clamp-2"}
+                                   ${isActive ? "" : "line-clamp-2"}
                                    ${
                                      isActive
                                        ? "text-[#8a8078]"
@@ -263,19 +264,8 @@ export default function Styles() {
                       >
                         {style.description}
                       </p>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setExpandedId(isExpanded ? null : style.id);
-                        }}
-                        className="mt-1.5 text-xs text-[#4a3160]/70 hover:text-[#4a3160] hover:underline transition-colors duration-200
-                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded"
-                      >
-                        {isExpanded ? "Leer menos" : "Leer más"}
-                      </button>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 );
               })}
             </div>
