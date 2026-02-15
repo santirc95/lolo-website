@@ -137,9 +137,6 @@ export default function GemCuts() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
   const curtainAnimRef = useRef<ReturnType<typeof animate> | null>(null);
 
-  // Capture previous hand image so the curtain carries the old scene
-  const prevHandImageRef = useRef(active.handImage);
-
   // Motion values for curtain progress tracking (mobile)
   const curtainY = useMotionValue(0);
   const curtainYPercent = useTransform(curtainY, (v) => `${v}%`);
@@ -180,12 +177,9 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
-    // Snapshot current hand before switching
-    prevHandImageRef.current = active.handImage;
     setActiveId(id);
     setRevealReady(false);
     curtainAnimRef.current?.stop();
-    // curtainY.set(0) moved to useLayoutEffect — avoids 1-frame glitch
     setWipeKey((k) => k + 1);
   }
 
@@ -281,29 +275,15 @@ export default function GemCuts() {
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
 
-                  {/* Curtain — carries the PREVIOUS scene and slides up to reveal the new one */}
+                  {/* Curtain — opaque overlay, content-independent */}
                   {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                     <motion.div
                       style={{ y: curtainYPercent }}
                       className="absolute inset-0 z-10 pointer-events-none overflow-hidden"
                       aria-hidden="true"
                     >
-                      {/* Previous hand image */}
-                      <img
-                        src={prevHandImageRef.current}
-                        alt=""
-                        className="h-full w-full object-cover"
-                      />
-                      {/* Top wash (matches base) */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent" />
-                      {/* Frosted overlay + new cut diamond */}
-                      <div className="absolute inset-0 bg-white/35 backdrop-blur-[2px] flex items-center justify-center">
-                        <img
-                          src={active.cutImage}
-                          alt=""
-                          className="h-40 w-40 object-contain drop-shadow-lg"
-                        />
-                      </div>
+                      {/* Solid frosted panel */}
+                      <div className="absolute inset-0 bg-[#faf8f5]" />
 
                       {/* Curtain fold — curved fabric edge */}
                       <div
