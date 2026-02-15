@@ -337,29 +337,27 @@ export default function GemCuts() {
 
                 {/* Floating cut badge — overlaps image/text boundary */}
                 <div className="relative mx-auto -mt-8 w-fit z-20">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={active.id}
-                      initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
-                      animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1, transition: { duration: 0.55, ease: EASE_LUXURY } }}
-                      exit={prefersReducedMotion ? undefined : { opacity: 0, transition: { duration: 0.12 } }}
-                    >
-                      <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-                        style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
-                        <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
-                          <img
-                            src={active.cutImage}
-                            alt={`Diamante corte ${active.label}`}
-                            className="h-16 w-16 object-contain"
-                          />
-                        </div>
-                      </div>
-                      {/* Specular highlight */}
-                      <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
-                        <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
+                  <div className="rounded-xl p-[1px] shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
+                    style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
+                    <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={active.id}
+                          src={active.cutImage}
+                          alt={`Diamante corte ${active.label}`}
+                          className="h-16 w-16 object-contain"
+                          initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
+                          animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
+                          exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
+                          transition={{ duration: 0.45, ease: EASE_LUXURY }}
+                        />
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                  {/* Specular highlight */}
+                  <div className="absolute inset-[1px] rounded-xl pointer-events-none overflow-hidden">
+                    <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 rounded-full bg-white/20 blur-sm" />
+                  </div>
                 </div>
 
                 {/* Text body — fade in with badge */}
