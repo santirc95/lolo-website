@@ -71,7 +71,6 @@ const cuts = [
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const EASE_WIPE: [number, number, number, number] = [0.12, 1, 0.24, 1];
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
@@ -124,14 +123,9 @@ export default function GemCuts() {
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
-  const [isWiping, setIsWiping] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
-  const lastWipeKeyRef = useRef(0);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
-
-  // Keep ref in sync so only the latest overlay can unlock
-  lastWipeKeyRef.current = wipeKey;
 
   useEffect(() => {
     if (isInView && !hasEntered) {
@@ -155,13 +149,9 @@ export default function GemCuts() {
       : contentRevealDesktop;
 
   function handleCutChange(id: string) {
-    if (isWiping) return;
     setActiveId(id);
     setWipeKey((k) => k + 1);
   }
-
-  // Capture current wipeKey for the overlay closure
-  const currentWipeKey = wipeKey;
 
   return (
     <section
@@ -213,20 +203,16 @@ export default function GemCuts() {
           >
             {cuts.map((cut) => {
               const isActive = cut.id === activeId;
-              const pillDisabled = isWiping && !prefersReducedMotion && isMobile;
               return (
                 <button
                   key={cut.id}
                   role="tab"
                   aria-selected={isActive}
                   aria-controls={`panel-${cut.id}`}
-                  aria-disabled={pillDisabled || undefined}
-                  disabled={pillDisabled}
                   onClick={() => handleCutChange(cut.id)}
                   className={`pill-liquid whitespace-nowrap
                              text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
-                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}
-                             ${pillDisabled ? "opacity-70 cursor-not-allowed" : ""}`}
+                             ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
                 >
                   {cut.label}
                 </button>
@@ -244,43 +230,46 @@ export default function GemCuts() {
           aria-label={`Corte ${active.label}`}
           className="mx-auto max-w-5xl"
         >
-          {/* Mobile: compact card with cutImage curtain wipe */}
+          {/* Mobile: 2:3 vertical card with cut image header + hand/text body */}
           <div className="md:hidden">
-            <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
-              <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                {/* Base content — always in DOM */}
-                {/* Hand image */}
-                <div className="aspect-[16/9] w-full overflow-hidden">
+            <div className="aspect-[2/3] w-full max-w-[420px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
+              <div className="relative flex flex-col h-full rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
+                {/* Cut image header */}
+                <div className="h-32 w-full flex items-center justify-center bg-white/40 shrink-0">
                   <img
-                    src={active.handImage}
-                    alt={`Corte ${active.label} en mano`}
-                    className="h-full w-full object-cover"
+                    src={active.cutImage}
+                    alt={`Diamante corte ${active.label}`}
+                    className="h-24 w-24 object-contain drop-shadow-lg"
                   />
                 </div>
-                {/* Title + description */}
-                <div className="p-5">
-                  <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
-                    Corte{" "}
-                    <span className="italic text-[#4a3160]">{active.label}</span>
-                  </h3>
-                  <p className="text-base leading-relaxed text-[#8a8078] line-clamp-3">
-                    {active.description}
-                  </p>
+
+                {/* Hand image + text body — fills remaining space */}
+                <div className="flex-1 flex flex-col min-h-0">
+                  <div className="aspect-[4/3] w-full overflow-hidden shrink-0">
+                    <img
+                      src={active.handImage}
+                      alt={`Corte ${active.label} en mano`}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-5 overflow-auto max-h-[40%]">
+                    <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-3">
+                      Corte{" "}
+                      <span className="italic text-[#4a3160]">{active.label}</span>
+                    </h3>
+                    <p className="text-base leading-relaxed text-[#8a8078]">
+                      {active.description}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Curtain overlay — cutImage slides up to reveal hand + text */}
+                {/* Curtain overlay — cutImage slides up slowly to reveal content */}
                 {!prefersReducedMotion && hasEntered && wipeKey > 0 && (
                   <motion.div
                     key={wipeKey}
                     initial={{ y: "0%" }}
-                    animate={{ y: "-110%" }}
-                    transition={{ duration: 1.15, ease: EASE_WIPE }}
-                    onAnimationStart={() => setIsWiping(true)}
-                    onAnimationComplete={() => {
-                      if (currentWipeKey === lastWipeKeyRef.current) {
-                        setIsWiping(false);
-                      }
-                    }}
+                    animate={{ y: "-105%" }}
+                    transition={{ duration: 1.6, ease: "easeInOut" }}
                     className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center bg-white/35 backdrop-blur-[2px]"
                     aria-hidden="true"
                   >
