@@ -157,7 +157,7 @@ export default function GemCuts() {
       curtainY.set(0);
       curtainAnimRef.current = animate(curtainY, -105, {
         duration: 1.35,
-        ease: [0.12, 0.9, 0.18, 1],
+        ease: [0.65, 0, 0.35, 1],
       });
     }
   }, [wipeKey, hasEntered, prefersReducedMotion, curtainY]);
@@ -364,7 +364,7 @@ export default function GemCuts() {
                           ? { opacity: 1, y: 0, filter: "blur(0px)" }
                           : { opacity: 0, y: 6, filter: "blur(2px)" }
                       }
-                      transition={{ duration: 0.28, ease: [0.12, 0.9, 0.18, 1] }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
                         Corte{" "}
