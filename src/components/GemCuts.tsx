@@ -18,7 +18,7 @@ const cuts = [
     cutImage: "/images/cuts/round-cut.png",
     handImage: "/images/cuts/round-hand.png",
     description:
-      "El corte más clásico y brillante. Sus 57 facetas maximizan el destello desde cualquier ángulo, ideal para quien busca un anillo atemporal que nunca pase de moda.",
+      "El corte más clásico y brillante. Sus 58 facetas maximizan el destello desde cualquier ángulo, ideal para quien busca un anillo atemporal que nunca pase de moda.",
   },
   {
     id: "oval",
