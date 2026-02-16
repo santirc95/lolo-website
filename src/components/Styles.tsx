@@ -172,7 +172,7 @@ export default function Styles() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="md:flex-1 md:min-h-0"
+                className="max-w-[420px] mx-auto md:max-w-none md:mx-0 md:flex-1 md:min-h-0"
               >
                 {/* Glass border wrapper */}
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] md:h-full">
