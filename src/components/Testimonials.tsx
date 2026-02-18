@@ -4,46 +4,40 @@ import { motion } from "framer-motion";
 
 const TESTIMONIALS = [
   {
-    name: "Carlos M.",
-    avatar: "/images/testimonials/01.jpg",
+    name: "Fernando Huerta",
+    avatar: "/images/testimonials/fernando.png",
     rating: 5,
-    text: "El proceso fue increíble. Me guiaron en cada paso y el anillo superó todas mis expectativas. Mi ahora esposa no podía creerlo.",
-    detail: "Anillo solitario en oro blanco 18k",
+    text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien 👌🏼 definitivamente recomiendo.",
   },
   {
-    name: "Andrea L.",
-    avatar: "/images/testimonials/02.jpg",
+    name: "Fernanda Hierro",
+    avatar: "/images/testimonials/fernanda.png",
     rating: 5,
-    text: "Buscaba algo único y lo encontré. La atención personalizada marca la diferencia. Se nota que aman lo que hacen.",
-    detail: "Anillo halo en platino 950",
+    text: "El mejor joyero!! Mi anillo es la cosa más bonita que tengo!!! Gracias!",
   },
   {
-    name: "Roberto S.",
-    avatar: "/images/testimonials/03.jpg",
+    name: "Mauricio Barriga",
+    avatar: "/images/testimonials/mauricio.png",
     rating: 5,
-    text: "Tenía muchas dudas sobre diamantes y metales. Me explicaron todo con paciencia y sin presión. 100% recomendados.",
-    detail: "Anillo trilogía en oro rosa 14k",
+    text: "Súper profesionales, me ayudaron con cada detalle para que la pieza fuera única y especial. Servicio totalmente personalizado y excelente.",
   },
   {
-    name: "Valentina R.",
-    avatar: "/images/testimonials/04.jpg",
+    name: "René Torti",
+    avatar: "/images/testimonials/rene.png",
     rating: 5,
-    text: "Desde el primer contacto sentí confianza. El diseño 3D fue clave para visualizar el resultado. Quedó incluso mejor de lo que imaginé.",
-    detail: "Anillo pavé en oro amarillo 18k",
+    text: "Comprar un anillo de compromiso puede ser complicado, más cuando no sabes mucho del tema y es una compra importante. Pero con Santiago todo fue súper sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme todo: los pros, los contras, los detalles que uno ni se imagina. Fue una gran experiencia de compra, y se nota que le apasiona lo que hace. Recomiendo muchísimo Lolo si estás buscando algo especial y bien asesorado.",
   },
   {
-    name: "Sebastián G.",
-    avatar: "/images/testimonials/05.jpg",
+    name: "Sebastián Coronel",
+    avatar: "/images/testimonials/sebastian.png",
     rating: 5,
-    text: "Quería algo especial para nuestra historia y lo lograron. La calidad del diamante y el acabado son impecables.",
-    detail: "Anillo solitario en platino 950",
+    text: "",
   },
   {
-    name: "Mariana T.",
-    avatar: "/images/testimonials/06.jpg",
+    name: "Adrián Leyva",
+    avatar: "/images/testimonials/leyva.png",
     rating: 5,
-    text: "Me encantó poder participar en cada decisión. El empaque y la entrega fueron un detalle precioso. Totalmente recomendable.",
-    detail: "Anillo halo en oro rosa 18k",
+    text: "",
   },
 ];
 
@@ -103,11 +97,13 @@ function TestimonialCard({
       <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden p-6 h-full flex flex-col">
         <Stars count={t.rating} />
 
-        <blockquote className="mt-4 flex-1 text-base leading-relaxed text-[#4a4a4a]">
-          &ldquo;{t.text}&rdquo;
-        </blockquote>
+        {t.text && (
+          <blockquote className="mt-4 flex-1 text-base leading-relaxed text-[#4a4a4a]">
+            &ldquo;{t.text}&rdquo;
+          </blockquote>
+        )}
 
-        <div className="mt-5 flex items-center gap-3 border-t border-[#d4b896]/20 pt-4">
+        <div className={`flex items-center gap-3 border-t border-[#d4b896]/20 pt-4 ${t.text ? "mt-5" : "mt-4"}`}>
           <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border border-[#d4b896]/30">
             <img
               src={t.avatar}
@@ -117,7 +113,6 @@ function TestimonialCard({
           </div>
           <div>
             <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
-            <p className="text-xs text-[#8a8078]">{t.detail}</p>
           </div>
         </div>
       </div>
