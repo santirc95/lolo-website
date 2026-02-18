@@ -154,7 +154,7 @@ export default function Hero() {
           variants={heroItem}
           className="mt-12 flex items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
         >
-          <span>Diamantes GIA</span>
+          <span>Diamantes GIA &amp; IGI</span>
           <span className="h-4 w-px bg-gold/30" />
           <span>Oro 14k &amp; 18k</span>
           <span className="h-4 w-px bg-gold/30" />
