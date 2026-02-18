@@ -228,7 +228,7 @@ export default function GemCuts() {
       >
         {/* Tabs — wrapped + sticky on mobile, single-row scrollable on desktop */}
         <div
-          className="mx-auto max-w-4xl mb-6 md:mb-10
+          className="mx-auto max-w-[400px] md:max-w-4xl mb-6 md:mb-10
                      sticky top-20 z-20 bg-[#faf8f5]/90 backdrop-blur-md py-3
                      md:static md:z-auto md:bg-transparent md:backdrop-blur-none md:py-0
                      md:overflow-x-auto md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden"

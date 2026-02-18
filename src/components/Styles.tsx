@@ -129,7 +129,7 @@ export default function Styles() {
       >
       {/* Mobile: sticky pills selector (visible < md) */}
       <div className="md:hidden sticky top-20 z-20 -mx-5 px-5 bg-[#faf8f5]/90 backdrop-blur-md py-3 mb-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-[400px]">
           <div
             role="tablist"
             aria-label="Selecciona un estilo de anillo"
