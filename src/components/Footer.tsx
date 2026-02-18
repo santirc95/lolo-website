@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
 
 export default function Footer() {
@@ -9,12 +8,20 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12">
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">
           <div>
-            <Image
-              src="/images/brand/logo-lolo.svg"
-              alt="Loló"
-              width={140}
-              height={40}
-              className="brightness-0 invert"
+            <div
+              role="img"
+              aria-label="Loló"
+              className="h-[40px] w-[140px] bg-gradient-to-r from-[#d4b896] via-[#4a3160] to-[#d4b896]"
+              style={{
+                maskImage: "url(/images/brand/logo-lolo.svg)",
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskImage: "url(/images/brand/logo-lolo.svg)",
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+              }}
             />
             <p className="mt-1 text-sm">{SITE_CONFIG.tagline}</p>
           </div>
