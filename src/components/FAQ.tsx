@@ -125,7 +125,7 @@ function FAQItem({
                   e.stopPropagation();
                   window.open(getWhatsAppUrl(), "_blank");
                 }}
-                className="btn-liquid btn-liquid--primary absolute bottom-4 right-4 px-3 py-1 text-xs"
+                className="btn-liquid btn-liquid--primary absolute bottom-4 right-4 px-5 py-2 text-sm"
                 aria-label="Contactar por WhatsApp"
               >
                 Contactar
