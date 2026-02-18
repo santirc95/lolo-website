@@ -99,7 +99,7 @@ export default function Hero() {
         >
           El anillo que cuenta
           <br />
-          <span className="italic text-gold-dark">vuestra historia</span>
+          <span className="italic text-gold-dark">tu historia</span>
         </motion.h1>
 
         {/* Description */}
