@@ -36,7 +36,7 @@ const TESTIMONIALS = [
   },
   {
     name: "Adrián Leyva",
-    image: "/images/testimonials/leyva.png",
+    image: "/images/testimonials/adrian.png",
     rating: 5,
     text: "Buscaba algo único y en Loló entendieron exactamente lo que quería. El proceso fue totalmente personalizado y logramos materializar mi idea. El anillo quedó justo como lo imaginaba.",
   },
