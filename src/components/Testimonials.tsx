@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const TESTIMONIALS = [
@@ -143,7 +143,40 @@ function TestimonialCard({
   );
 }
 
+function ArrowIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={direction === "left" ? "rotate-180" : ""}
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
 export default function Testimonials() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth =
+      container.firstElementChild?.firstElementChild?.clientWidth ?? 340;
+    const distance = cardWidth + 20;
+    container.scrollBy({
+      left: direction === "left" ? -distance : distance,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section
       id="testimonios"
@@ -167,25 +200,51 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Carousel — matches PiecesCarousel sizing */}
-        <div
-          className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
-                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          <div className="flex gap-5 px-[7.5%] lg:px-0">
-            {TESTIMONIALS.map((t, i) => (
-              <div
-                key={t.name}
-                tabIndex={0}
-                className="w-[85%] flex-shrink-0 snap-center
-                           md:w-[calc((100%-1.25rem*1)/2)]
-                           lg:w-[calc((100%-1.25rem*2)/3)]
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           rounded-2xl"
-              >
-                <TestimonialCard t={t} index={i} />
-              </div>
-            ))}
+        {/* Carousel wrapper with nav buttons */}
+        <div className="relative">
+          {/* Prev button — hidden on mobile */}
+          <button
+            type="button"
+            aria-label="Ver testimonios anteriores"
+            onClick={() => scroll("left")}
+            className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                       h-11 w-11 text-[#4a3160]"
+          >
+            <ArrowIcon direction="left" />
+          </button>
+
+          {/* Next button — hidden on mobile */}
+          <button
+            type="button"
+            aria-label="Ver siguientes testimonios"
+            onClick={() => scroll("right")}
+            className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                       h-11 w-11 text-[#4a3160]"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+
+          {/* Scrollable track */}
+          <div
+            ref={scrollRef}
+            className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
+                       [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div className="flex gap-5 px-[7.5%] lg:px-0">
+              {TESTIMONIALS.map((t, i) => (
+                <div
+                  key={t.name}
+                  tabIndex={0}
+                  className="w-[85%] flex-shrink-0 snap-center
+                             md:w-[calc((100%-1.25rem*1)/2)]
+                             lg:w-[calc((100%-1.25rem*2)/3)]
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
+                             rounded-2xl"
+                >
+                  <TestimonialCard t={t} index={i} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078] md:hidden">
