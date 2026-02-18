@@ -406,7 +406,7 @@ export default function GemCuts() {
               {/* Cut image */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                  <div className="aspect-[4/5] w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
+                  <div className="aspect-square w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
                     <img
                       src={active.cutImage}
                       alt={`Diamante corte ${active.label}`}
@@ -420,7 +420,7 @@ export default function GemCuts() {
               <div className="flex flex-col gap-6">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                    <div className="aspect-[4/3] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
                       <img
                         src={active.handImage}
                         alt={`Corte ${active.label} en mano`}
