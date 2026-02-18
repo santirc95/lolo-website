@@ -136,7 +136,7 @@ function TestimonialCard({
         <img
           src={t.image}
           alt={`Pieza de ${t.name}`}
-          className="w-full h-48 object-cover"
+          className="w-full aspect-[4/5] object-cover"
         />
       </div>
     </motion.div>
