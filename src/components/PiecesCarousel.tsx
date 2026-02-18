@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const pieces = [
@@ -76,6 +76,27 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
 export default function PiecesCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [updateScrollState]);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -117,27 +138,31 @@ export default function PiecesCarousel() {
 
       {/* Carousel wrapper with nav buttons */}
       <div className="relative mx-auto max-w-7xl">
-        {/* Prev button — hidden on mobile */}
-        <button
-          type="button"
-          aria-label="Ver piezas anteriores"
-          onClick={() => scroll("left")}
-          className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
-                     h-11 w-11 text-[#4a3160]"
-        >
-          <ArrowIcon direction="left" />
-        </button>
+        {/* Prev button — only on desktop, hidden when at start */}
+        {canScrollLeft && (
+          <button
+            type="button"
+            aria-label="Ver piezas anteriores"
+            onClick={() => scroll("left")}
+            className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                       h-11 w-11 text-[#4a3160]"
+          >
+            <ArrowIcon direction="left" />
+          </button>
+        )}
 
-        {/* Next button — hidden on mobile */}
-        <button
-          type="button"
-          aria-label="Ver siguientes piezas"
-          onClick={() => scroll("right")}
-          className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
-                     h-11 w-11 text-[#4a3160]"
-        >
-          <ArrowIcon direction="right" />
-        </button>
+        {/* Next button — only on desktop, hidden when at end */}
+        {canScrollRight && (
+          <button
+            type="button"
+            aria-label="Ver siguientes piezas"
+            onClick={() => scroll("right")}
+            className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+                       h-11 w-11 text-[#4a3160]"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+        )}
 
         {/* Scrollable track — py-3/-my-3 gives room for hover shadow inside scroll container */}
         <div
