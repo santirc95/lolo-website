@@ -30,8 +30,8 @@ export default function Header() {
               <Image
                 src="/images/brand/logo-lolo.svg"
                 alt="Loló"
-                width={140}
-                height={40}
+                width={100}
+                height={28}
                 priority
               />
             </Link>
