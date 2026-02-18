@@ -1,35 +1,42 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const TESTIMONIALS = [
   {
     name: "Fernando Huerta",
+    image: "/images/testimonials/fernando.png",
     rating: 5,
     text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien 👌🏼 definitivamente recomiendo.",
   },
   {
     name: "Fernanda Hierro",
+    image: "/images/testimonials/fernanda.png",
     rating: 5,
     text: "El mejor joyero!! Mi anillo es la cosa más bonita que tengo!!! Gracias!",
   },
   {
     name: "Mauricio Barriga",
+    image: "/images/testimonials/mauricio.png",
     rating: 5,
     text: "Súper profesionales, me ayudaron con cada detalle para que la pieza fuera única y especial. Servicio totalmente personalizado y excelente.",
   },
   {
     name: "René Torti",
+    image: "/images/testimonials/rene.png",
     rating: 5,
     text: "Comprar un anillo de compromiso puede ser complicado, más cuando no sabes mucho del tema y es una compra importante. Pero con Santiago todo fue súper sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme todo: los pros, los contras, los detalles que uno ni se imagina. Fue una gran experiencia de compra, y se nota que le apasiona lo que hace. Recomiendo muchísimo Lolo si estás buscando algo especial y bien asesorado.",
   },
   {
     name: "Sebastián Coronel",
+    image: "/images/testimonials/sebastian.png",
     rating: 5,
     text: "",
   },
   {
     name: "Adrián Leyva",
+    image: "/images/testimonials/leyva.png",
     rating: 5,
     text: "",
   },
@@ -78,6 +85,8 @@ function TestimonialCard({
   t: (typeof TESTIMONIALS)[number];
   index: number;
 }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <motion.div
       custom={index}
@@ -88,25 +97,47 @@ function TestimonialCard({
       className="rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden p-6 h-full flex flex-col">
-        <Stars count={t.rating} />
+      <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
+        <div className="p-6 flex flex-col flex-1">
+          <Stars count={t.rating} />
 
-        {t.text && (
-          <blockquote className="mt-4 flex-1 text-base leading-relaxed text-[#4a4a4a]">
-            &ldquo;{t.text}&rdquo;
-          </blockquote>
-        )}
+          {t.text && (
+            <div className="mt-4 flex-1">
+              <blockquote
+                className={`text-base leading-relaxed text-[#4a4a4a] ${
+                  !expanded ? "line-clamp-3" : ""
+                }`}
+              >
+                &ldquo;{t.text}&rdquo;
+              </blockquote>
+              {t.text.length > 120 && (
+                <button
+                  onClick={() => setExpanded(!expanded)}
+                  className="mt-1 text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
+                >
+                  {expanded ? "Leer menos" : "Leer más"}
+                </button>
+              )}
+            </div>
+          )}
 
-        <div className={`flex items-center gap-3 border-t border-[#d4b896]/20 pt-4 ${t.text ? "mt-5" : "mt-4"}`}>
-          <div className="h-10 w-10 flex-shrink-0 rounded-full border border-[#d4b896]/30 bg-[#4a3160]/10 flex items-center justify-center">
-            <span className="text-sm font-medium text-[#4a3160]">
-              {t.name.split(" ").map((w) => w[0]).join("")}
-            </span>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
+          <div className={`flex items-center gap-3 border-t border-[#d4b896]/20 pt-4 ${t.text ? "mt-5" : "mt-4"}`}>
+            <div className="h-10 w-10 flex-shrink-0 rounded-full border border-[#d4b896]/30 bg-[#4a3160]/10 flex items-center justify-center">
+              <span className="text-sm font-medium text-[#4a3160]">
+                {t.name.split(" ").map((w) => w[0]).join("")}
+              </span>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
+            </div>
           </div>
         </div>
+
+        <img
+          src={t.image}
+          alt={`Pieza de ${t.name}`}
+          className="w-full h-48 object-cover"
+        />
       </div>
     </motion.div>
   );
