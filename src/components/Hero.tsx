@@ -156,7 +156,7 @@ export default function Hero() {
         >
           <span className="flex-1 text-center">Oro 14k &amp; 18k</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
-          <span className="flex-1 text-center">Diamantes GIA &amp; IGI</span>
+          <span className="flex-1 text-center">Diamantes<br />GIA &amp; IGI</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
           <span className="flex-1 text-center">Platino 950</span>
         </motion.div>
