@@ -5,37 +5,31 @@ import { motion } from "framer-motion";
 const TESTIMONIALS = [
   {
     name: "Fernando Huerta",
-    avatar: "/images/testimonials/fernando.png",
     rating: 5,
     text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien 👌🏼 definitivamente recomiendo.",
   },
   {
     name: "Fernanda Hierro",
-    avatar: "/images/testimonials/fernanda.png",
     rating: 5,
     text: "El mejor joyero!! Mi anillo es la cosa más bonita que tengo!!! Gracias!",
   },
   {
     name: "Mauricio Barriga",
-    avatar: "/images/testimonials/mauricio.png",
     rating: 5,
     text: "Súper profesionales, me ayudaron con cada detalle para que la pieza fuera única y especial. Servicio totalmente personalizado y excelente.",
   },
   {
     name: "René Torti",
-    avatar: "/images/testimonials/rene.png",
     rating: 5,
     text: "Comprar un anillo de compromiso puede ser complicado, más cuando no sabes mucho del tema y es una compra importante. Pero con Santiago todo fue súper sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme todo: los pros, los contras, los detalles que uno ni se imagina. Fue una gran experiencia de compra, y se nota que le apasiona lo que hace. Recomiendo muchísimo Lolo si estás buscando algo especial y bien asesorado.",
   },
   {
     name: "Sebastián Coronel",
-    avatar: "/images/testimonials/sebastian.png",
     rating: 5,
     text: "",
   },
   {
     name: "Adrián Leyva",
-    avatar: "/images/testimonials/leyva.png",
     rating: 5,
     text: "",
   },
@@ -104,12 +98,10 @@ function TestimonialCard({
         )}
 
         <div className={`flex items-center gap-3 border-t border-[#d4b896]/20 pt-4 ${t.text ? "mt-5" : "mt-4"}`}>
-          <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border border-[#d4b896]/30">
-            <img
-              src={t.avatar}
-              alt={`Foto de ${t.name}`}
-              className="h-full w-full object-cover"
-            />
+          <div className="h-10 w-10 flex-shrink-0 rounded-full border border-[#d4b896]/30 bg-[#4a3160]/10 flex items-center justify-center">
+            <span className="text-sm font-medium text-[#4a3160]">
+              {t.name.split(" ").map((w) => w[0]).join("")}
+            </span>
           </div>
           <div>
             <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
