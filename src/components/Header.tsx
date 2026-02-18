@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { NAV_LINKS, SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
 
@@ -24,10 +25,15 @@ export default function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="font-display text-xl tracking-wider text-charcoal
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2 focus-visible:rounded"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2 focus-visible:rounded"
             >
-              {SITE_CONFIG.name}
+              <Image
+                src="/images/brand/logo-lolo.svg"
+                alt="Loló"
+                width={140}
+                height={40}
+                priority
+              />
             </Link>
 
             {/* Desktop nav — center + right */}
