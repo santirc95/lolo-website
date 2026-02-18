@@ -167,7 +167,6 @@ export default function GemCuts() {
   useEffect(() => {
     if (isInView && !hasEntered) {
       setHasEntered(true);
-      setWipeKey((k) => k + 1);
     }
   }, [isInView, hasEntered]);
 
