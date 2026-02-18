@@ -35,7 +35,7 @@ const STYLES = [
   {
     id: "side-stones",
     name: "Side Stones",
-    video: "/videos/styles/side-stones.mp4",
+    video: "/videos/styles/sidestones.mp4",
     description:
       "Piedras laterales que enmarcan el diamante central, aportando simetría y un brillo envolvente. Un diseño que eleva la presencia del anillo sin restarle elegancia.",
   },
@@ -179,13 +179,13 @@ export default function Styles() {
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full md:p-2">
                     <div className="aspect-[3/4] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
                       <video
-                        key={active.video}
                         src={active.video}
                         autoPlay
                         loop
                         muted
                         playsInline
-                        className="h-full w-full object-cover"
+                        preload="metadata"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
