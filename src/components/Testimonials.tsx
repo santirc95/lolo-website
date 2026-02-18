@@ -151,7 +151,7 @@ export default function Testimonials() {
       aria-label="Reseñas de clientes"
       className="overflow-x-clip bg-[#faf8f5] px-5 py-20 md:py-28"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
@@ -167,37 +167,30 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Mobile: horizontal carousel (visible < md) */}
-        <div className="md:hidden">
-          <div
-            className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
-                       [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            <div className="flex gap-4 px-1">
-              {TESTIMONIALS.map((t, i) => (
-                <div
-                  key={t.name}
-                  tabIndex={0}
-                  className="w-[85%] flex-shrink-0 snap-center
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                             rounded-2xl"
-                >
-                  <TestimonialCard t={t} index={i} />
-                </div>
-              ))}
-            </div>
+        {/* Carousel — matches PiecesCarousel sizing */}
+        <div
+          className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
+                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <div className="flex gap-5 px-[7.5%] lg:px-0">
+            {TESTIMONIALS.map((t, i) => (
+              <div
+                key={t.name}
+                tabIndex={0}
+                className="w-[85%] flex-shrink-0 snap-center
+                           md:w-[calc((100%-1.25rem*1)/2)]
+                           lg:w-[calc((100%-1.25rem*2)/3)]
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
+                           rounded-2xl"
+              >
+                <TestimonialCard t={t} index={i} />
+              </div>
+            ))}
           </div>
-          <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078]">
-            Desliza &rarr;
-          </p>
         </div>
-
-        {/* Desktop: grid (visible md+) */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {TESTIMONIALS.map((t, i) => (
-            <TestimonialCard key={t.name} t={t} index={i} />
-          ))}
-        </div>
+        <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078] md:hidden">
+          Desliza &rarr;
+        </p>
       </div>
     </section>
   );
