@@ -216,6 +216,9 @@ export default function PiecesCarousel() {
           </motion.div>
         </div>
       </div>
+      <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078] md:hidden">
+        Desliza &rarr;
+      </p>
     </section>
   );
 }
