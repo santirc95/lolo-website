@@ -8,37 +8,37 @@ const TESTIMONIALS = [
     name: "Fernando Huerta",
     image: "/images/testimonials/fernando.png",
     rating: 5,
-    text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien 👌🏼 definitivamente recomiendo.",
+    text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien. Definitivamente lo recomiendo.",
   },
   {
     name: "Fernanda Hierro",
     image: "/images/testimonials/fernanda.png",
     rating: 5,
-    text: "El mejor joyero!! Mi anillo es la cosa más bonita que tengo!!! Gracias!",
+    text: "El mejor joyero. Mi anillo es la cosa más bonita que tengo. Gracias.",
   },
   {
     name: "Mauricio Barriga",
     image: "/images/testimonials/mauricio.png",
     rating: 5,
-    text: "Súper profesionales, me ayudaron con cada detalle para que la pieza fuera única y especial. Servicio totalmente personalizado y excelente.",
+    text: "Súper profesionales. Me ayudaron con cada detalle para que la pieza fuera única y especial. Servicio totalmente personalizado y excelente.",
   },
   {
     name: "René Torti",
     image: "/images/testimonials/rene.png",
     rating: 5,
-    text: "Comprar un anillo de compromiso puede ser complicado, más cuando no sabes mucho del tema y es una compra importante. Pero con Santiago todo fue súper sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme todo: los pros, los contras, los detalles que uno ni se imagina. Fue una gran experiencia de compra, y se nota que le apasiona lo que hace. Recomiendo muchísimo Lolo si estás buscando algo especial y bien asesorado.",
+    text: "Comprar un anillo de compromiso puede ser complicado, especialmente cuando no sabes mucho del tema y es una compra importante. Con Santiago todo fue sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme cada detalle. Fue una gran experiencia y se nota la pasión por lo que hace.",
   },
   {
     name: "Sebastián Coronel",
     image: "/images/testimonials/sebastian.png",
     rating: 5,
-    text: "",
+    text: "Desde el primer momento me sentí en confianza. Me explicaron todo con paciencia y me ayudaron a elegir el diamante perfecto para mi anillo. El resultado quedó increíble. Sin duda volvería a elegir Loló.",
   },
   {
     name: "Adrián Leyva",
     image: "/images/testimonials/leyva.png",
     rating: 5,
-    text: "",
+    text: "Buscaba algo único y en Loló entendieron exactamente lo que quería. El proceso fue totalmente personalizado y logramos materializar mi idea. El anillo quedó justo como lo imaginaba.",
   },
 ];
 
