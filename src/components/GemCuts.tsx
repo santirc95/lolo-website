@@ -273,7 +273,7 @@ export default function GemCuts() {
             <div className="w-full max-w-[480px] mx-auto rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
               <div className="relative flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
                 {/* Visual area — image + curtain locked to 2:3 */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden shrink-0">
+                <div className="relative aspect-[3/4] w-full overflow-hidden shrink-0">
                   {/* New hand image — revealed as curtain lifts */}
                   <img
                     src={active.handImage}
