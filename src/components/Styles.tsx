@@ -172,12 +172,12 @@ export default function Styles() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="max-w-[420px] mx-auto md:max-w-none md:mx-0 md:flex-1 md:min-h-0"
+                className="max-w-[480px] mx-auto md:max-w-none md:mx-0 md:flex-1 md:min-h-0"
               >
                 {/* Glass border wrapper */}
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] md:h-full">
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full p-2">
-                    <div className="aspect-[3/4] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
+                    <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
                       <video
                         src={active.video}
                         autoPlay
