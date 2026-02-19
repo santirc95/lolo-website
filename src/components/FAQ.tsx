@@ -44,7 +44,7 @@ const FAQS = [
   {
     question: "¿Envían a toda la República?",
     answer:
-      "Sí. Realizamos envíos asegurados a toda la República Mexicana. La entrega se hace en empaque premium con servicio de mensajería especializada.",
+      "Sí, realizamos envíos a toda la República mexicana.\n\nNos encargamos de coordinar la logística y el seguimiento para que tu anillo llegue en perfectas condiciones.",
   },
 ];
 
