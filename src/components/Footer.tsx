@@ -11,16 +11,14 @@ export default function Footer() {
             <div
               role="img"
               aria-label="Loló"
-              className="h-[48px] w-[170px] bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0]"
+              className="h-[48px] w-[170px] bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0] [mask-position:center] md:[mask-position:left] [-webkit-mask-position:center] md:[-webkit-mask-position:left]"
               style={{
                 maskImage: "url(/images/brand/logo-lolo.svg)",
                 maskSize: "contain",
                 maskRepeat: "no-repeat",
-                maskPosition: "left",
                 WebkitMaskImage: "url(/images/brand/logo-lolo.svg)",
                 WebkitMaskSize: "contain",
                 WebkitMaskRepeat: "no-repeat",
-                WebkitMaskPosition: "left",
               }}
             />
             <p className="mt-1 text-sm">{SITE_CONFIG.tagline}</p>
