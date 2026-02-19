@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const TESTIMONIALS = [
   {
@@ -145,19 +145,33 @@ function TestimonialCard({
         </div>
 
         {/* Image area with text overlay on expand */}
-        <div className="relative w-full aspect-square">
+        <div className="relative w-full aspect-square overflow-hidden">
           <img
             src={t.image}
             alt={`Pieza de ${t.name}`}
-            className={`w-full h-full object-cover transition-opacity duration-300 ${expanded ? "opacity-10" : ""}`}
+            className="w-full h-full object-cover"
           />
-          {expanded && (
-            <div className="absolute inset-0 overflow-y-auto p-5">
-              <blockquote className="text-sm leading-relaxed text-[#2c2c2c]">
-                &ldquo;{t.text}&rdquo;
-              </blockquote>
-            </div>
-          )}
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
+                exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                transition={{ duration: 0.5, ease: EASE_LUXURY }}
+                className="absolute inset-0 bg-[#faf8f5]/70 overflow-y-auto p-5"
+              >
+                <motion.blockquote
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.45, ease: EASE_LUXURY, delay: 0.1 }}
+                  className="text-sm leading-relaxed text-[#2c2c2c]"
+                >
+                  &ldquo;{t.text}&rdquo;
+                </motion.blockquote>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>
