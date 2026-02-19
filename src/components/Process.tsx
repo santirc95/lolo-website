@@ -36,7 +36,7 @@ const STEPS = [
     number: "05",
     title: "Entrega",
     description:
-      "Recibes tu anillo en un empaque premium, con certificado de autenticidad y garantía. Listo para el gran momento.",
+      "Recibe tu anillo cuidadosamente preparado, con certificado y listo para el momento más importante.",
   },
 ];
 
