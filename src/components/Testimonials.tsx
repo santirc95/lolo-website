@@ -165,7 +165,7 @@ function TestimonialCard({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.45, ease: EASE_LUXURY, delay: 0.1 }}
-                  className="text-sm leading-relaxed text-[#2c2c2c]"
+                  className="text-base leading-relaxed text-[#2c2c2c]"
                 >
                   &ldquo;{t.text}&rdquo;
                 </motion.blockquote>
