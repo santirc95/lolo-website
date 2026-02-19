@@ -19,7 +19,7 @@ const FAQS = [
   {
     question: "¿Cuánto tiempo tarda el proceso?",
     answer:
-      "Desde la primera consulta hasta la entrega, el proceso toma entre 4 y 6 semanas. Si tienes una fecha especial, podemos ajustar los tiempos. Recomendamos empezar con al menos 6 semanas de anticipación.",
+      "Una vez confirmados el diseño y el diamante, el proceso de fabricación toma aproximadamente entre 4 y 4.5 semanas.\n\nSi necesitas el anillo para una fecha especial, podemos analizar contigo las alternativas disponibles para cumplir con tu plazo.",
   },
   {
     question: "¿Puedo ver el diseño antes de que lo fabriquen?",
