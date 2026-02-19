@@ -86,6 +86,18 @@ function TestimonialCard({
   index: number;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const textRef = useRef<HTMLQuoteElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    const check = () => setIsOverflowing(el.scrollHeight > el.clientHeight + 1);
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.div
@@ -97,25 +109,24 @@ function TestimonialCard({
       className="h-full rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
+      <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
         <div className="p-6 flex flex-col flex-1">
           <Stars count={t.rating} />
 
           {t.text && (
             <div className="mt-4 flex-1">
               <blockquote
-                className={`text-base leading-relaxed text-[#4a4a4a] ${
-                  !expanded ? "line-clamp-3" : ""
-                }`}
+                ref={textRef}
+                className="text-base leading-relaxed text-[#4a4a4a] line-clamp-3"
               >
                 &ldquo;{t.text}&rdquo;
               </blockquote>
-              {t.text.length > 120 && (
+              {isOverflowing && (
                 <button
-                  onClick={() => setExpanded(!expanded)}
+                  onClick={() => setExpanded(true)}
                   className="mt-1 text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
                 >
-                  {expanded ? "Leer menos" : "Leer más"}
+                  Leer más
                 </button>
               )}
             </div>
@@ -138,6 +149,36 @@ function TestimonialCard({
           alt={`Pieza de ${t.name}`}
           className="w-full aspect-square object-cover"
         />
+
+        {/* Expanded overlay — full text within the card without changing its height */}
+        {expanded && (
+          <div className="absolute inset-0 z-10 flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 backdrop-blur-sm">
+            <div className="flex-1 overflow-y-auto p-6">
+              <Stars count={t.rating} />
+              <blockquote className="mt-4 text-base leading-relaxed text-[#4a4a4a]">
+                &ldquo;{t.text}&rdquo;
+              </blockquote>
+            </div>
+            <div className="border-t border-[#d4b896]/20 px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 flex-shrink-0 rounded-full border border-[#d4b896]/30 bg-[#4a3160]/10 flex items-center justify-center">
+                    <span className="text-sm font-medium text-[#4a3160]">
+                      {t.name.split(" ").map((w) => w[0]).join("")}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
+                </div>
+                <button
+                  onClick={() => setExpanded(false)}
+                  className="text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
+                >
+                  Leer menos
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -166,7 +207,6 @@ export default function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [arrowTop, setArrowTop] = useState<string>("50%");
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
@@ -186,29 +226,6 @@ export default function Testimonials() {
       window.removeEventListener("resize", updateScrollState);
     };
   }, [updateScrollState]);
-
-  // Anchor arrows to the center of the first card's image so they
-  // stay fixed when a card expands its text via "Leer más".
-  useEffect(() => {
-    const computeArrowCenter = () => {
-      const wrapper = scrollRef.current?.parentElement;
-      const img = scrollRef.current?.querySelector("img");
-      if (!wrapper || !img) return;
-      const wrapperRect = wrapper.getBoundingClientRect();
-      const imgRect = img.getBoundingClientRect();
-      setArrowTop(`${imgRect.top - wrapperRect.top + imgRect.height / 2}px`);
-    };
-
-    const img = scrollRef.current?.querySelector("img");
-    if (img?.complete) {
-      computeArrowCenter();
-    } else {
-      img?.addEventListener("load", computeArrowCenter, { once: true });
-    }
-
-    window.addEventListener("resize", computeArrowCenter);
-    return () => window.removeEventListener("resize", computeArrowCenter);
-  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -253,8 +270,7 @@ export default function Testimonials() {
               type="button"
               aria-label="Ver testimonios anteriores"
               onClick={() => scroll("left")}
-              style={{ top: arrowTop }}
-              className="pill-liquid pill-liquid--idle absolute -left-1 z-20 hidden -translate-y-1/2 md:flex
+              className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
                          h-11 w-11 text-[#4a3160]"
             >
               <ArrowIcon direction="left" />
@@ -267,8 +283,7 @@ export default function Testimonials() {
               type="button"
               aria-label="Ver siguientes testimonios"
               onClick={() => scroll("right")}
-              style={{ top: arrowTop }}
-              className="pill-liquid pill-liquid--idle absolute -right-1 z-20 hidden -translate-y-1/2 md:flex
+              className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
                          h-11 w-11 text-[#4a3160]"
             >
               <ArrowIcon direction="right" />
@@ -281,7 +296,7 @@ export default function Testimonials() {
             className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
                        [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <div className="flex items-start gap-5 px-[7.5%] lg:px-0">
+            <div className="flex gap-5 px-[7.5%] lg:px-0">
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={t.name}
