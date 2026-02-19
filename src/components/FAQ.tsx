@@ -29,7 +29,7 @@ const FAQS = [
   {
     question: "¿Qué certificaciones tienen los diamantes?",
     answer:
-      "Todos nuestros diamantes vienen con certificación de laboratorios gemológicos reconocidos internacionalmente como GIA (Gemological Institute of America) o IGI (International Gemological Institute).",
+      "Nuestros diamantes vienen con certificación de laboratorios gemológicos reconocidos internacionalmente como GIA (Gemological Institute of America) o IGI (International Gemological Institute).",
   },
   {
     question: "¿Ofrecen garantía?",
