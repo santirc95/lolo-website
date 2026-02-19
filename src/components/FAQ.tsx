@@ -17,6 +17,11 @@ const FAQS = [
       "El precio de un anillo de compromiso depende principalmente del diamante y del diseño que elijas. Trabajamos contigo para encontrar la mejor opción según tu presupuesto y prioridades, asegurando siempre calidad y asesoría personalizada.\n\nPodemos orientarte con distintas alternativas para que tomes una decisión informada y segura.",
   },
   {
+    question: "¿Cuál es la diferencia entre un diamante natural y uno de laboratorio?",
+    answer:
+      "Ambos son 100% diamantes reales y comparten las mismas propiedades físicas y químicas.\n\nLa principal diferencia radica en su origen: el diamante natural se forma en la tierra durante millones de años, mientras que el de laboratorio se crea en condiciones controladas que replican ese proceso.\n\nTrabajamos con ambas opciones y te asesoramos para elegir la que mejor se adapte a tus prioridades y presupuesto.",
+  },
+  {
     question: "¿Cuánto tiempo tarda el proceso?",
     answer:
       "Una vez confirmados el diseño y el diamante, el proceso de fabricación toma aproximadamente entre 4 y 4.5 semanas.\n\nSi necesitas el anillo para una fecha especial, podemos analizar contigo las alternativas disponibles para cumplir con tu plazo.",
