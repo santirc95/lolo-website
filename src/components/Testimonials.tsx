@@ -126,7 +126,7 @@ function TestimonialCard({
                   onClick={() => setExpanded((v) => !v)}
                   className="mt-1 text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
                 >
-                  {expanded ? "Leer menos" : "Leer más"}
+                  {expanded ? "Regresar a la foto" : "Ver comentario completo"}
                 </button>
               )}
             </div>
