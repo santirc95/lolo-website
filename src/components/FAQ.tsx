@@ -14,7 +14,7 @@ const FAQS = [
   {
     question: "¿Cuánto cuesta un anillo de compromiso personalizado?",
     answer:
-      "El precio varía según el tipo de metal, el diamante y el diseño. Trabajamos con presupuestos desde $15,000 MXN. En tu primera consulta te damos un estimado transparente sin compromiso.",
+      "El precio de un anillo de compromiso depende principalmente del diamante y del diseño que elijas. Trabajamos contigo para encontrar la mejor opción según tu presupuesto y prioridades, asegurando siempre calidad y asesoría personalizada.\n\nPodemos orientarte con distintas alternativas para que tomes una decisión informada y segura.",
   },
   {
     question: "¿Cuánto tiempo tarda el proceso?",
@@ -116,7 +116,11 @@ function FAQItem({
             style={{ willChange: "height" }}
           >
             <div className="relative pb-14 pr-4 text-sm leading-relaxed text-warm-gray">
-              <p className="pr-8">{answer}</p>
+              {answer.split("\n\n").map((paragraph, i) => (
+                <p key={i} className={`pr-8${i > 0 ? " mt-3" : ""}`}>
+                  {paragraph}
+                </p>
+              ))}
               <motion.button
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
