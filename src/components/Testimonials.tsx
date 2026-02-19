@@ -166,6 +166,7 @@ export default function Testimonials() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [arrowTop, setArrowTop] = useState<string>("50%");
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
@@ -185,6 +186,29 @@ export default function Testimonials() {
       window.removeEventListener("resize", updateScrollState);
     };
   }, [updateScrollState]);
+
+  // Anchor arrows to the center of the first card's image so they
+  // stay fixed when a card expands its text via "Leer más".
+  useEffect(() => {
+    const computeArrowCenter = () => {
+      const wrapper = scrollRef.current?.parentElement;
+      const img = scrollRef.current?.querySelector("img");
+      if (!wrapper || !img) return;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+      setArrowTop(`${imgRect.top - wrapperRect.top + imgRect.height / 2}px`);
+    };
+
+    const img = scrollRef.current?.querySelector("img");
+    if (img?.complete) {
+      computeArrowCenter();
+    } else {
+      img?.addEventListener("load", computeArrowCenter, { once: true });
+    }
+
+    window.addEventListener("resize", computeArrowCenter);
+    return () => window.removeEventListener("resize", computeArrowCenter);
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -229,7 +253,8 @@ export default function Testimonials() {
               type="button"
               aria-label="Ver testimonios anteriores"
               onClick={() => scroll("left")}
-              className="pill-liquid pill-liquid--idle absolute -left-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+              style={{ top: arrowTop }}
+              className="pill-liquid pill-liquid--idle absolute -left-1 z-20 hidden -translate-y-1/2 md:flex
                          h-11 w-11 text-[#4a3160]"
             >
               <ArrowIcon direction="left" />
@@ -242,7 +267,8 @@ export default function Testimonials() {
               type="button"
               aria-label="Ver siguientes testimonios"
               onClick={() => scroll("right")}
-              className="pill-liquid pill-liquid--idle absolute -right-1 top-1/2 z-20 hidden -translate-y-1/2 md:flex
+              style={{ top: arrowTop }}
+              className="pill-liquid pill-liquid--idle absolute -right-1 z-20 hidden -translate-y-1/2 md:flex
                          h-11 w-11 text-[#4a3160]"
             >
               <ArrowIcon direction="right" />
