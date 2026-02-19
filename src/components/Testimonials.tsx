@@ -165,7 +165,7 @@ function TestimonialCard({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.45, ease: EASE_LUXURY, delay: 0.1 }}
-                  className="text-base leading-relaxed text-[#2c2c2c]"
+                  className="text-base leading-relaxed bg-gradient-to-br from-[#4a3160] via-[#d4b896] to-[#4a3160] bg-clip-text text-transparent"
                 >
                   &ldquo;{t.text}&rdquo;
                 </motion.blockquote>
