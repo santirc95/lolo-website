@@ -255,7 +255,7 @@ export default function Testimonials() {
             className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
                        [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <div className="flex gap-5 px-[7.5%] lg:px-0">
+            <div className="flex items-start gap-5 px-[7.5%] lg:px-0">
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={t.name}
