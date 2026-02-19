@@ -12,31 +12,31 @@ const STEPS = [
     number: "01",
     title: "Conversación inicial",
     description:
-      "Nos conocemos, entendemos tu idea, presupuesto y estilo.",
+      "Nos cuentas tu idea, presupuesto y estilo. Te asesoramos sobre piedras, metales y diseños para que tomes la mejor decisión.",
   },
   {
     number: "02",
     title: "Selección de diamante",
     description:
-      "Te asesoramos para elegir la piedra ideal según tus prioridades.",
+      "Te ayudamos a elegir el diamante perfecto con certificación GIA o IGI. Transparencia total en calidad y precio.",
   },
   {
     number: "03",
     title: "Diseño personalizado",
     description:
-      "Creamos una propuesta única basada en lo que imaginaste.",
+      "Creamos un diseño en 3D exclusivo para ti. Lo revisamos juntos y lo ajustamos hasta que sea exactamente lo que imaginaste.",
   },
   {
     number: "04",
     title: "Creación artesanal",
     description:
-      "Fabricamos tu anillo con precisión y cuidado en cada detalle.",
+      "Tu anillo cobra vida en nuestro taller. Cada detalle es cuidado por artesanos expertos con décadas de experiencia.",
   },
   {
     number: "05",
     title: "Entrega",
     description:
-      "Recibe tu anillo cuidadosamente preparado, con certificado y listo para el momento más importante.",
+      "Recibes tu anillo en un empaque premium, con certificado de autenticidad y garantía. Listo para el gran momento.",
   },
 ];
 
