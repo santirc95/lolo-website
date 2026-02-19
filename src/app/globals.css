@@ -175,12 +175,12 @@ body {
   }
 
   .btn-liquid--dark {
-    background-color: #2c2c2c;
-    color: #fff;
-    border: 1px solid rgba(74, 49, 96, 0.2);
+    background: linear-gradient(135deg, #f3e3c9, #d4b896, #e8d2b0);
+    color: #2c2c2c;
+    border: 1px solid rgba(212, 184, 150, 0.4);
   }
   .btn-liquid--dark:hover {
-    background-color: #3a3a3a;
+    background: linear-gradient(135deg, #e8d2b0, #c9a87e, #d4b896);
   }
 
   .btn-liquid--ghost {
