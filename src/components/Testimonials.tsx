@@ -123,10 +123,10 @@ function TestimonialCard({
               </blockquote>
               {isOverflowing && (
                 <button
-                  onClick={() => setExpanded(true)}
+                  onClick={() => setExpanded((v) => !v)}
                   className="mt-1 text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
                 >
-                  Leer más
+                  {expanded ? "Leer menos" : "Leer más"}
                 </button>
               )}
             </div>
@@ -144,41 +144,21 @@ function TestimonialCard({
           </div>
         </div>
 
-        <img
-          src={t.image}
-          alt={`Pieza de ${t.name}`}
-          className="w-full aspect-square object-cover"
-        />
-
-        {/* Expanded overlay — full text within the card without changing its height */}
-        {expanded && (
-          <div className="absolute inset-0 z-10 flex flex-col rounded-[calc(1rem-1px)] bg-[#faf8f5]/95 backdrop-blur-sm">
-            <div className="flex-1 overflow-y-auto p-6">
-              <Stars count={t.rating} />
-              <blockquote className="mt-4 text-base leading-relaxed text-[#4a4a4a]">
+        {/* Image area with text overlay on expand */}
+        <div className="relative w-full aspect-square">
+          <img
+            src={t.image}
+            alt={`Pieza de ${t.name}`}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${expanded ? "opacity-10" : ""}`}
+          />
+          {expanded && (
+            <div className="absolute inset-0 overflow-y-auto p-5">
+              <blockquote className="text-sm leading-relaxed text-[#2c2c2c]">
                 &ldquo;{t.text}&rdquo;
               </blockquote>
             </div>
-            <div className="border-t border-[#d4b896]/20 px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 flex-shrink-0 rounded-full border border-[#d4b896]/30 bg-[#4a3160]/10 flex items-center justify-center">
-                    <span className="text-sm font-medium text-[#4a3160]">
-                      {t.name.split(" ").map((w) => w[0]).join("")}
-                    </span>
-                  </div>
-                  <p className="text-sm font-medium text-[#2c2c2c]">{t.name}</p>
-                </div>
-                <button
-                  onClick={() => setExpanded(false)}
-                  className="text-sm font-medium text-[#4a3160] hover:text-[#4a3160]/70 transition-colors"
-                >
-                  Leer menos
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </motion.div>
   );
