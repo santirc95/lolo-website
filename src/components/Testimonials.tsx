@@ -8,7 +8,7 @@ const TESTIMONIALS = [
     name: "Fernando Huerta",
     image: "/images/testimonials/fernando.png",
     rating: 5,
-    text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien. Definitivamente lo recomiendo.",
+    text: "Ya he comprado varias piezas en Loló y siempre quedo sorprendido para bien.\n\nDefinitivamente lo recomiendo.",
   },
   {
     name: "Fernanda Hierro",
