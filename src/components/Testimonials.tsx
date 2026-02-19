@@ -26,7 +26,7 @@ const TESTIMONIALS = [
     name: "René Torti",
     image: "/images/testimonials/rene.png",
     rating: 5,
-    text: "Comprar un anillo de compromiso puede ser complicado, especialmente cuando no sabes mucho del tema y es una compra importante. Con Santiago todo fue sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme cada detalle. Fue una gran experiencia y se nota la pasión por lo que hace.",
+    text: "Comprar un anillo de compromiso puede ser complicado, especialmente cuando no sabes mucho del tema y es una compra importante.\n\nCon Santiago todo fue sencillo. Siempre me sentí cómodo, sin presión, y se tomó el tiempo para explicarme cada detalle. Fue una gran experiencia y se nota la pasión por lo que hace.",
   },
   {
     name: "Sebastián Coronel",
@@ -165,7 +165,7 @@ function TestimonialCard({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.45, ease: EASE_LUXURY, delay: 0.1 }}
-                  className="text-base leading-relaxed bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0] bg-clip-text text-transparent"
+                  className="text-base leading-relaxed whitespace-pre-line bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0] bg-clip-text text-transparent"
                 >
                   &ldquo;{t.text}&rdquo;
                 </motion.blockquote>
