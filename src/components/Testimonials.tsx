@@ -158,7 +158,7 @@ function TestimonialCard({
                 animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
                 exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
                 transition={{ duration: 0.5, ease: EASE_LUXURY }}
-                className="absolute inset-0 bg-[#faf8f5]/70 overflow-y-auto p-5"
+                className="absolute inset-0 bg-[#faf8f5]/50 overflow-y-auto p-5"
               >
                 <motion.blockquote
                   initial={{ opacity: 0, y: 12 }}
