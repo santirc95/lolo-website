@@ -34,7 +34,7 @@ const STEPS = [
   },
   {
     number: "05",
-    title: "Entrega",
+    title: "Entrega y acompañamiento",
     description:
       "Recibe tu anillo cuidadosamente preparado, con certificado y listo para el momento más importante.",
   },
