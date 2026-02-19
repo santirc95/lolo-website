@@ -34,7 +34,7 @@ const FAQS = [
   {
     question: "¿Ofrecen garantía?",
     answer:
-      "Sí. Todos nuestros anillos incluyen garantía de por vida en la estructura y el engaste. También ofrecemos servicio de limpieza y mantenimiento gratuito.",
+      "Sí, ofrecemos garantía ante cualquier falla relacionada con la fabricación de la pieza.\n\nEn caso de golpes, accidentes o desgaste por uso, evaluamos cada caso para poder ayudarte con la mejor solución posible. Nuestro compromiso es acompañarte incluso después de la entrega.",
   },
   {
     question: "¿Pueden trabajar con un diseño que yo traiga?",
