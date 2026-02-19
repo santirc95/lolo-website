@@ -21,7 +21,7 @@ export default function Footer() {
                 WebkitMaskRepeat: "no-repeat",
               }}
             />
-            <p className="mt-1 text-sm">{SITE_CONFIG.tagline}</p>
+            <p className="mt-3 text-sm">{SITE_CONFIG.tagline}</p>
           </div>
 
           <div className="flex items-center gap-5">
