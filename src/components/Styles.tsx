@@ -39,6 +39,13 @@ const STYLES = [
     description:
       "Piedras laterales que enmarcan el diamante central, aportando simetría y un brillo envolvente. Un diseño que eleva la presencia del anillo sin restarle elegancia.",
   },
+  {
+    id: "toietmoi",
+    name: "Toi et Moi",
+    video: "/videos/styles/toietmoi.mp4",
+    description:
+      "Un diseño romántico que une dos piedras en una sola pieza. Representa la unión de dos historias que se encuentran y se complementan.",
+  },
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
