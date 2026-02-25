@@ -48,24 +48,26 @@ export default function Hero() {
           Mobile background video
       ============================== */}
       {!prefersReducedMotion && (
-        <video
-          className="absolute inset-0 h-full w-full object-cover md:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        >
-          <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
-          <source src="/videos/hero/lolo-hero-mobile.mp4" type="video/mp4" />
-        </video>
+        <div className="absolute inset-0 z-0 md:hidden">
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          >
+            <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
+            <source src="/videos/hero/lolo-hero-mobile.mp4" type="video/mp4" />
+          </video>
+        </div>
       )}
 
       {/* ==============================
           Decorative rings (gold)
       ============================== */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      <div className="absolute inset-0 z-[1] opacity-[0.03]">
         <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
@@ -74,7 +76,7 @@ export default function Hero() {
       {/* ==============================
           Purple glow system (lavender)
       ============================== */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 z-[1]">
         {/* Top soft wash */}
         <div
           className="absolute inset-0 opacity-[0.10]"
