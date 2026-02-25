@@ -151,7 +151,7 @@ export default function Styles() {
                   aria-selected={isActive}
                   aria-controls={`panel-${style.id}`}
                   onClick={() => setActiveId(style.id)}
-                  className={`pill-liquid whitespace-nowrap px-4 py-2.5 text-sm
+                  className={`pill-liquid whitespace-nowrap px-3.5 py-2 text-[13px]
                              ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
                 >
                   {style.name}
