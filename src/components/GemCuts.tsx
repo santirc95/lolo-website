@@ -249,7 +249,7 @@ export default function GemCuts() {
                   aria-controls={`panel-${cut.id}`}
                   onClick={() => handleCutChange(cut.id)}
                   className={`pill-liquid whitespace-nowrap
-                             text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5
+                             text-sm px-4 py-2.5 md:px-5
                              ${isActive ? "pill-liquid--active" : "pill-liquid--idle"}`}
                 >
                   {cut.label}
