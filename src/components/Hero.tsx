@@ -65,6 +65,14 @@ export default function Hero() {
       )}
 
       {/* ==============================
+          Mobile video overlay (darkens video for text contrast)
+      ============================== */}
+      <div
+        className="absolute inset-0 z-[1] bg-[#4a3160]/45 md:hidden"
+        aria-hidden="true"
+      />
+
+      {/* ==============================
           Decorative rings (gold)
       ============================== */}
       <div className="absolute inset-0 z-[1] opacity-[0.03]">
