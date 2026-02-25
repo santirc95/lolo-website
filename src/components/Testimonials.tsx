@@ -40,6 +40,24 @@ const TESTIMONIALS = [
     rating: 5,
     text: "Buscaba algo único y en Loló entendieron exactamente lo que quería. El proceso fue totalmente personalizado y logramos materializar mi idea. El anillo quedó justo como lo imaginaba.",
   },
+  {
+    name: "Javier Agraz",
+    image: "/images/testimonials/javier.png",
+    rating: 5,
+    text: "Quería un solitario con un diseño especial en los costados y logramos exactamente lo que tenía en mente. El proceso fue claro y siempre me sentí en confianza.",
+  },
+  {
+    name: "Manuel Bojórquez",
+    image: "/images/testimonials/manuel.png",
+    rating: 5,
+    text: "Excelente atención y servicio al cliente, además de una calidad impecable en cada detalle.",
+  },
+  {
+    name: "Santiago Antona",
+    image: "/images/testimonials/santiago.png",
+    rating: 5,
+    text: "Me asesoraron en cada paso y logramos un anillo único. Se nota el cuidado y la dedicación en todo el proceso.",
+  },
 ];
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
