@@ -133,7 +133,7 @@ export default function Hero() {
         >
           El anillo que cuenta
           <br />
-          <span className="italic bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent">tu historia</span>
+          <span className="italic text-[#4A3160]">tu historia</span>
         </motion.h1>
 
         {/* Description */}
