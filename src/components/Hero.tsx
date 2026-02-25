@@ -120,7 +120,7 @@ export default function Hero() {
         <motion.p
           custom={0}
           variants={heroItem}
-          className="mb-4 text-sm uppercase tracking-[0.34em] text-gold-dark"
+          className="mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
         >
           Joyería fina personalizada
         </motion.p>
@@ -133,14 +133,14 @@ export default function Hero() {
         >
           El anillo que cuenta
           <br />
-          <span className="italic text-gold-dark">tu historia</span>
+          <span className="italic bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent">tu historia</span>
         </motion.h1>
 
         {/* Description */}
         <motion.p
           custom={2}
           variants={heroItem}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0] bg-clip-text text-transparent"
+          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
           artesanía que un momento así merece.
