@@ -140,7 +140,7 @@ export default function Hero() {
         <motion.p
           custom={2}
           variants={heroItem}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
+          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#b8976d] via-[#4A3160] to-[#b8976d] bg-clip-text text-transparent"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
           artesanía que un momento así merece.
