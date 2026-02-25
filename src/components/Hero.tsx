@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
 
@@ -39,8 +39,28 @@ const heroCtas = {
    Hero Component
 ================================ */
 export default function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20 bg-luxury-wash bg-luxury-grain">
+
+      {/* ==============================
+          Mobile background video
+      ============================== */}
+      {!prefersReducedMotion && (
+        <video
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
+          <source src="/videos/hero/lolo-hero-mobile.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* ==============================
           Decorative rings (gold)
