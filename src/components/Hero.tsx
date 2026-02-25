@@ -65,17 +65,21 @@ export default function Hero() {
       )}
 
       {/* ==============================
-          Mobile video overlay (darkens video for text contrast)
+          Mobile video overlay (champagne wash for text contrast)
       ============================== */}
       <div
-        className="absolute inset-0 z-[1] bg-[#4a3160]/45 md:hidden"
+        className="absolute inset-0 z-[1] md:hidden"
         aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+        }}
       />
 
       {/* ==============================
           Decorative rings (gold)
       ============================== */}
-      <div className="absolute inset-0 z-[1] opacity-[0.03]">
+      <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
@@ -84,7 +88,7 @@ export default function Hero() {
       {/* ==============================
           Purple glow system (lavender)
       ============================== */}
-      <div className="pointer-events-none absolute inset-0 z-[1]">
+      <div className="pointer-events-none absolute inset-0">
         {/* Top soft wash */}
         <div
           className="absolute inset-0 opacity-[0.10]"
