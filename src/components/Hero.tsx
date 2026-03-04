@@ -42,7 +42,10 @@ export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20 bg-luxury-wash bg-luxury-grain">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">
+
+      {/* Static background — only visible on mobile (desktop uses video) */}
+      <div className="absolute inset-0 bg-luxury-wash bg-luxury-grain md:hidden" />
 
       {/* ==============================
           Mobile background video
@@ -68,7 +71,7 @@ export default function Hero() {
           Desktop background video
       ============================== */}
       {!prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 hidden md:block">
+        <div className="absolute inset-0 z-0 hidden md:block bg-[#FAF7F2]">
           <video
             className="h-full w-full object-cover opacity-0 transition-opacity duration-[1400ms]"
             autoPlay
