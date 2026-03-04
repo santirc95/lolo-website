@@ -96,7 +96,7 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+            "linear-gradient(to bottom, rgba(250,248,245,0.45) 0%, rgba(243,227,201,0.30) 40%, rgba(243,227,201,0.30) 60%, rgba(250,248,245,0.45) 100%)",
         }}
       />
 
