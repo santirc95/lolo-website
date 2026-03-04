@@ -221,13 +221,13 @@ export default function Hero() {
         <motion.div
           custom={4}
           variants={heroItem}
-          className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider text-warm-gray"
+          className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
         >
-          <span className="flex-1 text-center">Oro 14k &amp; 18k</span>
+          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Oro 14k &amp; 18k</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
-          <span className="flex-1 text-center">Diamantes<br />GIA &amp; IGI</span>
+          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Diamantes<br />GIA &amp; IGI</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
-          <span className="flex-1 text-center">Platino 950</span>
+          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Platino 950</span>
         </motion.div>
       </motion.div>
 
