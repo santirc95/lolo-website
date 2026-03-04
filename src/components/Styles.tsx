@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const STYLES = [
@@ -97,7 +97,29 @@ const panelStaticVariants = {
 export default function Styles() {
   const [activeId, setActiveId] = useState(STYLES[0].id);
   const active = STYLES.find((s) => s.id === activeId)!;
+  const activeIdx = STYLES.findIndex((s) => s.id === activeId);
   const prefersReducedMotion = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Prefetch adjacent videos so they're cached when user switches
+  const prefetchVideo = useCallback((url: string) => {
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.as = "video";
+    link.href = url;
+    // Avoid duplicates
+    if (!document.querySelector(`link[href="${url}"]`)) {
+      document.head.appendChild(link);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Prefetch prev & next style videos
+    const prev = STYLES[(activeIdx - 1 + STYLES.length) % STYLES.length];
+    const next = STYLES[(activeIdx + 1) % STYLES.length];
+    prefetchVideo(prev.video);
+    prefetchVideo(next.video);
+  }, [activeIdx, prefetchVideo]);
 
   return (
     <section
@@ -186,12 +208,14 @@ export default function Styles() {
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full p-2">
                     <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
                       <video
+                        ref={videoRef}
+                        key={active.id}
                         src={active.video}
                         autoPlay
                         loop
                         muted
                         playsInline
-                        preload="metadata"
+                        preload="auto"
                         className="w-full h-full object-cover"
                       />
                     </div>

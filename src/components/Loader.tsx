@@ -10,14 +10,19 @@ export default function Loader() {
 
   useEffect(() => {
     const handleLoad = () => {
-      setTimeout(() => setVisible(false), 300);
+      setTimeout(() => setVisible(false), 100);
     };
 
     if (document.readyState === "complete") {
       handleLoad();
     } else {
       window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
+      // Fallback: dismiss loader after 2s max regardless of load state
+      const fallback = setTimeout(() => setVisible(false), 2000);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        clearTimeout(fallback);
+      };
     }
   }, []);
 
