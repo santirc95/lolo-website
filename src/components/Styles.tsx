@@ -198,6 +198,10 @@ export default function Styles() {
                   </div>
                 </div>
 
+                <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078]">
+                  Personaliza tu estilo
+                </p>
+
                 {/* Description — mobile only */}
                 <div className="mt-5 md:hidden">
                   <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">
