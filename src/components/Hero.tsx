@@ -65,6 +65,39 @@ export default function Hero() {
       )}
 
       {/* ==============================
+          Desktop background video
+      ============================== */}
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 z-0 hidden md:block">
+          <video
+            className="h-full w-full object-cover opacity-0 transition-opacity duration-[1400ms]"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            onLoadedData={(e) => e.currentTarget.classList.add("opacity-100")}
+          >
+            <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
+            <source src="/videos/hero/lolo-hero-desktop.mp4" type="video/mp4" />
+          </video>
+        </div>
+      )}
+
+      {/* ==============================
+          Desktop video overlay (champagne wash for text contrast)
+      ============================== */}
+      <div
+        className="absolute inset-0 z-[1] hidden md:block"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+        }}
+      />
+
+      {/* ==============================
           Mobile video overlay (champagne wash for text contrast)
       ============================== */}
       <div
