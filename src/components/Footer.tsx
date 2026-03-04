@@ -4,32 +4,65 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gold/10 bg-charcoal text-white/70">
+    <footer className="border-t border-[#d4b896]/10 bg-gradient-to-br from-[#2f2a28] to-[#3a3431] text-white/70">
       <div className="mx-auto max-w-6xl px-5 py-12">
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">
-          <div>
-            <p className="font-display text-xl tracking-wider text-white">
-              {SITE_CONFIG.name}
-            </p>
-            <p className="mt-1 text-sm">{SITE_CONFIG.tagline}</p>
+          <div className="flex flex-col items-center md:items-start">
+            <div
+              role="img"
+              aria-label="Loló"
+              className="h-[48px] w-[170px] bg-gradient-to-r from-[#f3e3c9] via-[#d4b896] to-[#e8d2b0] [mask-position:center] md:[mask-position:left] [-webkit-mask-position:center] md:[-webkit-mask-position:left]"
+              style={{
+                maskImage: "url(/images/brand/logo-lolo.svg)",
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskImage: "url(/images/brand/logo-lolo.svg)",
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+              }}
+            />
+            <p className="mt-3 text-sm">{SITE_CONFIG.tagline}</p>
           </div>
 
-          <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm transition-colors hover:text-white"
-            >
-              WhatsApp
-            </a>
+          <div className="flex items-center gap-5">
             <a
               href={SITE_CONFIG.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm transition-colors hover:text-white"
+              aria-label="Instagram LOLŌ"
+              className="opacity-90 transition-all duration-[250ms] ease-out hover:opacity-100 hover:-translate-y-[1px] hover:drop-shadow-[0_0_6px_rgba(74,49,96,0.35)]"
             >
-              Instagram
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <defs>
+                  <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#f3e3c9" />
+                    <stop offset="50%" stopColor="#d4b896" />
+                    <stop offset="100%" stopColor="#e8d2b0" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig-grad)" />
+                <circle cx="12" cy="12" r="5" stroke="url(#ig-grad)" />
+                <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad)" stroke="none" />
+              </svg>
+            </a>
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp LOLŌ"
+              className="opacity-90 transition-all duration-[250ms] ease-out hover:opacity-100 hover:-translate-y-[1px] hover:drop-shadow-[0_0_6px_rgba(74,49,96,0.35)]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <defs>
+                  <linearGradient id="wa-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#f3e3c9" />
+                    <stop offset="50%" stopColor="#d4b896" />
+                    <stop offset="100%" stopColor="#e8d2b0" />
+                  </linearGradient>
+                </defs>
+                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" stroke="url(#wa-grad)" />
+                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Zm0 0a5 5 0 0 0 5 5m0 0h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1Z" stroke="url(#wa-grad)" />
+              </svg>
             </a>
           </div>
         </div>

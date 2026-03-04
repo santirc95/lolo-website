@@ -16,15 +16,15 @@ const STEPS = [
   },
   {
     number: "02",
-    title: "Diseño personalizado",
-    description:
-      "Creamos un diseño en 3D exclusivo para ti. Lo revisamos juntos y lo ajustamos hasta que sea exactamente lo que imaginaste.",
-  },
-  {
-    number: "03",
     title: "Selección de diamante",
     description:
       "Te ayudamos a elegir el diamante perfecto con certificación GIA o IGI. Transparencia total en calidad y precio.",
+  },
+  {
+    number: "03",
+    title: "Diseño personalizado",
+    description:
+      "Creamos un diseño en 3D exclusivo para ti. Lo revisamos juntos y lo ajustamos hasta que sea exactamente lo que imaginaste.",
   },
   {
     number: "04",
@@ -34,9 +34,9 @@ const STEPS = [
   },
   {
     number: "05",
-    title: "Entrega especial",
+    title: "Entrega y acompañamiento",
     description:
-      "Recibes tu anillo en un empaque premium, con certificado de autenticidad y garantía. Listo para el gran momento.",
+      "Recibe tu anillo cuidadosamente preparado, con certificado y listo para el momento más importante.",
   },
 ];
 
@@ -175,7 +175,7 @@ export default function Process() {
         }}
       />
 
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
@@ -185,7 +185,7 @@ export default function Process() {
             De la idea al{" "}
             <span className="italic text-[#4a3160]">anillo perfecto</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
             Un proceso cercano y transparente, diseñado para que disfrutes cada
             paso tanto como el resultado final.
           </p>
@@ -224,7 +224,7 @@ export default function Process() {
                     <h3 className="font-display text-lg tracking-tight text-[#2c2c2c]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#8a8078]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#736b65]">
                       {step.description}
                     </p>
                   </div>
@@ -252,7 +252,7 @@ export default function Process() {
                     <h3 className="font-display text-lg tracking-tight text-[#2c2c2c]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#8a8078]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#736b65]">
                       {step.description}
                     </p>
                   </div>
@@ -266,14 +266,11 @@ export default function Process() {
         <div ref={ctaRef} className="mt-16 text-center" style={{ opacity: 0 }}>
           <a
             href={getWhatsAppUrl(
-              "Hola, quiero iniciar el proceso de diseño de mi anillo de compromiso."
+              "Hola, me gustaría comenzar el proceso para diseñar un anillo de compromiso."
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#2c2c2c] px-8 py-4 text-base font-medium text-white transition-all
-                       hover:bg-[#3a3a3a] hover:shadow-lg
-                       hover:ring-1 hover:ring-[rgba(74,49,96,0.35)]
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
+            className="btn-liquid btn-liquid--primary px-8 py-4 text-base"
           >
             Inicia tu proceso hoy
             <svg

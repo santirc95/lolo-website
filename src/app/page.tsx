@@ -8,7 +8,7 @@ import Trust from "@/components/Trust";
 import FAQ from "@/components/FAQ";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import Loader from "@/components/Loader";
 import GemCuts from "@/components/GemCuts";
 
@@ -30,7 +30,7 @@ export default function Home() {
         <CTABanner />
       </main>
       <Footer />
-      <WhatsAppButton />
+
     </>
   );
 }
