@@ -87,7 +87,7 @@ const cuts = [
   },
 ];
 
-const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const EASE_LUXURY = [0.22, 1, 0.36, 1] as const;
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
