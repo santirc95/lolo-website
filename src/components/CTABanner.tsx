@@ -44,7 +44,7 @@ export default function CTABanner() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
-        className="mx-auto max-w-5xl"
+        className="mx-auto max-w-6xl"
       >
         {/* Glass card with gradient border */}
         <div
@@ -87,7 +87,7 @@ export default function CTABanner() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="mt-4 text-base leading-relaxed text-[#8a8078] sm:text-lg"
+                  className="mt-4 text-base leading-relaxed text-[#736b65] sm:text-lg"
                 >
                   Te guiamos en cada paso: selección del diamante, diseño y
                   fabricación. Sin presión, con claridad.

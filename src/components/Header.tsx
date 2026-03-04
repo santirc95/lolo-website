@@ -54,7 +54,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group relative text-sm tracking-wide text-[#8a8078] transition-colors duration-200
+                  className="group relative text-sm tracking-wide text-[#736b65] transition-colors duration-200
                              hover:text-[#4a3160]
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded"
                 >
@@ -123,7 +123,7 @@ export default function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={closeMobile}
-                      className="text-base tracking-wide text-[#8a8078] transition-colors duration-200 hover:text-[#4a3160]
+                      className="text-base tracking-wide text-[#736b65] transition-colors duration-200 hover:text-[#4a3160]
                                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:rounded"
                     >
                       {link.label}

@@ -72,7 +72,7 @@ export default function Trust() {
       aria-label="Por qué elegir LOLŌ"
       className="bg-[#faf8f5] px-5 py-20 md:py-28"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-14">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
@@ -82,7 +82,7 @@ export default function Trust() {
             Joyería con{" "}
             <span className="italic text-[#4a3160]">alma</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#736b65] sm:text-lg">
             Creemos que un anillo de compromiso es mucho más que una joya. Es una
             promesa hecha materia. Por eso ponemos el mismo amor en crearlo que
             tú al entregarlo.
@@ -121,7 +121,7 @@ export default function Trust() {
                       {point.title}
                     </h3>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-[#8a8078] line-clamp-3 md:line-clamp-none">
+                  <p className="mt-2 text-sm leading-relaxed text-[#736b65] line-clamp-3 md:line-clamp-none">
                     {point.description}
                   </p>
                 </div>

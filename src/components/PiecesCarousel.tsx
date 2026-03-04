@@ -131,14 +131,14 @@ export default function PiecesCarousel() {
           Piezas que{" "}
           <span className="italic text-[#4a3160]">enamoran</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
           Cada anillo es una obra única, diseñada con materiales nobles y el
           cuidado artesanal que merece vuestra historia.
         </p>
       </motion.div>
 
       {/* Carousel wrapper with nav buttons */}
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-6xl">
         {/* Prev button — only on desktop, hidden when at start */}
         {canScrollLeft && (
           <button
@@ -207,7 +207,7 @@ export default function PiecesCarousel() {
                       <h3 className="text-base font-medium text-[#2c2c2c]">
                         {piece.title}
                       </h3>
-                      <p className="mt-1 text-sm text-[#8a8078]">
+                      <p className="mt-1 text-sm text-[#736b65]">
                         {piece.subtitle}
                       </p>
                     </div>
@@ -218,7 +218,7 @@ export default function PiecesCarousel() {
           </motion.div>
         </div>
       </div>
-      <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078] md:hidden">
+      <p className="mt-4 text-center text-xs tracking-wide text-[#736b65] md:hidden">
         Desliza &rarr;
       </p>
     </section>

@@ -121,7 +121,7 @@ export default function Styles() {
           Encuentra tu{" "}
           <span className="italic text-[#4a3160]">estilo</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
           Cada diseño tiene su propia personalidad. Explora los estilos más
           populares y cuéntanos cuál va contigo.
         </p>
@@ -198,7 +198,7 @@ export default function Styles() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078]">
+                <p className="mt-4 text-center text-xs tracking-wide text-[#736b65]">
                   Cada estilo puede personalizarse
                 </p>
 
@@ -210,7 +210,7 @@ export default function Styles() {
                       {active.name}
                     </span>
                   </h3>
-                  <p className="text-base leading-relaxed text-[#8a8078]">
+                  <p className="text-base leading-relaxed text-[#736b65]">
                     {active.description}
                   </p>
                 </div>
@@ -291,8 +291,8 @@ export default function Styles() {
                                    ${isActive ? "whitespace-normal" : "line-clamp-2"}
                                    ${
                                      isActive
-                                       ? "text-[#8a8078]"
-                                       : "text-[#8a8078]/70"
+                                       ? "text-[#736b65]"
+                                       : "text-[#736b65]/70"
                                    }`}
                       >
                         {style.description}

@@ -214,7 +214,7 @@ export default function GemCuts() {
           Encuentra tu{" "}
           <span className="italic text-[#4a3160]">corte ideal</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
           Cada forma refleja la luz de manera distinta y transforma el carácter
           de tu anillo. Explora los cortes y descubre cuál va contigo.
         </p>
@@ -267,7 +267,7 @@ export default function GemCuts() {
           id={`panel-${active.id}`}
           role="tabpanel"
           aria-label={`Corte ${active.label}`}
-          className="mx-auto max-w-5xl"
+          className="mx-auto max-w-6xl"
         >
           {/* Mobile: vertical card — aspect-[2/3] only for visual area, text flows naturally */}
           <div className="md:hidden">
@@ -394,7 +394,7 @@ export default function GemCuts() {
                         Corte{" "}
                         <span className="italic text-[#4a3160]">{active.label}</span>
                       </h3>
-                      <p className="text-base leading-relaxed text-[#8a8078]">
+                      <p className="text-base leading-relaxed text-[#736b65]">
                         {active.description}
                       </p>
                     </motion.div>
@@ -450,7 +450,7 @@ export default function GemCuts() {
                     Corte{" "}
                     <span className="italic text-[#4a3160]">{active.label}</span>
                   </h3>
-                  <p className="text-base leading-relaxed text-[#8a8078]">
+                  <p className="text-base leading-relaxed text-[#736b65]">
                     {active.description}
                   </p>
                 </div>

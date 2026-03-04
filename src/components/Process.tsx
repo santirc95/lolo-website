@@ -175,7 +175,7 @@ export default function Process() {
         }}
       />
 
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
@@ -185,7 +185,7 @@ export default function Process() {
             De la idea al{" "}
             <span className="italic text-[#4a3160]">anillo perfecto</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
             Un proceso cercano y transparente, diseñado para que disfrutes cada
             paso tanto como el resultado final.
           </p>
@@ -224,7 +224,7 @@ export default function Process() {
                     <h3 className="font-display text-lg tracking-tight text-[#2c2c2c]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#8a8078]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#736b65]">
                       {step.description}
                     </p>
                   </div>
@@ -252,7 +252,7 @@ export default function Process() {
                     <h3 className="font-display text-lg tracking-tight text-[#2c2c2c]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#8a8078]">
+                    <p className="mt-2 text-sm leading-relaxed text-[#736b65]">
                       {step.description}
                     </p>
                   </div>

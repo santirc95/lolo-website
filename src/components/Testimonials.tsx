@@ -88,7 +88,7 @@ function Stars({ count }: { count: number }) {
           height="15"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="text-[#c9a96e]"
+          className="text-[#9a7a4a]"
         >
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
@@ -261,7 +261,7 @@ export default function Testimonials() {
       aria-label="Reseñas de clientes"
       className="overflow-x-clip bg-[#faf8f5] px-5 py-20 md:py-28"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-12">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
@@ -271,7 +271,7 @@ export default function Testimonials() {
             Historias que nos{" "}
             <span className="italic text-[#4a3160]">inspiran</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#8a8078] sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[#736b65] sm:text-lg">
             La confianza de nuestros clientes es nuestro mayor orgullo. Estas
             son algunas de sus experiencias.
           </p>
@@ -328,7 +328,7 @@ export default function Testimonials() {
             </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078] md:hidden">
+        <p className="mt-4 text-center text-xs tracking-wide text-[#736b65] md:hidden">
           Desliza &rarr;
         </p>
       </div>

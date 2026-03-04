@@ -9,7 +9,7 @@ export default function NotFound() {
       <h1 className="font-display text-5xl tracking-tight text-[#2c2c2c] sm:text-6xl">
         404
       </h1>
-      <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#8a8078] sm:text-lg">
+      <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-[#736b65] sm:text-lg">
         Lo sentimos, la página que buscas no existe o fue movida.
       </p>
       <Link
