@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -95,7 +95,18 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
-        <GoogleAnalytics gaId="G-0V7WRP90CV" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0V7WRP90CV"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0V7WRP90CV');
+          `}
+        </Script>
       </body>
     </html>
   );
