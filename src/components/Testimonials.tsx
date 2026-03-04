@@ -167,7 +167,7 @@ function TestimonialCard({
         <div className="relative w-full aspect-square overflow-hidden">
           <Image
             src={t.image}
-            alt={`Pieza de ${t.name}`}
+            alt={`Anillo de compromiso diseñado para ${t.name}`}
             fill
             sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover"
