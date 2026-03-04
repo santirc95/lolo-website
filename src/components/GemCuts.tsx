@@ -87,7 +87,8 @@ const cuts = [
   },
 ];
 
-const EASE_LUXURY = [0.22, 1, 0.36, 1] as const;
+type CubicBezier = [number, number, number, number];
+const EASE_LUXURY: CubicBezier = [0.22, 1, 0.36, 1];
 
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
