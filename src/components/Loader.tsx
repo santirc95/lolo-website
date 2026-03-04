@@ -9,20 +9,20 @@ export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Dismiss loader once the DOM is interactive (don't wait for all images/videos)
     const dismiss = () => setVisible(false);
 
-    if (document.readyState === "interactive" || document.readyState === "complete") {
-      // DOM is already parsed — show content after a brief brand moment
-      const t = setTimeout(dismiss, 400);
-      return () => clearTimeout(t);
+    if (document.readyState === "complete") {
+      // Page already fully loaded (e.g. back navigation)
+      setTimeout(dismiss, 100);
     } else {
-      const onReady = () => setTimeout(dismiss, 400);
-      document.addEventListener("DOMContentLoaded", onReady);
-      // Fallback: dismiss after 1.5s max regardless
-      const fallback = setTimeout(dismiss, 1500);
+      // Wait for window.load — now that below-fold resources are lazy,
+      // this mainly waits for the Hero video + fonts (the above-fold essentials)
+      const onLoad = () => setTimeout(dismiss, 100);
+      window.addEventListener("load", onLoad);
+      // Safety fallback: never block longer than 3s
+      const fallback = setTimeout(dismiss, 3000);
       return () => {
-        document.removeEventListener("DOMContentLoaded", onReady);
+        window.removeEventListener("load", onLoad);
         clearTimeout(fallback);
       };
     }

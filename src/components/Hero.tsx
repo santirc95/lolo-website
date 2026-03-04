@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
@@ -41,19 +40,6 @@ const heroCtas = {
 ================================ */
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
-
-  // Start loading video data only after the component mounts (avoids blocking initial render)
-  useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const video = isMobile ? mobileVideoRef.current : desktopVideoRef.current;
-    if (video) {
-      video.preload = "auto";
-      video.load();
-    }
-  }, []);
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">
@@ -67,14 +53,12 @@ export default function Hero() {
       {!prefersReducedMotion && (
         <div className="absolute inset-0 z-0 md:hidden bg-[#F5EDE3]">
           <video
-            ref={mobileVideoRef}
-            className={`h-full w-full object-cover transition-opacity duration-700 ease-in-out ${videoReady ? "opacity-100" : "opacity-0"}`}
+            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
-            onCanPlay={() => setVideoReady(true)}
+            preload="auto"
             aria-hidden="true"
           >
             <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
@@ -89,14 +73,12 @@ export default function Hero() {
       {!prefersReducedMotion && (
         <div className="absolute inset-0 z-0 hidden md:block bg-[#F5EDE3]">
           <video
-            ref={desktopVideoRef}
-            className={`h-full w-full object-cover transition-opacity duration-700 ease-in-out ${videoReady ? "opacity-100" : "opacity-0"}`}
+            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
-            onCanPlay={() => setVideoReady(true)}
+            preload="auto"
             aria-hidden="true"
           >
             <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
