@@ -10,10 +10,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.name} — Anillos de Compromiso Personalizados`,
-    template: `%s | ${SITE_CONFIG.name}`,
+    default: "LOLŌ | Anillos de compromiso con diamantes",
+    template: "%s | LOLŌ",
   },
-  description: SITE_CONFIG.description,
+  description:
+    "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
   metadataBase: new URL(SITE_CONFIG.url),
   keywords: [
     "anillos de compromiso",
@@ -33,13 +34,17 @@ export const metadata: Metadata = {
     locale: "es_MX",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: `${SITE_CONFIG.name} — Anillos de Compromiso Personalizados`,
-    description: SITE_CONFIG.description,
+    title: "LOLŌ | Anillos de compromiso con diamantes",
+    description:
+      "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
+    images: "/opengraph-image.png",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CONFIG.name} — Anillos de Compromiso Personalizados`,
-    description: SITE_CONFIG.description,
+    title: "LOLŌ | Anillos de compromiso con diamantes",
+    description:
+      "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
+    images: "/twitter-image.png",
   },
   robots: {
     index: true,
