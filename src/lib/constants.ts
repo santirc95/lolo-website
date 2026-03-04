@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
     "Diseñamos y creamos anillos de compromiso personalizados con diamantes certificados y metales preciosos. Asesoría experta y proceso transparente.",
   url: "https://www.lolojoyeria.com",
   whatsapp: {
-    number: "5215512778853",
+    number: "525512778853",
     message:
       "Hola, me interesa saber más sobre los anillos de compromiso personalizados de LOLŌ.",
   },
