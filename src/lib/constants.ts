@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   whatsapp: {
     number: "525512778853",
     message:
-      "Hola, me interesa saber más sobre los anillos de compromiso personalizados de LOLŌ.",
+      "Hola, estoy buscando un anillo de compromiso personalizado y me gustaría más información.",
   },
   social: {
     instagram: "https://www.instagram.com/lolojoyeria",

@@ -266,7 +266,7 @@ export default function Process() {
         <div ref={ctaRef} className="mt-16 text-center" style={{ opacity: 0 }}>
           <a
             href={getWhatsAppUrl(
-              "Hola, quiero iniciar el proceso de diseño de mi anillo de compromiso."
+              "Hola, me gustaría comenzar el proceso para diseñar un anillo de compromiso."
             )}
             target="_blank"
             rel="noopener noreferrer"

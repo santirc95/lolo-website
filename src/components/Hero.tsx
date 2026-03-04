@@ -188,7 +188,7 @@ export default function Hero() {
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <a
-            href={getWhatsAppUrl("Hola, vi su página y me interesa diseñar un anillo de compromiso.")}
+            href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-liquid btn-liquid--dark px-8 py-4 text-base"

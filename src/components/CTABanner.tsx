@@ -105,7 +105,7 @@ export default function CTABanner() {
               >
                 {/* Primary CTA — WhatsApp */}
                 <a
-                  href={getWhatsAppUrl("Hola, quiero diseñar mi anillo de compromiso.")}
+                  href={getWhatsAppUrl("Hola, me gustaría diseñar un anillo de compromiso.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Contáctanos por WhatsApp para diseñar tu anillo"
