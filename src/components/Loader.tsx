@@ -9,15 +9,22 @@ export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => setVisible(false), 300);
-    };
+    const dismiss = () => setVisible(false);
 
     if (document.readyState === "complete") {
-      handleLoad();
+      // Page already fully loaded (e.g. back navigation)
+      setTimeout(dismiss, 100);
     } else {
-      window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
+      // Wait for window.load — now that below-fold resources are lazy,
+      // this mainly waits for the Hero video + fonts (the above-fold essentials)
+      const onLoad = () => setTimeout(dismiss, 100);
+      window.addEventListener("load", onLoad);
+      // Safety fallback: never block longer than 3s
+      const fallback = setTimeout(dismiss, 3000);
+      return () => {
+        window.removeEventListener("load", onLoad);
+        clearTimeout(fallback);
+      };
     }
   }, []);
 

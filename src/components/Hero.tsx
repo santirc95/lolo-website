@@ -51,14 +51,14 @@ export default function Hero() {
           Mobile background video
       ============================== */}
       {!prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 md:hidden">
+        <div className="absolute inset-0 z-0 md:hidden bg-[#F5EDE3]">
           <video
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             aria-hidden="true"
           >
             <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
@@ -71,9 +71,9 @@ export default function Hero() {
           Desktop background video
       ============================== */}
       {!prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 hidden md:block bg-[#FAF7F2]">
+        <div className="absolute inset-0 z-0 hidden md:block bg-[#F5EDE3]">
           <video
-            className="h-full w-full object-cover animate-[fadeIn_1.4s_ease-in-out_forwards]"
+            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted
             loop

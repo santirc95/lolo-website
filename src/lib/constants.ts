@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
       "Hola, estoy buscando un anillo de compromiso personalizado y me gustaría más información.",
   },
   social: {
-    instagram: "https://www.instagram.com/lolojoyeria",
+    instagram: "https://www.instagram.com/lolo.mexico/",
   },
 } as const;
 

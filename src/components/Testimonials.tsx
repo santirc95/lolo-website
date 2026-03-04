@@ -169,6 +169,7 @@ function TestimonialCard({
             src={t.image}
             alt={`Anillo de compromiso diseñado para ${t.name}`}
             fill
+            loading="lazy"
             sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover"
           />

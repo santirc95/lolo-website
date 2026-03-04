@@ -137,11 +137,31 @@ const previewStaticVariants = {
 export default function GemCuts() {
   const [activeId, setActiveId] = useState(cuts[0].id);
   const active = cuts.find((c) => c.id === activeId)!;
+  const activeIdx = cuts.findIndex((c) => c.id === activeId);
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const [wipeKey, setWipeKey] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
 
+  // Prefetch adjacent cut images for instant tab switching
+  useEffect(() => {
+    const adjacent = [
+      (activeIdx - 1 + cuts.length) % cuts.length,
+      (activeIdx + 1) % cuts.length,
+    ];
+    adjacent.forEach((i) => {
+      const cut = cuts[i];
+      [cut.cutImage, cut.handImage].forEach((src) => {
+        const link = document.createElement("link");
+        link.rel = "prefetch";
+        link.as = "image";
+        link.href = src;
+        if (!document.querySelector(`link[href="${src}"]`)) {
+          document.head.appendChild(link);
+        }
+      });
+    });
+  }, [activeIdx]);
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.35 });
@@ -281,6 +301,7 @@ export default function GemCuts() {
                     src={active.handImage}
                     alt={`Corte ${active.label} en mano`}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 400px, 0px"
                     className="object-cover"
                   />
@@ -423,6 +444,7 @@ export default function GemCuts() {
                       src={active.cutImage}
                       alt={`Diamante corte ${active.label}`}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 0px, 50vw"
                       className="object-contain !p-[12.5%]"
                     />
@@ -439,6 +461,7 @@ export default function GemCuts() {
                         src={active.handImage}
                         alt={`Corte ${active.label} en mano`}
                         fill
+                        loading="lazy"
                         sizes="(max-width: 768px) 0px, 50vw"
                         className="object-cover"
                       />
