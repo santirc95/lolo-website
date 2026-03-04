@@ -199,7 +199,7 @@ export default function Styles() {
                 </div>
 
                 <p className="mt-4 text-center text-xs tracking-wide text-[#8a8078]">
-                  Personaliza tu estilo
+                  Cada estilo puede personalizarse
                 </p>
 
                 {/* Description — mobile only */}
