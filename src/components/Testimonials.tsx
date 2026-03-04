@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const TESTIMONIALS = [
   {
@@ -164,10 +165,12 @@ function TestimonialCard({
 
         {/* Image area with text overlay on expand */}
         <div className="relative w-full aspect-square overflow-hidden">
-          <img
+          <Image
             src={t.image}
             alt={`Pieza de ${t.name}`}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover"
           />
           <AnimatePresence>
             {expanded && (

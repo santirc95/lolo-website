@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 
 const pieces = [
   { id: 1, src: "/images/collection/01.png", title: "Pieza destacada", subtitle: "Joyería fina personalizada", alt: "Pieza LOLŌ en contexto — Colección 01" },
@@ -193,12 +194,13 @@ export default function PiecesCarousel() {
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   {/* Glass card */}
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
-                      <img
+                    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                      <Image
                         src={piece.src}
                         alt={piece.alt}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover"
                       />
                     </div>
                     <div className="px-5 py-4">

@@ -10,6 +10,7 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
+import Image from "next/image";
 
 const cuts = [
   {
@@ -275,10 +276,12 @@ export default function GemCuts() {
                 {/* Visual area — image + curtain locked to 2:3 */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden shrink-0">
                   {/* New hand image — revealed as curtain lifts */}
-                  <img
+                  <Image
                     src={active.handImage}
                     alt={`Corte ${active.label} en mano`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 400px, 0px"
+                    className="object-cover"
                   />
                   {/* Top wash */}
                   <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/70 via-transparent to-transparent pointer-events-none" />
@@ -291,10 +294,12 @@ export default function GemCuts() {
                       aria-hidden="true"
                     >
                       {/* Previous hand image — visible through frosted glass */}
-                      <img
+                      <Image
                         src={prevHandImageRef.current}
                         alt=""
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="400px"
+                        className="object-cover"
                       />
                       {/* Frosted translucent overlay */}
                       <div className="absolute inset-0 bg-[#faf8f5]/40 backdrop-blur-[2px]" />
@@ -306,10 +311,12 @@ export default function GemCuts() {
                         transition={{ duration: 0.35, ease: EASE_LUXURY }}
                         className="absolute inset-0 flex items-center justify-center"
                       >
-                        <img
+                        <Image
                           src={active.cutImage}
                           alt=""
-                          className="h-40 w-40 object-contain drop-shadow-lg"
+                          width={160}
+                          height={160}
+                          className="object-contain drop-shadow-lg"
                         />
                       </motion.div>
 
@@ -348,16 +355,21 @@ export default function GemCuts() {
                     style={{ background: "linear-gradient(135deg, rgba(212,184,150,0.8), rgba(74,49,96,0.35), rgba(212,184,150,0.8))" }}>
                     <div className="bg-[#faf8f5]/75 backdrop-blur-md rounded-xl p-2">
                       <AnimatePresence mode="wait">
-                        <motion.img
+                        <motion.div
                           key={active.id}
-                          src={active.cutImage}
-                          alt={`Diamante corte ${active.label}`}
-                          className="h-16 w-16 object-contain"
                           initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
                           animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
                           exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.85 }}
                           transition={{ duration: 0.45, ease: EASE_LUXURY }}
-                        />
+                        >
+                          <Image
+                            src={active.cutImage}
+                            alt={`Diamante corte ${active.label}`}
+                            width={64}
+                            height={64}
+                            className="object-contain"
+                          />
+                        </motion.div>
                       </AnimatePresence>
                     </div>
                   </div>
@@ -405,11 +417,13 @@ export default function GemCuts() {
               {/* Cut image */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                 <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                  <div className="aspect-square w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
-                    <img
+                  <div className="relative aspect-square w-full overflow-hidden rounded-[calc(1rem-1px)] flex items-center justify-center bg-white/40">
+                    <Image
                       src={active.cutImage}
                       alt={`Diamante corte ${active.label}`}
-                      className="h-3/4 w-3/4 object-contain"
+                      fill
+                      sizes="(max-width: 768px) 0px, 50vw"
+                      className="object-contain !p-[12.5%]"
                     />
                   </div>
                 </div>
@@ -419,11 +433,13 @@ export default function GemCuts() {
               <div className="flex flex-col gap-6">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="aspect-[4/3] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
-                      <img
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                      <Image
                         src={active.handImage}
                         alt={`Corte ${active.label} en mano`}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 0px, 50vw"
+                        className="object-cover"
                       />
                     </div>
                   </div>
