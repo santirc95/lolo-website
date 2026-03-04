@@ -164,7 +164,7 @@ function TestimonialCard({
         </div>
 
         {/* Image area with text overlay on expand */}
-        <div className="relative w-full aspect-square overflow-hidden">
+        <div className="relative w-full aspect-square overflow-hidden bg-[#ece5db]">
           <Image
             src={t.image}
             alt={`Anillo de compromiso diseñado para ${t.name}`}

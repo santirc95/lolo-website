@@ -194,7 +194,7 @@ export default function PiecesCarousel() {
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
                   {/* Glass card */}
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)]">
+                    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[calc(1rem-1px)] bg-[#ece5db]">
                       <Image
                         src={piece.src}
                         alt={piece.alt}
