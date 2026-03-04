@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 
 const STYLES = [
   {
@@ -100,29 +100,31 @@ export default function Styles() {
   const activeIdx = STYLES.findIndex((s) => s.id === activeId);
   const prefersReducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
 
-  // Prefetch adjacent videos so they're cached when user switches
+  // Prefetch adjacent videos only once the section is near the viewport
   const prefetchVideo = useCallback((url: string) => {
     const link = document.createElement("link");
     link.rel = "prefetch";
     link.as = "video";
     link.href = url;
-    // Avoid duplicates
     if (!document.querySelector(`link[href="${url}"]`)) {
       document.head.appendChild(link);
     }
   }, []);
 
   useEffect(() => {
-    // Prefetch prev & next style videos
+    if (!isInView) return;
     const prev = STYLES[(activeIdx - 1 + STYLES.length) % STYLES.length];
     const next = STYLES[(activeIdx + 1) % STYLES.length];
     prefetchVideo(prev.video);
     prefetchVideo(next.video);
-  }, [activeIdx, prefetchVideo]);
+  }, [activeIdx, prefetchVideo, isInView]);
 
   return (
     <section
+      ref={sectionRef}
       id="estilos"
       role="region"
       aria-label="Estilos de anillo de compromiso"
@@ -207,17 +209,19 @@ export default function Styles() {
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px] md:h-full">
                   <div className="rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden md:h-full p-2">
                     <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
-                      <video
-                        ref={videoRef}
-                        key={active.id}
-                        src={active.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="w-full h-full object-cover"
-                      />
+                      {isInView && (
+                        <video
+                          ref={videoRef}
+                          key={active.id}
+                          src={active.video}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-cover"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

@@ -9,18 +9,20 @@ export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => setVisible(false), 100);
-    };
+    // Dismiss loader once the DOM is interactive (don't wait for all images/videos)
+    const dismiss = () => setVisible(false);
 
-    if (document.readyState === "complete") {
-      handleLoad();
+    if (document.readyState === "interactive" || document.readyState === "complete") {
+      // DOM is already parsed — show content after a brief brand moment
+      const t = setTimeout(dismiss, 400);
+      return () => clearTimeout(t);
     } else {
-      window.addEventListener("load", handleLoad);
-      // Fallback: dismiss loader after 2s max regardless of load state
-      const fallback = setTimeout(() => setVisible(false), 2000);
+      const onReady = () => setTimeout(dismiss, 400);
+      document.addEventListener("DOMContentLoaded", onReady);
+      // Fallback: dismiss after 1.5s max regardless
+      const fallback = setTimeout(dismiss, 1500);
       return () => {
-        window.removeEventListener("load", handleLoad);
+        document.removeEventListener("DOMContentLoaded", onReady);
         clearTimeout(fallback);
       };
     }

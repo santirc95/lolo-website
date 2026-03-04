@@ -301,6 +301,7 @@ export default function GemCuts() {
                     src={active.handImage}
                     alt={`Corte ${active.label} en mano`}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 400px, 0px"
                     className="object-cover"
                   />
@@ -443,6 +444,7 @@ export default function GemCuts() {
                       src={active.cutImage}
                       alt={`Diamante corte ${active.label}`}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 0px, 50vw"
                       className="object-contain !p-[12.5%]"
                     />
@@ -459,6 +461,7 @@ export default function GemCuts() {
                         src={active.handImage}
                         alt={`Corte ${active.label} en mano`}
                         fill
+                        loading="lazy"
                         sizes="(max-width: 768px) 0px, 50vw"
                         className="object-cover"
                       />
