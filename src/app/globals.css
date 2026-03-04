@@ -111,6 +111,12 @@ body {
     linear-gradient(180deg, #FAF7F2 0%, #F7F0E8 60%, #F3ECE2 100%);
 }
 
+/* Luxury fade-in for hero video */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* =========================================
    LOLŌ — Component Styles
    Must live inside @layer components so

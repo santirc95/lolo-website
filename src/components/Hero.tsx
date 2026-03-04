@@ -73,14 +73,13 @@ export default function Hero() {
       {!prefersReducedMotion && (
         <div className="absolute inset-0 z-0 hidden md:block bg-[#FAF7F2]">
           <video
-            className="h-full w-full object-cover opacity-0 transition-opacity duration-[1400ms]"
+            className="h-full w-full object-cover animate-[fadeIn_1.4s_ease-in-out_forwards]"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             aria-hidden="true"
-            onLoadedData={(e) => e.currentTarget.classList.add("opacity-100")}
           >
             <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
             <source src="/videos/hero/lolo-hero-desktop.mp4" type="video/mp4" />
