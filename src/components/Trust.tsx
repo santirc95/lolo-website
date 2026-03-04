@@ -143,7 +143,7 @@ export default function Trust() {
           className="mt-10 md:mt-14 text-center"
         >
           <a
-            href={getWhatsAppUrl()}
+            href={getWhatsAppUrl("Hola, me gustaría conocer más sobre LOLŌ y cómo trabajan.")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-liquid btn-liquid--primary px-8 py-4 text-base"

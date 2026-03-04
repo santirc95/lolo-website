@@ -65,7 +65,7 @@ export default function Header() {
 
               {/* CTA */}
               <a
-                href={getWhatsAppUrl()}
+                href={getWhatsAppUrl("Hola, me gustaría empezar a diseñar mi anillo de compromiso.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-liquid btn-liquid--primary ml-2 px-5 py-2 text-sm font-medium
@@ -140,7 +140,7 @@ export default function Header() {
                 </p>
                 <div className="flex flex-col gap-3">
                   <a
-                    href={getWhatsAppUrl()}
+                    href={getWhatsAppUrl("Hola, me gustaría empezar a diseñar mi anillo de compromiso.")}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={closeMobile}
