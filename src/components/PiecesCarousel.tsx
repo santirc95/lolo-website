@@ -27,30 +27,10 @@ const pieces = [
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const headerVariants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease },
-  },
-};
-
-const cardContainerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease },
   },
 };
@@ -171,24 +151,17 @@ export default function PiecesCarousel() {
           className="-my-3 py-3 overflow-x-auto scroll-smooth snap-x snap-mandatory
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <motion.div
-            className="flex gap-5 px-[7.5%] lg:px-0"
-            variants={prefersReducedMotion ? undefined : cardContainerVariants}
-            initial={prefersReducedMotion ? undefined : "hidden"}
-            whileInView={prefersReducedMotion ? undefined : "visible"}
-            viewport={{ once: true, margin: "-60px" }}
-          >
+          <div className="flex gap-5 px-[7.5%] lg:px-0">
             {pieces.map((piece) => (
-              <motion.div
+              <div
                 key={piece.id}
                 tabIndex={0}
-                variants={prefersReducedMotion ? undefined : cardVariants}
                 className="w-[85%] flex-shrink-0 snap-center
                            md:w-[calc((100%-1.25rem*1)/2)]
                            lg:w-[calc((100%-1.25rem*2)/3)]
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
-                           rounded-2xl transition-all duration-300
-                           hover:-translate-y-1 hover:shadow-lg"
+                           rounded-2xl transition-shadow duration-300
+                           md:hover:shadow-lg"
               >
                 {/* Gradient border wrapper */}
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]">
@@ -214,9 +187,9 @@ export default function PiecesCarousel() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
       <p className="mt-4 text-center text-xs tracking-wide text-[#736b65] md:hidden">
