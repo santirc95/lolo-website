@@ -92,7 +92,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
           >
             <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
@@ -113,7 +113,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
           >
             <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
