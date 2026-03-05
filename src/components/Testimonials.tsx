@@ -64,13 +64,13 @@ const TESTIMONIALS = [
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+  hidden: { opacity: 0.01, y: 20, scale: 0.97 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
+    scale: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.6,
       ease: EASE_LUXURY,
       delay: i * 0.12,
     },
@@ -128,7 +128,7 @@ function TestimonialCard({
       className="h-full rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5] overflow-hidden h-full flex flex-col">
+      <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
         <div className="p-6 flex flex-col flex-1">
           <Stars count={t.rating} />
 
