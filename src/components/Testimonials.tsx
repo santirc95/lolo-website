@@ -64,15 +64,14 @@ const TESTIMONIALS = [
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const cardVariants = {
-  hidden: { opacity: 0.01, y: 20, scale: 0.97 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: EASE_LUXURY,
-      delay: i * 0.12,
+      delay: i * 0.1,
     },
   }),
 };
@@ -124,7 +123,7 @@ function TestimonialCard({
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, amount: 0.15 }}
       className="h-full rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
@@ -176,11 +175,11 @@ function TestimonialCard({
           <AnimatePresence>
             {expanded && (
               <motion.div
-                initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
-                exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                transition={{ duration: 0.5, ease: EASE_LUXURY }}
-                className="absolute inset-0 bg-[#2f2a28]/80 overflow-y-auto p-5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: EASE_LUXURY }}
+                className="absolute inset-0 bg-[#2f2a28]/90 backdrop-blur-sm overflow-y-auto p-5"
               >
                 <motion.blockquote
                   initial={{ opacity: 0, y: 12 }}
