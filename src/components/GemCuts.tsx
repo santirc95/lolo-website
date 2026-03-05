@@ -16,72 +16,72 @@ const cuts = [
   {
     id: "round",
     label: "Round",
-    cutImage: "/images/cuts/round-cut.png",
-    handImage: "/images/cuts/round-hand.png",
+    cutImage: "/images/cuts/round-cut.webp",
+    handImage: "/images/cuts/round-hand.webp",
     description:
       "El corte más clásico y brillante. Sus 58 facetas maximizan el destello desde cualquier ángulo, ideal para quien busca un anillo atemporal que nunca pase de moda.",
   },
   {
     id: "oval",
     label: "Oval",
-    cutImage: "/images/cuts/oval-cut.png",
-    handImage: "/images/cuts/oval-hand.png",
+    cutImage: "/images/cuts/oval-cut.webp",
+    handImage: "/images/cuts/oval-hand.webp",
     description:
       "Elegante y alargado, el óvalo estiliza la mano y aparenta mayor tamaño que un round del mismo quilataje. Perfecto para un look sofisticado y moderno.",
   },
   {
     id: "emerald",
     label: "Emerald",
-    cutImage: "/images/cuts/emerald-cut.png",
-    handImage: "/images/cuts/emerald-hand.png",
+    cutImage: "/images/cuts/emerald-cut.webp",
+    handImage: "/images/cuts/emerald-hand.webp",
     description:
       "Facetas escalonadas que crean un efecto de \"sala de espejos\". Transmite serenidad art-déco y destaca por su claridad. Ideal si prefieres brillo sutil sobre destello intenso.",
   },
   {
     id: "princess",
     label: "Princess",
-    cutImage: "/images/cuts/princess-cut.png",
-    handImage: "/images/cuts/princess-hand.png",
+    cutImage: "/images/cuts/princess-cut.webp",
+    handImage: "/images/cuts/princess-hand.webp",
     description:
       "Cuadrado con esquinas vivas y brillo comparable al round. Ofrece un aspecto contemporáneo y geométrico que combina con monturas minimalistas y modernas.",
   },
   {
     id: "radiant",
     label: "Radiant",
-    cutImage: "/images/cuts/radiant-cut.png",
-    handImage: "/images/cuts/radiant-hand.png",
+    cutImage: "/images/cuts/radiant-cut.webp",
+    handImage: "/images/cuts/radiant-hand.webp",
     description:
       "Combina la silueta rectangular del emerald con la intensidad del round. Sus esquinas recortadas lo hacen resistente y cómodo para uso diario.",
   },
   {
     id: "cushion",
     label: "Cushion",
-    cutImage: "/images/cuts/cushion-cut.png",
-    handImage: "/images/cuts/cushion-hand.png",
+    cutImage: "/images/cuts/cushion-cut.webp",
+    handImage: "/images/cuts/cushion-hand.webp",
     description:
       "Bordes suaves y redondeados con un brillo cálido y romántico. Evoca un aire vintage que se adapta tanto a monturas halo como a solitarios clásicos.",
   },
   {
     id: "pear",
     label: "Pear",
-    cutImage: "/images/cuts/pear-cut.png",
-    handImage: "/images/cuts/pear-hand.png",
+    cutImage: "/images/cuts/pear-cut.webp",
+    handImage: "/images/cuts/pear-hand.webp",
     description:
       "Mezcla de round y marquise con una punta delicada. Alarga visualmente el dedo y ofrece un estilo único que destaca entre los cortes más tradicionales.",
   },
   {
     id: "marquise",
     label: "Marquise",
-    cutImage: "/images/cuts/marquise-cut.png",
-    handImage: "/images/cuts/marquise-hand.png",
+    cutImage: "/images/cuts/marquise-cut.webp",
+    handImage: "/images/cuts/marquise-hand.webp",
     description:
       "Su forma de naveta maximiza la superficie visible del diamante, creando un efecto dramático en la mano. Ideal para quien busca presencia y originalidad.",
   },
   {
     id: "asscher",
     label: "Asscher",
-    cutImage: "/images/cuts/asscher-cut.png",
-    handImage: "/images/cuts/asscher-hand.png",
+    cutImage: "/images/cuts/asscher-cut.webp",
+    handImage: "/images/cuts/asscher-hand.webp",
     description:
       "Un cuadrado de facetas escalonadas con esquinas recortadas que irradia simetría art-déco. Su brillo profundo y geométrico lo convierte en una elección única para quien valora el detalle y la distinción.",
   },
