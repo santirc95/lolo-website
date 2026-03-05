@@ -37,19 +37,35 @@ const heroCtas = {
 /* ==============================
    Hero Component
 ================================ */
-// React doesn't reliably set the `muted` HTML attribute during SSR hydration.
-// Without it, mobile browsers block autoplay. This ref callback forces it.
+// Mobile browsers block autoplay unless the muted attribute is in the DOM.
+// React hydration doesn't always set it, so we force it via a ref callback
+// and retry play on multiple readiness signals + first user interaction.
 function useAutoplayVideo() {
   return useCallback((el: HTMLVideoElement | null) => {
     if (!el) return;
     el.muted = true;
     el.setAttribute("muted", "");
-    const tryPlay = () => el.play().catch(() => {});
-    if (el.readyState >= 3) {
+    el.playsInline = true;
+
+    const tryPlay = () => {
+      el.play().catch(() => {});
+    };
+
+    if (el.readyState >= 2) {
       tryPlay();
-    } else {
-      el.addEventListener("canplay", tryPlay, { once: true });
     }
+
+    el.addEventListener("canplay", tryPlay, { once: true });
+    el.addEventListener("loadeddata", tryPlay, { once: true });
+
+    // Last resort: first user interaction unblocks autoplay on restrictive browsers
+    const onInteraction = () => {
+      tryPlay();
+      document.removeEventListener("touchstart", onInteraction);
+      document.removeEventListener("scroll", onInteraction);
+    };
+    document.addEventListener("touchstart", onInteraction, { once: true, passive: true });
+    document.addEventListener("scroll", onInteraction, { once: true, passive: true });
   }, []);
 }
 
