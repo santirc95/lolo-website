@@ -108,6 +108,17 @@ body {
   to   { opacity: 1; }
 }
 
+/* Hide native video play button / controls overlay on mobile browsers */
+video::-webkit-media-controls,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* =========================================
    LOLŌ — Component Styles
    Must live inside @layer components so
