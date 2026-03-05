@@ -54,14 +54,12 @@ export const metadata: Metadata = {
     title: "LOLŌ | Anillos de compromiso con diamantes",
     description:
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
-    images: "/opengraph-image.png",
   },
   twitter: {
     card: "summary_large_image",
     title: "LOLŌ | Anillos de compromiso con diamantes",
     description:
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
-    images: "/twitter-image.png",
   },
   robots: {
     index: true,
