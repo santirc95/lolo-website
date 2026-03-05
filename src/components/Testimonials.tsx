@@ -63,18 +63,7 @@ const TESTIMONIALS = [
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: EASE_LUXURY,
-      delay: i * 0.1,
-    },
-  }),
-};
+// No per-card whileInView — it conflicts with snap-scroll causing jumps
 
 function Stars({ count }: { count: number }) {
   return (
@@ -98,10 +87,8 @@ function Stars({ count }: { count: number }) {
 
 function TestimonialCard({
   t,
-  index,
 }: {
   t: (typeof TESTIMONIALS)[number];
-  index: number;
 }) {
   const [expanded, setExpanded] = useState(false);
   const textRef = useRef<HTMLQuoteElement>(null);
@@ -118,14 +105,9 @@ function TestimonialCard({
   }, []);
 
   return (
-    <motion.div
-      custom={index}
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+    <div
       className="h-full rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
-                 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                 transition-shadow duration-300 md:hover:shadow-lg"
     >
       <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
         <div className="p-6 flex flex-col flex-1">
@@ -195,7 +177,7 @@ function TestimonialCard({
           </AnimatePresence>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -322,7 +304,7 @@ export default function Testimonials() {
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2
                              rounded-2xl"
                 >
-                  <TestimonialCard t={t} index={i} />
+                  <TestimonialCard t={t} />
                 </div>
               ))}
             </div>
