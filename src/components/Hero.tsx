@@ -191,7 +191,7 @@ export default function Hero() {
             href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-liquid btn-liquid--dark px-8 py-4 text-base"
+            className="btn-liquid btn-liquid--dark px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
           >
             Empieza tu diseño
             <svg
@@ -211,7 +211,7 @@ export default function Hero() {
 
           <a
             href="#proceso"
-            className="btn-liquid btn-liquid--ghost px-8 py-4 text-base"
+            className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
           >
             Cómo funciona
           </a>
