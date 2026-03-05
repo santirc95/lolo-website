@@ -128,7 +128,7 @@ function TestimonialCard({
       className="h-full rounded-2xl bg-gradient-to-br from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/40 p-[1px]
                  transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5]/70 backdrop-blur-md overflow-hidden h-full flex flex-col">
+      <div className="relative rounded-[calc(1rem-1px)] bg-[#faf8f5] overflow-hidden h-full flex flex-col">
         <div className="p-6 flex flex-col flex-1">
           <Stars count={t.rating} />
 
