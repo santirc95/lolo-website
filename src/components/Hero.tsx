@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
@@ -37,16 +37,26 @@ const heroCtas = {
 /* ==============================
    Hero Component
 ================================ */
+// React doesn't reliably set the `muted` HTML attribute during SSR hydration.
+// Without it, mobile browsers block autoplay. This ref callback forces it.
+function useAutoplayVideo() {
+  return useCallback((el: HTMLVideoElement | null) => {
+    if (!el) return;
+    el.muted = true;
+    el.setAttribute("muted", "");
+    const tryPlay = () => el.play().catch(() => {});
+    if (el.readyState >= 3) {
+      tryPlay();
+    } else {
+      el.addEventListener("canplay", tryPlay, { once: true });
+    }
+  }, []);
+}
+
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-
-  // Mobile browsers may block autoplay — force play programmatically
-  useEffect(() => {
-    mobileVideoRef.current?.play().catch(() => {});
-    desktopVideoRef.current?.play().catch(() => {});
-  }, []);
+  const mobileVideoRef = useAutoplayVideo();
+  const desktopVideoRef = useAutoplayVideo();
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">

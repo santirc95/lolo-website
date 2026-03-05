@@ -3,6 +3,19 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 
+// React doesn't reliably set the `muted` HTML attribute during SSR hydration.
+// Without it, mobile browsers block autoplay.
+function forceAutoplay(el: HTMLVideoElement) {
+  el.muted = true;
+  el.setAttribute("muted", "");
+  const tryPlay = () => el.play().catch(() => {});
+  if (el.readyState >= 3) {
+    tryPlay();
+  } else {
+    el.addEventListener("canplay", tryPlay, { once: true });
+  }
+}
+
 const STYLES = [
   {
     id: "solitario",
@@ -207,7 +220,10 @@ export default function Styles() {
                     <div className="aspect-[4/5] md:aspect-auto w-full overflow-hidden rounded-[calc(1rem-1px)] md:rounded-xl md:h-full">
                       {isInView && (
                         <video
-                          ref={videoRef}
+                          ref={(el) => {
+                            (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+                            if (el) forceAutoplay(el);
+                          }}
                           key={active.id}
                           src={active.video}
                           autoPlay
@@ -215,9 +231,6 @@ export default function Styles() {
                           muted
                           playsInline
                           preload="metadata"
-                          onLoadedData={(e) => {
-                            (e.target as HTMLVideoElement).play().catch(() => {});
-                          }}
                           className="w-full h-full object-cover"
                         />
                       )}
