@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
 import { easeLuxury } from "@/lib/motion";
@@ -8,11 +9,10 @@ import { easeLuxury } from "@/lib/motion";
    Animation presets
 ================================ */
 const heroItem = {
-  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 24 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 1.6,
       ease: easeLuxury,
@@ -22,11 +22,10 @@ const heroItem = {
 };
 
 const heroCtas = {
-  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 18 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 1.4,
       ease: easeLuxury,
@@ -40,6 +39,14 @@ const heroCtas = {
 ================================ */
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Mobile browsers may block autoplay — force play programmatically
+  useEffect(() => {
+    mobileVideoRef.current?.play().catch(() => {});
+    desktopVideoRef.current?.play().catch(() => {});
+  }, []);
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">
@@ -53,6 +60,7 @@ export default function Hero() {
       {!prefersReducedMotion && (
         <div className="absolute inset-0 z-0 md:hidden bg-[#F5EDE3]">
           <video
+            ref={mobileVideoRef}
             className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted
@@ -73,6 +81,7 @@ export default function Hero() {
       {!prefersReducedMotion && (
         <div className="absolute inset-0 z-0 hidden md:block bg-[#F5EDE3]">
           <video
+            ref={desktopVideoRef}
             className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
             autoPlay
             muted

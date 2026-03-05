@@ -93,39 +93,36 @@ const EASE_LUXURY: CubicBezier = [0.22, 1, 0.36, 1];
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
 const headerRevealVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.0, ease: EASE_LUXURY },
   },
 };
 
 const contentRevealDesktop = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.0, ease: EASE_LUXURY, delay: 0.2 },
   },
 };
 
 const contentRevealMobile = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.65, ease: EASE_LUXURY },
   },
 };
 
 const previewVariants = {
-  initial: { opacity: 0, y: 12, filter: "blur(4px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: EASE_LUXURY } },
-  exit: { opacity: 0, y: -12, filter: "blur(4px)", transition: { duration: 0.35, ease: EASE_LUXURY } },
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_LUXURY } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.35, ease: EASE_LUXURY } },
 };
 
 const previewStaticVariants = {
@@ -407,9 +404,9 @@ export default function GemCuts() {
                     <motion.div
                       key={active.id}
                       layout
-                      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6, filter: "blur(2px)" }}
-                      animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-                      exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6, filter: "blur(2px)" }}
+                      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 6 }}
+                      animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                      exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
                       transition={{ duration: 0.65, ease: EASE_LUXURY }}
                     >
                       <h3 className="text-2xl font-display tracking-tight text-[#2c2c2c] mb-2">

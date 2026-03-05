@@ -53,37 +53,33 @@ const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const viewportConfig = { once: true, amount: 0.35, margin: "0px 0px -15% 0px" as const };
 
 const headerRevealVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.0, ease: EASE_LUXURY },
   },
 };
 
 const contentRevealVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.0, ease: EASE_LUXURY, delay: 0.2 },
   },
 };
 
 const panelVariants = {
-  initial: { opacity: 0, y: 12, filter: "blur(4px)" },
+  initial: { opacity: 0, y: 12 },
   animate: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.4, ease: EASE_LUXURY },
   },
   exit: {
     opacity: 0,
     y: -12,
-    filter: "blur(4px)",
     transition: { duration: 0.35, ease: EASE_LUXURY },
   },
 };
@@ -219,6 +215,9 @@ export default function Styles() {
                           muted
                           playsInline
                           preload="metadata"
+                          onLoadedData={(e) => {
+                            (e.target as HTMLVideoElement).play().catch(() => {});
+                          }}
                           className="w-full h-full object-cover"
                         />
                       )}
