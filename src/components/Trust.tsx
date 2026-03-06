@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const TRUST_POINTS = [
   {
@@ -146,6 +147,7 @@ export default function Trust() {
             href={getWhatsAppUrl("Hola, me gustaría conocer más sobre cómo trabajan en LOLŌ.")}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick()}
             className="btn-liquid btn-liquid--primary px-8 py-4 text-base"
           >
             Conócenos mejor

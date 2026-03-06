@@ -1,4 +1,5 @@
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function WhatsAppButton() {
   return (
@@ -6,6 +7,7 @@ export default function WhatsAppButton() {
       href={getWhatsAppUrl()}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWhatsAppClick()}
       aria-label="Contáctanos por WhatsApp"
       className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp shadow-lg transition-transform hover:scale-110"
     >

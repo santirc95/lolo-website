@@ -1,4 +1,5 @@
 import { SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -49,6 +50,7 @@ export default function Footer() {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick()}
               aria-label="WhatsApp LOLŌ"
               className="opacity-90 transition-all duration-[250ms] ease-out hover:opacity-100 hover:-translate-y-[1px] hover:drop-shadow-[0_0_6px_rgba(74,49,96,0.35)]"
             >

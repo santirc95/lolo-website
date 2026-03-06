@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { NAV_LINKS, SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const EASE_LUXURY: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -68,6 +69,7 @@ export default function Header() {
                 href={getWhatsAppUrl("Hola, estoy buscando un anillo de compromiso y me gustaría recibir asesoría.")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick()}
                 className="btn-liquid btn-liquid--primary ml-2 px-5 py-2 text-sm font-medium
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
               >
@@ -143,7 +145,7 @@ export default function Header() {
                     href={getWhatsAppUrl("Hola, estoy buscando un anillo de compromiso y me gustaría recibir asesoría.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={closeMobile}
+                    onClick={() => { trackWhatsAppClick(); closeMobile(); }}
                     className="btn-liquid btn-liquid--primary w-full px-6 py-3 text-center text-sm font-medium
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
                   >

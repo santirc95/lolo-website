@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { easeLuxury } from "@/lib/motion";
 
 const EASE_LUXURY: [number, number, number, number] = easeLuxury;
@@ -108,6 +109,7 @@ export default function CTABanner() {
                   href={getWhatsAppUrl("Hola, me gustaría diseñar un anillo de compromiso.")}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick()}
                   aria-label="Contáctanos por WhatsApp para diseñar tu anillo"
                   className="group btn-liquid btn-liquid--primary gap-2.5 px-8 py-4 text-base"
                 >
