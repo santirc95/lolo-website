@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { easeLuxury } from "@/lib/motion";
 
 /* ==============================
@@ -226,6 +227,7 @@ export default function Hero() {
             href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick()}
             className="btn-liquid btn-liquid--dark px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
           >
             Empieza tu diseño

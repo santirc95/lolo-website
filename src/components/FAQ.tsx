@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const PANEL_TRANSITION = {
   duration: 0.26,
@@ -132,6 +133,7 @@ function FAQItem({
                 transition={{ duration: 0.2, ease: easeLuxury }}
                 onClick={(e) => {
                   e.stopPropagation();
+                  trackWhatsAppClick();
                   window.open(getWhatsAppUrl("Hola, tengo algunas dudas sobre los anillos de compromiso."), "_blank");
                 }}
                 className="btn-liquid btn-liquid--primary absolute bottom-4 right-4 px-5 py-2 text-sm"

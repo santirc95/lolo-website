@@ -4,6 +4,7 @@ import { useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getWhatsAppUrl } from "@/lib/constants";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -270,6 +271,7 @@ export default function Process() {
             )}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick()}
             className="btn-liquid btn-liquid--primary px-8 py-4 text-base"
           >
             Inicia tu proceso hoy
