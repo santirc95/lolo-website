@@ -1,3 +1,5 @@
+"use client";
+
 import { SITE_CONFIG, getWhatsAppUrl } from "@/lib/constants";
 import { trackWhatsAppClick } from "@/lib/analytics";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { getWhatsAppUrl } from "@/lib/constants";
 import { trackWhatsAppClick } from "@/lib/analytics";
 
