@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
     images: [
       {
-        url: "/images/OG/opengraph-image.png",
+        url: "https://lolomexico.com/images/OG/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "LOLŌ - Joyería fina",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     title: "LOLŌ | Anillos de compromiso con diamantes",
     description:
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
-    images: ["/images/OG/twitter-image.png"],
+    images: ["https://lolomexico.com/images/OG/twitter-image.png"],
   },
   robots: {
     index: true,
