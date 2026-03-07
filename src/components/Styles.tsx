@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
+import { trackStyleVideoPlay, trackStyleVideoComplete } from "@/lib/analytics";
 
 // React doesn't reliably set the `muted` HTML attribute during SSR hydration.
 // Without it, mobile browsers block autoplay. Force all required attributes
@@ -129,6 +130,26 @@ export default function Styles() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "200px" });
 
+  // GA4 tracking: deduplicate per style per page load
+  const playedStyles = useRef(new Set<string>());
+  const completedStyles = useRef(new Set<string>());
+
+  const handleVideoPlay = useCallback(() => {
+    if (!playedStyles.current.has(activeId)) {
+      playedStyles.current.add(activeId);
+      trackStyleVideoPlay(active.name);
+    }
+  }, [activeId, active.name]);
+
+  const handleTimeUpdate = useCallback((e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const el = e.currentTarget;
+    if (!el.duration || completedStyles.current.has(activeId)) return;
+    if (el.currentTime / el.duration >= 0.75) {
+      completedStyles.current.add(activeId);
+      trackStyleVideoComplete(active.name);
+    }
+  }, [activeId, active.name]);
+
   // Prefetch adjacent videos only once the section is near the viewport
   const prefetchVideo = useCallback((url: string) => {
     const link = document.createElement("link");
@@ -248,6 +269,8 @@ export default function Styles() {
                           muted
                           playsInline
                           preload="metadata"
+                          onPlaying={handleVideoPlay}
+                          onTimeUpdate={handleTimeUpdate}
                           className="w-full h-full object-cover"
                         />
                       )}
