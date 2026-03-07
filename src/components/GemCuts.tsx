@@ -11,6 +11,7 @@ import {
   animate,
 } from "framer-motion";
 import Image from "next/image";
+import { trackCutView } from "@/lib/analytics";
 
 const cuts = [
   {
@@ -203,11 +204,20 @@ export default function GemCuts() {
       ? contentRevealMobile
       : contentRevealDesktop;
 
+  // GA4 tracking: deduplicate per cut per page load
+  const viewedCuts = useRef(new Set<string>());
+
   function handleCutChange(id: string) {
     prevHandImageRef.current = active.handImage;
     setActiveId(id);
     curtainAnimRef.current?.stop();
     setWipeKey((k) => k + 1);
+
+    const cut = cuts.find((c) => c.id === id);
+    if (cut && !viewedCuts.current.has(id)) {
+      viewedCuts.current.add(id);
+      trackCutView(cut.label);
+    }
   }
 
   return (
