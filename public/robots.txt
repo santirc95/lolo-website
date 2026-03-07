@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.lolojoyeria.com/sitemap.xml
+Sitemap: https://lolomexico.com/sitemap.xml

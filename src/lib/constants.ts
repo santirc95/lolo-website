@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   tagline: "Anillos de compromiso a tu medida",
   description:
     "Diseñamos y creamos anillos de compromiso personalizados con diamantes certificados y metales preciosos. Asesoría experta y proceso transparente.",
-  url: "https://www.lolojoyeria.com",
+  url: "https://lolomexico.com",
   whatsapp: {
     number: "525512778853",
     message:
