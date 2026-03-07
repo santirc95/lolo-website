@@ -27,11 +27,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "LOLŌ | Anillos de compromiso con diamantes",
+    default: "Anillos de compromiso con diamantes | LOLŌ México",
     template: "%s | LOLŌ",
   },
   description:
-    "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
+    "Anillos de compromiso personalizados con diamantes certificados y asesoría experta en México. Diseña una pieza única con LOLŌ.",
   metadataBase: new URL(SITE_CONFIG.url),
   keywords: [
     "anillos de compromiso",
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     locale: "es_MX",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: "LOLŌ | Anillos de compromiso con diamantes",
+    title: "Anillos de compromiso con diamantes | LOLŌ México",
     description:
-      "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
+      "Anillos de compromiso personalizados con diamantes certificados y asesoría experta en México. Diseña una pieza única con LOLŌ.",
     images: [
       {
         url: "https://lolomexico.com/images/OG/opengraph-image.png",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LOLŌ | Anillos de compromiso con diamantes",
+    title: "Anillos de compromiso con diamantes | LOLŌ México",
     description:
-      "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
+      "Anillos de compromiso personalizados con diamantes certificados y asesoría experta en México. Diseña una pieza única con LOLŌ.",
     images: ["https://lolomexico.com/images/OG/twitter-image.png"],
   },
   robots: {
