@@ -104,9 +104,9 @@ export default function PiecesCarousel() {
         whileInView={prefersReducedMotion ? undefined : "visible"}
         viewport={{ once: true, margin: "-60px" }}
       >
-        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
+        <span className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Colección
-        </p>
+        </span>
         <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
           Piezas que{" "}
           <span className="italic text-[#4a3160]">enamoran</span>

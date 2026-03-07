@@ -59,16 +59,16 @@ export default function CTABanner() {
             <div className="flex flex-col items-center text-center md:flex-row md:items-center md:text-left md:justify-between gap-10 md:gap-16">
               {/* Text column */}
               <div className="max-w-xl">
-                <motion.p
+                <motion.span
                   custom={0}
                   variants={childVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]"
+                  className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]"
                 >
                   Listo para comenzar
-                </motion.p>
+                </motion.span>
 
                 <motion.h2
                   custom={1}
