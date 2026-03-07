@@ -202,7 +202,7 @@ export default function Hero() {
           variants={heroItem}
           className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          El anillo que cuenta
+          Anillos de compromiso que cuentan
           <br />
           <span className="italic text-[#4A3160]">tu historia</span>
         </motion.h1>
