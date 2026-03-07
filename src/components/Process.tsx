@@ -179,9 +179,9 @@ export default function Process() {
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
+          <span className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]">
             Proceso
-          </p>
+          </span>
           <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
             De la idea al{" "}
             <span className="italic text-[#4a3160]">anillo perfecto</span>

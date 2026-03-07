@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeLuxury, fadeUp, viewportOnce } from "@/lib/motion";
 import { getWhatsAppUrl } from "@/lib/constants";
@@ -69,23 +69,11 @@ function FAQItem({
 }) {
   const panelId = `faq-panel-${index}`;
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        onToggle();
-      }
-    },
-    [onToggle],
-  );
-
   return (
     <motion.div layout="position" className="border-b border-gold/10">
-      <div
-        role="button"
-        tabIndex={0}
+      <button
+        type="button"
         onClick={onToggle}
-        onKeyDown={handleKeyDown}
         className="liquid-row flex w-full items-center justify-between py-5 text-left cursor-pointer"
         aria-expanded={open}
         aria-controls={panelId}
@@ -107,7 +95,7 @@ function FAQItem({
         >
           <path d="m6 9 6 6 6-6" />
         </motion.svg>
-      </div>
+      </button>
       <AnimatePresence initial={false} mode="sync">
         {open && (
           <motion.div
@@ -162,9 +150,9 @@ export default function FAQ() {
           whileInView="visible"
           viewport={viewportOnce}
         >
-          <p className="text-sm uppercase tracking-[0.3em] text-gold-dark">
+          <span className="block text-sm uppercase tracking-[0.3em] text-gold-dark">
             FAQ
-          </p>
+          </span>
           <h2 className="mt-3 font-display text-3xl tracking-tight text-charcoal sm:text-4xl">
             Preguntas frecuentes
           </h2>
