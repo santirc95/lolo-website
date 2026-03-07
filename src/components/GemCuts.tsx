@@ -235,9 +235,9 @@ export default function GemCuts() {
         whileInView={prefersReducedMotion ? undefined : "visible"}
         viewport={viewportConfig}
       >
-        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
+        <span className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Cortes
-        </p>
+        </span>
         <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
           Encuentra tu{" "}
           <span className="italic text-[#4a3160]">corte ideal</span>

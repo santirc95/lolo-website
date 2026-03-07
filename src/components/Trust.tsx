@@ -76,9 +76,9 @@ export default function Trust() {
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-14">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
+          <span className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]">
             Por qué LOLŌ
-          </p>
+          </span>
           <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
             Joyería con{" "}
             <span className="italic text-[#4a3160]">alma</span>

@@ -185,9 +185,9 @@ export default function Styles() {
         whileInView={prefersReducedMotion ? undefined : "visible"}
         viewport={viewportConfig}
       >
-        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[#4a3160]">
+        <span className="mb-3 block text-sm uppercase tracking-[0.3em] text-[#4a3160]">
           Estilos
-        </p>
+        </span>
         <h2 className="font-display text-3xl tracking-tight text-[#2c2c2c] sm:text-4xl md:text-5xl">
           Encuentra tu{" "}
           <span className="italic text-[#4a3160]">estilo</span>
@@ -356,8 +356,8 @@ export default function Styles() {
                         transition={{ duration: 0.3, ease: EASE_LUXURY }}
                       />
 
-                      <h3
-                        className={`font-display text-base tracking-tight transition-colors duration-300
+                      <span
+                        className={`block font-display text-base tracking-tight transition-colors duration-300
                                    ${
                                      isActive
                                        ? "text-[#4a3160]"
@@ -365,7 +365,7 @@ export default function Styles() {
                                    }`}
                       >
                         {style.name}
-                      </h3>
+                      </span>
                       <p
                         className={`mt-1 text-sm leading-snug min-w-0 break-words transition-colors duration-300
                                    ${isActive ? "whitespace-normal" : "line-clamp-2"}
