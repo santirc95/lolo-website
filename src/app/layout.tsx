@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
     images: [
       {
-        url: "/images/OG/opengraph-image.png",
+        url: "https://lolomexico.com/images/OG/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "LOLŌ - Joyería fina",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     title: "LOLŌ | Anillos de compromiso con diamantes",
     description:
       "Diseñamos anillos de compromiso únicos con diamantes certificados y asesoría personalizada.",
-    images: ["/images/OG/twitter-image.png"],
+    images: ["https://lolomexico.com/images/OG/twitter-image.png"],
   },
   robots: {
     index: true,
@@ -83,6 +83,53 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "JewelryStore",
+      "@id": `${SITE_CONFIG.url}/#jewelry-store`,
+      name: SITE_CONFIG.name,
+      description:
+        "Anillos de compromiso personalizados con diamantes naturales y de laboratorio.",
+      url: SITE_CONFIG.url,
+      priceRange: "$$$",
+      image: "https://lolomexico.com/images/OG/opengraph-image.png",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "MX",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Mexico",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        url: `https://wa.me/${SITE_CONFIG.whatsapp.number}`,
+        availableLanguage: ["Spanish"],
+      },
+      sameAs: [SITE_CONFIG.social.instagram],
+    },
+    {
+      "@type": "Service",
+      "@id": `${SITE_CONFIG.url}/#service`,
+      name: "Diseño de Anillos de Compromiso Personalizados",
+      description:
+        "Diseño y creación personalizada de anillos de compromiso con diamantes naturales y de laboratorio.",
+      provider: {
+        "@type": "JewelryStore",
+        "@id": `${SITE_CONFIG.url}/#jewelry-store`,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Mexico",
+      },
+      serviceType: "Custom Engagement Ring Design",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -94,19 +141,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "JewelryStore",
-              name: SITE_CONFIG.name,
-              description: SITE_CONFIG.description,
-              url: SITE_CONFIG.url,
-              priceRange: "$$$",
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "MX",
-              },
-              sameAs: [SITE_CONFIG.social.instagram],
-            }),
+            __html: JSON.stringify(structuredData),
           }}
         />
       </head>
