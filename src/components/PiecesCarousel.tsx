@@ -195,6 +195,39 @@ export default function PiecesCarousel() {
       <p className="mt-4 text-center text-xs tracking-wide text-[#736b65] md:hidden">
         Desliza &rarr;
       </p>
+
+      {/* Mobile-only scroll-down indicator */}
+      <motion.div
+        className="mt-8 flex flex-col items-center gap-1 md:hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.5, ease }}
+      >
+        <span className="text-xs tracking-wide text-neutral-400/70">
+          Explora los estilos de anillo
+        </span>
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-neutral-400/60"
+          animate={prefersReducedMotion ? undefined : { y: [0, 4, 0] }}
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : { duration: 2, repeat: Infinity, ease: "easeInOut" }
+          }
+        >
+          <path d="m6 9 6 6 6-6" />
+        </motion.svg>
+      </motion.div>
     </section>
   );
 }
