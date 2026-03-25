@@ -85,7 +85,7 @@ export default function Hero() {
 
         {/* Video wrapper — edge-to-edge, fades into background at bottom */}
         <motion.div
-          className="relative pt-16"
+          className="relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, ease: easeLuxury }}
@@ -125,6 +125,16 @@ export default function Hero() {
               }}
             />
           )}
+
+          {/* Champagne overlay — same as desktop */}
+          <div
+            className="absolute inset-0 z-[1]"
+            aria-hidden="true"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+            }}
+          />
         </motion.div>
 
         {/* Content — overlaps the faded video area for seamless feel */}
@@ -156,9 +166,10 @@ export default function Hero() {
           <motion.p
             custom={2}
             variants={heroItem}
-            className="mx-auto mt-4 max-w-[280px] text-sm leading-relaxed text-charcoal/60"
+            className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-charcoal/60"
           >
-            Diamantes certificados y artesanía que un momento así merece.
+            Diseñamos anillos de compromiso únicos, con diamantes certificados y la
+            artesanía que un momento así merece.
           </motion.p>
 
           <motion.div custom={3} variants={heroCtas} className="mt-7">
