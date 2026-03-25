@@ -83,18 +83,26 @@ export default function Hero() {
       ================================================================ */}
       <div className="flex min-h-[100dvh] flex-col bg-[#FAF7F2] md:hidden">
 
-        {/* Video wrapper box */}
+        {/* Video wrapper — edge-to-edge, fades into background at bottom */}
         <motion.div
-          className="px-4 pt-20"
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: easeLuxury }}
+          className="relative pt-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: easeLuxury }}
         >
           {!prefersReducedMotion ? (
-            <div className="overflow-hidden rounded-2xl shadow-lg">
+            <div
+              className="overflow-hidden"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              }}
+            >
               <video
                 ref={mobileVideoRef}
-                className="aspect-[4/3] w-full object-cover"
+                className="aspect-[3/4] w-full object-cover"
                 autoPlay
                 muted
                 loop
@@ -107,41 +115,59 @@ export default function Hero() {
               </video>
             </div>
           ) : (
-            <div className="aspect-[4/3] rounded-2xl bg-luxury-wash bg-luxury-grain" />
+            <div
+              className="aspect-[3/4] bg-luxury-wash bg-luxury-grain"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              }}
+            />
           )}
         </motion.div>
 
-        {/* Simplified content */}
+        {/* Content — overlaps the faded video area for seamless feel */}
         <motion.div
-          className="flex flex-1 flex-col justify-center px-5 pb-10 pt-6"
+          className="-mt-28 relative z-10 flex flex-1 flex-col items-center px-6 pb-12 text-center"
           initial="hidden"
           animate="show"
         >
+          {/* Eyebrow */}
+          <motion.p
+            custom={0}
+            variants={heroItem}
+            className="mb-4 text-[11px] uppercase tracking-[0.3em] text-gold"
+          >
+            Joyería fina personalizada
+          </motion.p>
+
           <motion.h1
             custom={1}
             variants={heroItem}
-            className="font-display text-4xl leading-tight tracking-tight text-charcoal"
+            className="font-display text-[2rem] leading-[1.15] tracking-tight text-charcoal"
           >
-            Anillos de compromiso que cuentan
+            Anillos de compromiso
             <br />
+            que cuentan{" "}
             <span className="italic text-[#4A3160]">tu historia</span>
           </motion.h1>
 
           <motion.p
             custom={2}
             variants={heroItem}
-            className="mt-4 max-w-sm text-base leading-relaxed text-charcoal/70"
+            className="mx-auto mt-4 max-w-[280px] text-sm leading-relaxed text-charcoal/60"
           >
             Diamantes certificados y artesanía que un momento así merece.
           </motion.p>
 
-          <motion.div custom={3} variants={heroCtas} className="mt-6">
+          <motion.div custom={3} variants={heroCtas} className="mt-7">
             <a
               href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackWhatsAppClick()}
-              className="btn-liquid btn-liquid--dark px-6 py-3 text-sm"
+              className="btn-liquid btn-liquid--dark px-7 py-3.5 text-sm"
             >
               Empieza tu diseño
               <svg
