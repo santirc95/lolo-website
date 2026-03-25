@@ -23,15 +23,15 @@ export default function Header() {
   }, [mobileOpen, closeMobile]);
 
   return (
-    <header className="pointer-events-none fixed top-3 left-0 right-0 z-50">
-      <div className="pointer-events-auto relative mx-auto max-w-6xl px-4">
+    <header className="pointer-events-none fixed top-3 left-0 right-0 z-50 px-5">
+      <div className="pointer-events-auto relative mx-auto max-w-6xl">
         {/* ── Gradient border pill ── */}
         <div
-          className="rounded-full bg-gradient-to-r from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/60 p-[1px]
+          className="rounded-2xl bg-gradient-to-r from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/60 p-[1px]
                      shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
         >
-          {/* ── Inner glass pill ── */}
-          <div className="flex h-14 items-center justify-between rounded-full bg-[#faf8f5]/75 backdrop-blur-md px-5">
+          {/* ── Inner glass bar ── */}
+          <div className="flex h-14 items-center justify-between rounded-[calc(1rem-1px)] bg-[#faf8f5]/75 backdrop-blur-md px-5">
             {/* Logo */}
             <Link
               href="/"
@@ -70,7 +70,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick()}
-                className="btn-liquid btn-liquid--primary ml-2 px-5 py-2 text-sm font-medium
+                className="btn-liquid btn-liquid--primary rounded-[calc(1rem-1px)] ml-2 px-5 py-2 text-sm font-medium
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
               >
                 Empieza tu diseño

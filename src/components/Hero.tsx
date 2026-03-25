@@ -76,227 +76,309 @@ export default function Hero() {
   const desktopVideoRef = useAutoplayVideo();
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">
+    <section className="relative overflow-hidden">
 
-      {/* Static background — only visible on mobile (desktop uses video) */}
-      <div className="absolute inset-0 bg-luxury-wash bg-luxury-grain md:hidden" />
+      {/* ================================================================
+          MOBILE LAYOUT — Video box on top, simplified content below
+      ================================================================ */}
+      <div className="flex min-h-[100dvh] flex-col bg-[#FAF7F2] md:hidden">
 
-      {/* ==============================
-          Mobile background video
-      ============================== */}
-      {!prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 md:hidden bg-[#F5EDE3]">
-          <video
-            ref={mobileVideoRef}
-            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
-          >
-            <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
-            <source src="/videos/hero/lolo-hero-mobile.mp4" type="video/mp4" />
-          </video>
-        </div>
-      )}
-
-      {/* ==============================
-          Desktop background video
-      ============================== */}
-      {!prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 hidden md:block bg-[#F5EDE3]">
-          <video
-            ref={desktopVideoRef}
-            className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden="true"
-          >
-            <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
-            <source src="/videos/hero/lolo-hero-desktop.mp4" type="video/mp4" />
-          </video>
-        </div>
-      )}
-
-      {/* ==============================
-          Desktop video overlay (champagne wash for text contrast)
-      ============================== */}
-      <div
-        className="absolute inset-0 z-[1] hidden md:block"
-        aria-hidden="true"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
-        }}
-      />
-
-      {/* ==============================
-          Mobile video overlay (champagne wash for text contrast)
-      ============================== */}
-      <div
-        className="absolute inset-0 z-[1] md:hidden"
-        aria-hidden="true"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
-        }}
-      />
-
-      {/* ==============================
-          Decorative rings (gold)
-      ============================== */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
-        <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
-        <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
-      </div>
-
-      {/* ==============================
-          Purple glow system (lavender)
-      ============================== */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Top soft wash */}
-        <div
-          className="absolute inset-0 opacity-[0.10]"
-          style={{
-            background:
-              "radial-gradient(85% 55% at 50% 0%, rgba(74,49,96,0.18), transparent 62%)",
-          }}
-        />
-
-        {/* Center glow */}
-        <div
-          className="absolute left-1/2 top-[18%] h-[600px] w-[600px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.11]"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(74,49,96,0.45), transparent 66%)",
-          }}
-        />
-      </div>
-
-      {/* ==============================
-          Main content
-      ============================== */}
-      <motion.div
-        className="relative z-10 mx-auto max-w-3xl text-center"
-        initial="hidden"
-        animate="show"
-      >
-        {/* Eyebrow */}
-        <motion.p
-          custom={0}
-          variants={heroItem}
-          className="mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
-        >
-          Joyería fina personalizada
-        </motion.p>
-
-        {/* Headline */}
-        <motion.h1
-          custom={1}
-          variants={heroItem}
-          className="font-display text-4xl leading-tight tracking-tight text-charcoal sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          Anillos de compromiso que cuentan
-          <br />
-          <span className="italic text-[#4A3160]">tu historia</span>
-        </motion.h1>
-
-        {/* Description */}
-        <motion.p
-          custom={2}
-          variants={heroItem}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
-        >
-          Diseñamos anillos de compromiso únicos, con diamantes certificados y la
-          artesanía que un momento así merece.
-        </motion.p>
-
-        {/* CTAs */}
+        {/* Video wrapper — edge-to-edge, fades into background at bottom */}
         <motion.div
-          custom={3}
-          variants={heroCtas}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          className="relative"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: easeLuxury }}
         >
-          <a
-            href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick()}
-            className="btn-liquid btn-liquid--dark px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
-          >
-            Empieza tu diseño
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {!prefersReducedMotion ? (
+            <div
+              className="overflow-hidden"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              }}
             >
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </a>
+              <video
+                ref={mobileVideoRef}
+                className="aspect-[3/4] w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              >
+                <source src="/videos/hero/lolo-hero-mobile.webm" type="video/webm" />
+                <source src="/videos/hero/lolo-hero-mobile.mp4" type="video/mp4" />
+              </video>
+            </div>
+          ) : (
+            <div
+              className="aspect-[3/4] bg-luxury-wash bg-luxury-grain"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 50%, transparent 100%)",
+              }}
+            />
+          )}
 
-          <a
-            href="#proceso"
-            className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
-          >
-            Cómo funciona
-          </a>
+          {/* Champagne overlay — same as desktop */}
+          <div
+            className="absolute inset-0 z-[1]"
+            aria-hidden="true"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+            }}
+          />
         </motion.div>
 
-        {/* Trust line */}
+        {/* Content — overlaps the faded video area for seamless feel */}
         <motion.div
-          custom={4}
-          variants={heroItem}
-          className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
+          className="-mt-28 relative z-10 flex flex-1 flex-col items-center px-6 pb-12 text-center"
+          initial="hidden"
+          animate="show"
         >
-          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Oro 14k &amp; 18k</span>
-          <span className="h-4 w-px shrink-0 bg-gold/30" />
-          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Diamantes<br />GIA &amp; IGI</span>
-          <span className="h-4 w-px shrink-0 bg-gold/30" />
-          <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Platino 950</span>
-        </motion.div>
-      </motion.div>
+          {/* Eyebrow */}
+          <motion.p
+            custom={0}
+            variants={heroItem}
+            className="mb-4 text-[11px] uppercase tracking-[0.3em] text-gold"
+          >
+            Joyería fina personalizada
+          </motion.p>
 
-      {/* ==============================
-          Scroll indicator
-      ============================== */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: easeLuxury,
-          delay: 2.8,
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="text-gold"
+          <motion.h1
+            custom={1}
+            variants={heroItem}
+            className="font-display text-[2rem] leading-[1.15] tracking-tight text-charcoal"
+          >
+            Anillos de compromiso
+            <br />
+            que cuentan{" "}
+            <span className="italic text-[#4A3160]">tu historia</span>
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            variants={heroItem}
+            className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-charcoal/60"
+          >
+            Diseñamos anillos de compromiso únicos, con diamantes certificados y la
+            artesanía que un momento así merece.
+          </motion.p>
+
+          <motion.div custom={3} variants={heroCtas} className="mt-7">
+            <a
+              href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick()}
+              className="btn-liquid btn-liquid--dark px-7 py-3.5 text-sm"
+            >
+              Empieza tu diseño
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* ================================================================
+          DESKTOP LAYOUT — Original fullscreen background video
+      ================================================================ */}
+      <div className="relative hidden min-h-screen items-center justify-center px-5 pt-20 md:flex">
+
+        {/* Desktop background video */}
+        {!prefersReducedMotion && (
+          <div
+            className="absolute inset-0 z-0 bg-[#F5EDE3]"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+            }}
+          >
+            <video
+              ref={desktopVideoRef}
+              className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            >
+              <source src="/videos/hero/lolo-hero-desktop.webm" type="video/webm" />
+              <source src="/videos/hero/lolo-hero-desktop.mp4" type="video/mp4" />
+            </video>
+          </div>
+        )}
+
+        {/* Desktop video overlay (champagne wash for text contrast) */}
+        <div
+          className="absolute inset-0 z-[1]"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+          }}
+        />
+
+        {/* Decorative rings (gold) */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+          <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
+        </div>
+
+        {/* Purple glow system (lavender) */}
+        <div className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute inset-0 opacity-[0.10]"
+            style={{
+              background:
+                "radial-gradient(85% 55% at 50% 0%, rgba(74,49,96,0.18), transparent 62%)",
+            }}
+          />
+          <div
+            className="absolute left-1/2 top-[18%] h-[600px] w-[600px] -translate-x-1/2 rounded-full blur-3xl opacity-[0.11]"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(74,49,96,0.45), transparent 66%)",
+            }}
+          />
+        </div>
+
+        {/* Main content */}
+        <motion.div
+          className="relative z-10 mx-auto max-w-3xl text-center"
+          initial="hidden"
+          animate="show"
         >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </motion.div>
+          {/* Eyebrow */}
+          <motion.p
+            custom={0}
+            variants={heroItem}
+            className="mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
+          >
+            Joyería fina personalizada
+          </motion.p>
+
+          {/* Headline */}
+          <motion.h1
+            custom={1}
+            variants={heroItem}
+            className="font-display text-6xl leading-tight tracking-tight text-charcoal lg:text-7xl"
+          >
+            Anillos de compromiso que cuentan
+            <br />
+            <span className="italic text-[#4A3160]">tu historia</span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p
+            custom={2}
+            variants={heroItem}
+            className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
+          >
+            Diseñamos anillos de compromiso únicos, con diamantes certificados y la
+            artesanía que un momento así merece.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            custom={3}
+            variants={heroCtas}
+            className="mt-10 flex flex-row items-center justify-center gap-4"
+          >
+            <a
+              href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick()}
+              className="btn-liquid btn-liquid--dark px-8 py-4 text-base"
+            >
+              Empieza tu diseño
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </a>
+
+            <a
+              href="#proceso"
+              className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm"
+            >
+              Cómo funciona
+            </a>
+          </motion.div>
+
+          {/* Trust line */}
+          <motion.div
+            custom={4}
+            variants={heroItem}
+            className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
+          >
+            <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Oro 14k &amp; 18k</span>
+            <span className="h-4 w-px shrink-0 bg-gold/30" />
+            <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Diamantes<br />GIA &amp; IGI</span>
+            <span className="h-4 w-px shrink-0 bg-gold/30" />
+            <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Platino 950</span>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 6, 0] }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: easeLuxury,
+            delay: 2.8,
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-gold"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </motion.div>
+      </div>
     </section>
   );
 }
-
-
