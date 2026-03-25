@@ -70,7 +70,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick()}
-                className="btn-liquid btn-liquid--primary ml-2 px-5 py-2 text-sm font-medium
+                className="btn-liquid btn-liquid--primary rounded-[calc(1rem-1px)] ml-2 px-5 py-2 text-sm font-medium
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a3160]/50 focus-visible:ring-offset-2"
               >
                 Empieza tu diseño

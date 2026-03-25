@@ -313,7 +313,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackWhatsAppClick()}
-              className="btn-liquid btn-liquid--dark rounded-2xl px-8 py-4 text-base"
+              className="btn-liquid btn-liquid--dark px-8 py-4 text-base"
             >
               Empieza tu diseño
               <svg
@@ -333,7 +333,7 @@ export default function Hero() {
 
             <a
               href="#proceso"
-              className="btn-liquid btn-liquid--ghost rounded-2xl px-6 py-3 text-sm"
+              className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm"
             >
               Cómo funciona
             </a>
