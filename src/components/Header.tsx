@@ -31,7 +31,7 @@ export default function Header() {
                      shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
         >
           {/* ── Inner glass pill ── */}
-          <div className="flex h-11 items-center justify-between rounded-full bg-[#faf8f5]/55 backdrop-blur-md px-4">
+          <div className="flex h-14 items-center justify-between rounded-full bg-[#faf8f5]/75 backdrop-blur-md px-5">
             {/* Logo */}
             <Link
               href="/"
@@ -40,8 +40,8 @@ export default function Header() {
               <Image
                 src="/images/brand/logo-lolo.svg"
                 alt="Loló"
-                width={78}
-                height={24}
+                width={91}
+                height={28}
                 priority
               />
             </Link>
