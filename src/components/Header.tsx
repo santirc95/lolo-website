@@ -23,8 +23,8 @@ export default function Header() {
   }, [mobileOpen, closeMobile]);
 
   return (
-    <header className="pointer-events-none fixed top-3 left-0 right-0 z-50">
-      <div className="pointer-events-auto relative mx-auto max-w-6xl px-5">
+    <header className="pointer-events-none fixed top-3 left-0 right-0 z-50 px-5">
+      <div className="pointer-events-auto relative mx-auto max-w-6xl">
         {/* ── Gradient border pill ── */}
         <div
           className="rounded-2xl bg-gradient-to-r from-[#d4b896]/60 via-[#4a3160]/20 to-[#d4b896]/60 p-[1px]
