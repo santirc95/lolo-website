@@ -76,7 +76,7 @@ export default function Hero() {
   const desktopVideoRef = useAutoplayVideo();
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-16 md:pt-20">
+    <section className="relative flex min-h-screen items-end pb-12 md:items-center md:pb-0 justify-center overflow-hidden px-5 pt-20">
 
       {/* Static background — only visible on mobile (desktop uses video) */}
       <div className="absolute inset-0 bg-luxury-wash bg-luxury-grain md:hidden" />
@@ -143,14 +143,14 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(250,248,245,0.72) 0%, rgba(243,227,201,0.50) 40%, rgba(243,227,201,0.45) 60%, rgba(250,248,245,0.72) 100%)",
+            "linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(250,248,245,0.55) 55%, rgba(250,248,245,0.88) 75%, rgba(250,248,245,0.95) 100%)",
         }}
       />
 
       {/* ==============================
           Decorative rings (gold)
       ============================== */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      <div className="absolute inset-0 opacity-[0.03] hidden md:block">
         <div className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
         <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold" />
@@ -159,7 +159,7 @@ export default function Hero() {
       {/* ==============================
           Purple glow system (lavender)
       ============================== */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
         {/* Top soft wash */}
         <div
           className="absolute inset-0 opacity-[0.10]"
@@ -183,7 +183,7 @@ export default function Hero() {
           Main content
       ============================== */}
       <motion.div
-        className="relative z-10 mx-auto max-w-3xl text-center"
+        className="relative z-10 mx-auto max-w-3xl text-left md:text-center"
         initial="hidden"
         animate="show"
       >
@@ -191,7 +191,7 @@ export default function Hero() {
         <motion.p
           custom={0}
           variants={heroItem}
-          className="mb-5 md:mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
+          className="hidden md:block mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
         >
           Joyería fina personalizada
         </motion.p>
@@ -211,7 +211,7 @@ export default function Hero() {
         <motion.p
           custom={2}
           variants={heroItem}
-          className="mx-auto mt-5 md:mt-6 max-w-xl text-base md:text-lg leading-relaxed sm:text-xl opacity-80 md:opacity-100 bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
+          className="mt-4 md:mx-auto md:mt-6 max-w-xl text-base md:text-lg leading-relaxed sm:text-xl opacity-80 md:opacity-100 bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
           artesanía que un momento así merece.
@@ -221,7 +221,7 @@ export default function Hero() {
         <motion.div
           custom={3}
           variants={heroCtas}
-          className="mt-8 md:mt-10 flex flex-col items-center gap-3 md:gap-4 sm:flex-row sm:justify-center"
+          className="mt-6 md:mt-10 flex flex-col items-start md:items-center gap-3 md:gap-4 sm:flex-row sm:justify-center"
         >
           <a
             href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
@@ -248,7 +248,7 @@ export default function Hero() {
 
           <a
             href="#proceso"
-            className="btn-liquid btn-liquid--ghost px-5 py-2.5 text-xs opacity-75 sm:px-8 sm:py-4 sm:text-base sm:opacity-100 md:px-6 md:py-3 md:text-sm md:opacity-100"
+            className="btn-liquid btn-liquid--ghost px-5 py-2.5 text-xs opacity-70 md:px-6 md:py-3 md:text-sm md:opacity-100 sm:px-8 sm:py-4 sm:text-base"
           >
             Cómo funciona
           </a>
@@ -258,7 +258,7 @@ export default function Hero() {
         <motion.div
           custom={4}
           variants={heroItem}
-          className="mx-auto mt-8 md:mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
+          className="hidden md:flex mx-auto mt-12 max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
         >
           <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Oro 14k &amp; 18k</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
@@ -272,7 +272,7 @@ export default function Hero() {
           Scroll indicator
       ============================== */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 6, 0] }}
         transition={{
