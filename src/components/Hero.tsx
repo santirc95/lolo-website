@@ -206,7 +206,15 @@ export default function Hero() {
 
         {/* Desktop background video */}
         {!prefersReducedMotion && (
-          <div className="absolute inset-0 z-0 bg-[#F5EDE3]">
+          <div
+            className="absolute inset-0 z-0 bg-[#F5EDE3]"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+            }}
+          >
             <video
               ref={desktopVideoRef}
               className="h-full w-full object-cover animate-[fadeIn_0.8s_ease-in-out_forwards]"
@@ -305,7 +313,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackWhatsAppClick()}
-              className="btn-liquid btn-liquid--dark px-8 py-4 text-base"
+              className="btn-liquid btn-liquid--dark rounded-2xl px-8 py-4 text-base"
             >
               Empieza tu diseño
               <svg
@@ -325,7 +333,7 @@ export default function Hero() {
 
             <a
               href="#proceso"
-              className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm"
+              className="btn-liquid btn-liquid--ghost rounded-2xl px-6 py-3 text-sm"
             >
               Cómo funciona
             </a>
