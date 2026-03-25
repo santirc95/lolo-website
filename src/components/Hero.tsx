@@ -76,7 +76,7 @@ export default function Hero() {
   const desktopVideoRef = useAutoplayVideo();
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-20">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pt-16 md:pt-20">
 
       {/* Static background — only visible on mobile (desktop uses video) */}
       <div className="absolute inset-0 bg-luxury-wash bg-luxury-grain md:hidden" />
@@ -143,7 +143,7 @@ export default function Hero() {
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(250,248,245,0.82) 0%, rgba(243,227,201,0.65) 40%, rgba(243,227,201,0.65) 60%, rgba(250,248,245,0.82) 100%)",
+            "linear-gradient(to bottom, rgba(250,248,245,0.72) 0%, rgba(243,227,201,0.50) 40%, rgba(243,227,201,0.45) 60%, rgba(250,248,245,0.72) 100%)",
         }}
       />
 
@@ -191,7 +191,7 @@ export default function Hero() {
         <motion.p
           custom={0}
           variants={heroItem}
-          className="mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
+          className="mb-5 md:mb-4 text-sm uppercase tracking-[0.34em] bg-gradient-to-r from-[#d4b896] via-[#4A3160] to-[#d4b896] bg-clip-text text-transparent"
         >
           Joyería fina personalizada
         </motion.p>
@@ -211,7 +211,7 @@ export default function Hero() {
         <motion.p
           custom={2}
           variants={heroItem}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed sm:text-xl bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
+          className="mx-auto mt-5 md:mt-6 max-w-xl text-base md:text-lg leading-relaxed sm:text-xl opacity-80 md:opacity-100 bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent"
         >
           Diseñamos anillos de compromiso únicos, con diamantes certificados y la
           artesanía que un momento así merece.
@@ -221,7 +221,7 @@ export default function Hero() {
         <motion.div
           custom={3}
           variants={heroCtas}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          className="mt-8 md:mt-10 flex flex-col items-center gap-3 md:gap-4 sm:flex-row sm:justify-center"
         >
           <a
             href={getWhatsAppUrl("Hola, vi su página y me gustaría saber más sobre diseñar un anillo de compromiso.")}
@@ -248,7 +248,7 @@ export default function Hero() {
 
           <a
             href="#proceso"
-            className="btn-liquid btn-liquid--ghost px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base"
+            className="btn-liquid btn-liquid--ghost px-5 py-2.5 text-xs opacity-75 sm:px-8 sm:py-4 sm:text-base sm:opacity-100 md:px-6 md:py-3 md:text-sm md:opacity-100"
           >
             Cómo funciona
           </a>
@@ -258,7 +258,7 @@ export default function Hero() {
         <motion.div
           custom={4}
           variants={heroItem}
-          className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
+          className="mx-auto mt-8 md:mt-12 flex max-w-md items-center justify-center gap-8 text-xs uppercase tracking-wider"
         >
           <span className="flex-1 text-center bg-gradient-to-r from-[#a6845b] via-[#4A3160] to-[#a6845b] bg-clip-text text-transparent">Oro 14k &amp; 18k</span>
           <span className="h-4 w-px shrink-0 bg-gold/30" />
